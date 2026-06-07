@@ -253,7 +253,7 @@ body::before {
 }
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-size: clamp(2.2rem, 6vw, 6.5rem);
   font-weight: 600;
   color: #fff;
   line-height: 1.05;
@@ -425,6 +425,12 @@ body::before {
 
 <style id="global-responsive-fixes">
 /* GLOBAL RESPONSIVE FIXES */
+@media (max-width: 480px) {
+  .hero-title { font-size: 2.2rem !important; }
+  .hero-sub { font-size: 0.9rem !important; }
+  section[style*="min-height:100svh;"] { height: auto !important; padding-top: 6rem !important; padding-bottom: 3rem !important; }
+}
+
 img { max-width: 100%; height: auto; }
 @media (max-width: 768px) {
   /* Fix Stats Bar */
@@ -1041,28 +1047,7 @@ img { max-width: 100%; height: auto; }
 </footer>
 
 <!-- ═══════ MOBILE BOTTOM NAV ═══════ -->
-<nav class="mobile-nav-bar lg-hidden">
-  <a href="index.html" class="mobile-nav-item active">
-    <span class="iconify" data-icon="solar:home-smile-bold"></span>
-    <span>Home</span>
-  </a>
-  <a href="events.html" class="mobile-nav-item">
-    <span class="iconify" data-icon="solar:calendar-date-linear"></span>
-    <span>Events</span>
-  </a>
-  <a href="jobs.html" class="mobile-nav-item">
-    <span class="iconify" data-icon="solar:case-minimalistic-linear"></span>
-    <span>Jobs</span>
-  </a>
-  <a href="vendors.html" class="mobile-nav-item">
-    <span class="iconify" data-icon="solar:shop-linear"></span>
-    <span>Vendors</span>
-  </a>
-  <a href="about.html" class="mobile-nav-item">
-    <span class="iconify" data-icon="solar:info-circle-linear"></span>
-    <span>About</span>
-  </a>
-</nav>
+
 
 <style>
 @media (min-width: 768px) {
