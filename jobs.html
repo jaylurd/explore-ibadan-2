@@ -150,20 +150,20 @@ img { max-width: 100%; height: auto; }
       <div style="margin-bottom:1.25rem;">
         <label style="font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Job Type</label>
         <div style="display:flex;flex-direction:column;gap:0.4rem;">
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" checked style="accent-color:var(--forest);"> Full-Time</label>
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" style="accent-color:var(--forest);"> Part-Time</label>
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" style="accent-color:var(--forest);"> Contract</label>
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" style="accent-color:var(--forest);"> Remote</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="type" value="Full-time" style="accent-color:var(--forest);"> Full-Time</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="type" value="Part-time" style="accent-color:var(--forest);"> Part-Time</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="type" value="Contract" style="accent-color:var(--forest);"> Contract</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="type" value="Remote" style="accent-color:var(--forest);"> Remote</label>
         </div>
       </div>
       <div style="margin-bottom:1.25rem;">
         <label style="font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem;">Industry</label>
         <div style="display:flex;flex-direction:column;gap:0.4rem;">
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" checked style="accent-color:var(--forest);"> Technology</label>
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" style="accent-color:var(--forest);"> Finance</label>
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" style="accent-color:var(--forest);"> Agriculture</label>
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" style="accent-color:var(--forest);"> Education</label>
-          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" style="accent-color:var(--forest);"> Healthcare</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="industry" value="Technology" style="accent-color:var(--forest);"> Technology</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="industry" value="Finance" style="accent-color:var(--forest);"> Finance</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="industry" value="Agriculture" style="accent-color:var(--forest);"> Agriculture</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="industry" value="Education" style="accent-color:var(--forest);"> Education</label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--mid);cursor:pointer;"><input type="checkbox" class="job-filter" data-category="industry" value="Healthcare" style="accent-color:var(--forest);"> Healthcare</label>
         </div>
       </div>
     </div>
@@ -174,21 +174,21 @@ img { max-width: 100%; height: auto; }
     <!-- Search bar -->
     <div class="reveal" style="position:relative;margin-bottom:1.5rem;">
       <span class="iconify" data-icon="solar:minimalistic-magnifer-linear" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem;"></span>
-      <input type="text" placeholder="Search by title, skill, or company…" class="search-bar">
+      <input type="text" id="job-search" placeholder="Search by title, skill, or company…" class="search-bar">
     </div>
 
     <!-- Sort bar -->
     <div class="reveal" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.5rem;">
-      <div style="font-size:0.8rem;color:var(--muted);"><strong style="color:var(--charcoal);">340</strong> jobs found</div>
+      <div style="font-size:0.8rem;color:var(--muted);"><strong id="job-count" style="color:var(--charcoal);">5</strong> jobs found</div>
       <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
         <button class="filter-btn active">Most Recent</button>
       </div>
     </div>
 
     <!-- Job listings -->
-    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+    <div id="job-listings" style="display:flex;flex-direction:column;gap:0.75rem;">
 
-      <div class="job-card reveal">
+      <div class="job-card reveal" data-type="Full-time" data-industry="Technology">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
           <div style="display:flex;gap:1rem;align-items:flex-start;">
             <div style="width:52px;height:52px;background:var(--gold-pale);border:1px solid rgba(184,135,11,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
@@ -211,7 +211,7 @@ img { max-width: 100%; height: auto; }
         </div>
       </div>
 
-      <div class="job-card reveal" style="transition-delay:0.05s;">
+      <div class="job-card reveal" data-type="Remote" data-industry="Marketing" style="transition-delay:0.05s;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
           <div style="display:flex;gap:1rem;align-items:flex-start;">
             <div style="width:52px;height:52px;background:#FFF3E0;border:1px solid rgba(255,152,0,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--terra);font-size:1.1rem;">CB</div>
@@ -232,7 +232,7 @@ img { max-width: 100%; height: auto; }
         </div>
       </div>
 
-      <div class="job-card reveal" style="transition-delay:0.1s;">
+      <div class="job-card reveal" data-type="Contract" data-industry="Agriculture" style="transition-delay:0.1s;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
           <div style="display:flex;gap:1rem;align-items:flex-start;">
             <div style="width:52px;height:52px;background:#E8F5E9;border:1px solid rgba(0,100,0,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--forest);font-size:1.1rem;">FF</div>
@@ -253,7 +253,7 @@ img { max-width: 100%; height: auto; }
         </div>
       </div>
 
-      <div class="job-card reveal" style="transition-delay:0.15s;">
+      <div class="job-card reveal" data-type="Full-time" data-industry="Education" style="transition-delay:0.15s;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
           <div style="display:flex;gap:1rem;align-items:flex-start;">
             <div style="width:52px;height:52px;background:var(--parchment);border:1px solid rgba(184,135,11,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--charcoal);font-size:1.1rem;">UI</div>
@@ -274,7 +274,7 @@ img { max-width: 100%; height: auto; }
         </div>
       </div>
 
-      <div class="job-card reveal" style="transition-delay:0.2s;">
+      <div class="job-card reveal" data-type="Full-time" data-industry="Finance" style="transition-delay:0.2s;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
           <div style="display:flex;gap:1rem;align-items:flex-start;">
             <div style="width:52px;height:52px;background:#E3F0FF;border:1px solid rgba(0,80,200,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:#0050C8;font-size:1.1rem;">FN</div>
@@ -309,7 +309,7 @@ img { max-width: 100%; height: auto; }
 <footer class="footer-bg" style="background:var(--forest);padding:5rem 1.5rem 2.5rem;">
   <div style="max-width:1280px;margin:0 auto;">
     <!-- Top grid -->
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 2fr;gap:3rem;margin-bottom:4rem;">
+    <div style="display:grid;grid-template-columns:2fr 1fr 2fr;gap:3rem;margin-bottom:4rem;">
       <div>
         <a href="index.html" style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:1rem;">
           Explore <span style="color:var(--gold-bright);">Ibadan</span>
@@ -331,15 +331,7 @@ img { max-width: 100%; height: auto; }
         <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Platform</h4>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.8rem;"><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="events.html" class="footer-link">Events</a></li><li><a href="jobs.html" class="footer-link">Jobs</a></li><li><a href="vendors.html" class="footer-link">Vendors</a></li><li><a href="services.html" class="footer-link">Services</a></li></ul>
       </div>
-      <div>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Company</h4>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.8rem;">
-          <li><a href="#" class="footer-link">About Us</a></li>
-          <li><a href="#" class="footer-link">Contact</a></li>
-          <li><a href="#" class="footer-link">Privacy</a></li>
-          <li><a href="#" class="footer-link">Terms</a></li>
-        </ul>
-      </div>
+      
       <div>
         <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Newsletter</h4>
         <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:1rem;line-height:1.6;">Get the latest jobs and events delivered every week.</p>
@@ -369,12 +361,58 @@ const hdr=document.getElementById('site-header');
 window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>60));
 document.getElementById('menu-open').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';});
 document.getElementById('menu-close').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';});
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    this.closest('div').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
+
+// Job Filtering Logic
+const searchInput = document.getElementById('job-search');
+const filterCheckboxes = document.querySelectorAll('.job-filter');
+const jobCards = document.querySelectorAll('.job-card');
+const jobCountLabel = document.getElementById('job-count');
+
+function applyFilters() {
+  const searchTerm = searchInput.value.toLowerCase();
+  
+  // Get selected checkboxes by category
+  const selectedTypes = Array.from(filterCheckboxes)
+    .filter(cb => cb.checked && cb.dataset.category === 'type')
+    .map(cb => cb.value.toLowerCase());
+    
+  const selectedIndustries = Array.from(filterCheckboxes)
+    .filter(cb => cb.checked && cb.dataset.category === 'industry')
+    .map(cb => cb.value.toLowerCase());
+
+  let visibleCount = 0;
+
+  jobCards.forEach(card => {
+    // Text search (checks all text inside the card)
+    const cardText = card.innerText.toLowerCase();
+    const matchesSearch = searchTerm === '' || cardText.includes(searchTerm);
+    
+    // Type and Industry filters (from data attributes)
+    const cardType = (card.dataset.type || '').toLowerCase();
+    const cardIndustry = (card.dataset.industry || '').toLowerCase();
+    
+    // If no checkboxes in a category are checked, we don't filter by that category
+    const matchesType = selectedTypes.length === 0 || selectedTypes.some(type => cardType.includes(type) || type.includes(cardType));
+    const matchesIndustry = selectedIndustries.length === 0 || selectedIndustries.includes(cardIndustry);
+
+    if (matchesSearch && matchesType && matchesIndustry) {
+      card.style.display = 'block';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
   });
-});
+
+  jobCountLabel.innerText = visibleCount;
+}
+
+// Attach event listeners
+searchInput.addEventListener('input', applyFilters);
+filterCheckboxes.forEach(cb => cb.addEventListener('change', applyFilters));
+
+// Initial call to set correct count
+applyFilters();
+
 </script>
 </body>
 </html>
