@@ -51,6 +51,29 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;
 .search-bar:focus{border-color:var(--gold);}
 .search-bar::placeholder{color:var(--muted);}
 </style>
+
+<style id="global-responsive-fixes">
+/* GLOBAL RESPONSIVE FIXES */
+img { max-width: 100%; height: auto; }
+@media (max-width: 768px) {
+  /* Fix Stats Bar */
+  .stat-pill { padding: 1rem !important; }
+  .stat-number { font-size: 2rem !important; }
+  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+  /* Fix Mosaic */
+  .features-grid > div > div[style*="height:480px"] { height: auto !important; }
+  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  /* Fix Footer Grid */
+  footer > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  footer > div > div:first-child > div { grid-column: 1 / -1 !important; }
+  /* Fix Founder Bio */
+  .reveal[style*="flex-wrap:wrap"] > div { min-width: 100% !important; }
+}
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
+}
+</style>
 </head>
 <body>
 <div id="mobile-menu">
@@ -326,7 +349,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;
 </nav>
 <style>
 @media(min-width:768px){.desktop-nav{display:flex!important;}.hamburger-btn{display:none!important;}.mobile-nav-bar{display:none!important;}main{padding-bottom:2.5rem!important;}}
-@media(max-width:768px){.jobs-layout{grid-template-columns:1fr!important;} .jobs-layout aside{display:none;}}
+@media(max-width:768px){.jobs-layout{grid-template-columns:1fr!important;} }
 </style>
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('active');obs.unobserve(i.target);}});},{threshold:0.06});

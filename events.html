@@ -51,6 +51,29 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;
 .date-badge .month { font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.8); }
 .event-tag { display:inline-flex; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; padding:0.25rem 0.7rem; background:var(--gold-pale); color:var(--gold); border-radius:1px; margin-bottom:0.75rem; }
 </style>
+
+<style id="global-responsive-fixes">
+/* GLOBAL RESPONSIVE FIXES */
+img { max-width: 100%; height: auto; }
+@media (max-width: 768px) {
+  /* Fix Stats Bar */
+  .stat-pill { padding: 1rem !important; }
+  .stat-number { font-size: 2rem !important; }
+  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+  /* Fix Mosaic */
+  .features-grid > div > div[style*="height:480px"] { height: auto !important; }
+  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  /* Fix Footer Grid */
+  footer > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  footer > div > div:first-child > div { grid-column: 1 / -1 !important; }
+  /* Fix Founder Bio */
+  .reveal[style*="flex-wrap:wrap"] > div { min-width: 100% !important; }
+}
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
+}
+</style>
 </head>
 <body>
 
@@ -115,7 +138,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;
   <!-- Featured Event -->
   <div class="reveal" style="display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:4rem;">
     <h2 style="font-size:1.8rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;">Featured Event</h2>
-    <div style="background:#fff;border:1px solid rgba(184,135,11,0.15);display:grid;grid-template-columns:minmax(300px, 1fr) 1fr;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.06);" class="featured-grid">
+    <div style="background:#fff;border:1px solid rgba(184,135,11,0.15);display:grid;grid-template-columns:minmax(280px, 1fr) 1fr;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.06);" class="featured-grid">
       <div style="position:relative;">
         <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=100&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;min-height:300px;" alt="Tech Summit">
         <div style="position:absolute;top:1.5rem;left:1.5rem;background:var(--forest);color:var(--gold-bright);padding:0.4rem 1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Featured</div>
@@ -140,7 +163,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;
     <div style="font-size:0.8rem;color:var(--muted);"><span class="iconify" data-icon="solar:calendar-linear"></span> Showing June 2026</div>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:1.5rem;">
+  <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:1.5rem;">
     
     <!-- Event Card -->
     <div class="event-card reveal">

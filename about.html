@@ -422,6 +422,29 @@ body::before {
 .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,135,11,0.08); }
 .search-input::placeholder { color: var(--muted); }
 </style>
+
+<style id="global-responsive-fixes">
+/* GLOBAL RESPONSIVE FIXES */
+img { max-width: 100%; height: auto; }
+@media (max-width: 768px) {
+  /* Fix Stats Bar */
+  .stat-pill { padding: 1rem !important; }
+  .stat-number { font-size: 2rem !important; }
+  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+  /* Fix Mosaic */
+  .features-grid > div > div[style*="height:480px"] { height: auto !important; }
+  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  /* Fix Footer Grid */
+  footer > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  footer > div > div:first-child > div { grid-column: 1 / -1 !important; }
+  /* Fix Founder Bio */
+  .reveal[style*="flex-wrap:wrap"] > div { min-width: 100% !important; }
+}
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
+}
+</style>
 </head>
 
 <body>

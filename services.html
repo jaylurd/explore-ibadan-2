@@ -422,6 +422,29 @@ body::before {
 .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,135,11,0.08); }
 .search-input::placeholder { color: var(--muted); }
 </style>
+
+<style id="global-responsive-fixes">
+/* GLOBAL RESPONSIVE FIXES */
+img { max-width: 100%; height: auto; }
+@media (max-width: 768px) {
+  /* Fix Stats Bar */
+  .stat-pill { padding: 1rem !important; }
+  .stat-number { font-size: 2rem !important; }
+  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+  /* Fix Mosaic */
+  .features-grid > div > div[style*="height:480px"] { height: auto !important; }
+  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  /* Fix Footer Grid */
+  footer > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  footer > div > div:first-child > div { grid-column: 1 / -1 !important; }
+  /* Fix Founder Bio */
+  .reveal[style*="flex-wrap:wrap"] > div { min-width: 100% !important; }
+}
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
+}
+</style>
 </head>
 
 <body>
@@ -487,7 +510,7 @@ body::before {
   <div style="display:grid;grid-template-columns:1fr;gap:4rem;">
     
     <!-- Event Planning -->
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:3rem;align-items:center;">
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:3rem;align-items:center;">
       <div style="border-radius:2px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.08);">
         <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&q=100&auto=format&fit=crop" alt="Event Planning" style="width:100%;height:auto;display:block;">
       </div>
@@ -505,7 +528,7 @@ body::before {
     </div>
 
     <!-- Bridal Assistance -->
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:3rem;align-items:center;">
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:3rem;align-items:center;">
       <div style="order:2;">
         <h2 style="font-size:2.2rem;font-weight:600;color:var(--charcoal);line-height:1.2;margin-bottom:1rem;">Bridal Assistance</h2>
         <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.5rem;">Your big day deserves flawless execution. Our bridal assistance packages are tailored to give you peace of mind so you can enjoy every moment.</p>
