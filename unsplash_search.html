@@ -43,7 +43,20 @@
 <style id="global-responsive-fixes">
 /* GLOBAL RESPONSIVE FIXES */
 img { max-width: 100%; height: auto; }
+
+/* Hero mobile fix */
+.hero-wrapper { position:relative; width:100%; min-height:clamp(600px,78vh,820px); overflow:hidden; border-radius:3px; }
+.hero-content { position:relative; z-index:10; height:100%; min-height:clamp(600px,78vh,820px); display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(2rem,5vw,4.5rem); padding-top:6rem; }
+
 @media (max-width: 768px) {
+  /* Hero: let it grow with content */
+  .hero-wrapper { min-height: auto !important; height: auto !important; }
+  .hero-content { min-height: auto !important; height: auto !important; padding: 2rem 1.5rem 2.5rem !important; padding-top: 5rem !important; }
+  .hero-title { font-size: clamp(2rem, 8vw, 3rem) !important; }
+  .hero-sub { font-size: 0.9rem !important; margin-bottom: 1.5rem !important; }
+  .hero-badge { font-size: 0.55rem !important; padding: 0.35rem 0.75rem !important; }
+  .scroll-cue { display: none !important; }
+
   /* Fix Stats Bar */
   .stat-pill { padding: 1rem !important; }
   .stat-number { font-size: 2rem !important; }
@@ -56,9 +69,13 @@ img { max-width: 100%; height: auto; }
   footer > div > div:first-child > div { grid-column: 1 / -1 !important; }
   /* Fix Founder Bio */
   .reveal[style*="flex-wrap:wrap"] > div { min-width: 100% !important; }
+  /* Fix feature cards grid */
+  div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  /* Fix CTA buttons */
+  .btn-gold, .btn-primary { font-size: 0.7rem !important; padding: 0.6rem 1.2rem !important; }
 }
 @media (max-width: 480px) {
-  /* Extra small screens */
+  .hero-title { font-size: 1.9rem !important; line-height: 1.15 !important; }
   .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
 }
 </style>
