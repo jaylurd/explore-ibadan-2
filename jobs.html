@@ -180,6 +180,7 @@ img { max-width: 100%; height: auto; }
     <!-- Sort bar -->
     <div class="reveal" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.5rem;">
       <div style="font-size:0.8rem;color:var(--muted);"><strong id="job-count" style="color:var(--charcoal);">5</strong> jobs found</div>
+      <div style="font-size:0.8rem;color:var(--muted);"><strong id="job-count" style="color:var(--charcoal);">0</strong> jobs found</div>
       <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
         <button class="filter-btn active">Most Recent</button>
       </div>
@@ -187,114 +188,6 @@ img { max-width: 100%; height: auto; }
 
     <!-- Job listings -->
     <div id="job-listings" style="display:flex;flex-direction:column;gap:0.75rem;">
-
-      <div class="job-card reveal" data-type="Full-time" data-industry="Technology">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
-          <div style="display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:52px;height:52px;background:var(--gold-pale);border:1px solid rgba(184,135,11,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <span class="iconify" data-icon="logos:google" style="font-size:1.5rem;"></span>
-            </div>
-            <div>
-              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--charcoal);margin:0 0 0.25rem;">Senior Software Engineer</h3>
-              <p style="font-size:0.8rem;color:var(--muted);margin:0 0 0.75rem;">TechBridge Ibadan</p>
-              <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Bodija</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> Full-time</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:calendar-linear" style="color:var(--gold);"></span> Posted 2d ago</span>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
-            <span class="job-tag" style="border-color:rgba(11,46,11,0.2);color:var(--forest);background:#EBF4EB;">Full-Time</span>
-            <a href="https://wa.me/2348135471582" target="_blank" class="btn-primary" style="font-size:0.7rem;padding:0.55rem 1.2rem;"><span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:0.9rem;"></span> Enquire</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="job-card reveal" data-type="Remote" data-industry="Marketing" style="transition-delay:0.05s;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
-          <div style="display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:52px;height:52px;background:#FFF3E0;border:1px solid rgba(255,152,0,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--terra);font-size:1.1rem;">CB</div>
-            <div>
-              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--charcoal);margin:0 0 0.25rem;">Marketing Manager</h3>
-              <p style="font-size:0.8rem;color:var(--muted);margin:0 0 0.75rem;">Cocoa Brands Ltd</p>
-              <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Dugbe</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> Full-time</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:calendar-linear" style="color:var(--gold);"></span> Posted 3d ago</span>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
-            <span class="job-tag" style="border-color:rgba(139,58,26,0.2);color:var(--terra);background:#FDF2EE;">Remote</span>
-            <a href="https://wa.me/2348135471582" target="_blank" class="btn-primary" style="font-size:0.7rem;padding:0.55rem 1.2rem;"><span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:0.9rem;"></span> Enquire</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="job-card reveal" data-type="Contract" data-industry="Agriculture" style="transition-delay:0.1s;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
-          <div style="display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:52px;height:52px;background:#E8F5E9;border:1px solid rgba(0,100,0,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--forest);font-size:1.1rem;">FF</div>
-            <div>
-              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--charcoal);margin:0 0 0.25rem;">Agro-Tech Project Manager</h3>
-              <p style="font-size:0.8rem;color:var(--muted);margin:0 0 0.75rem;">FarmForward Nigeria</p>
-              <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Moniya</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> Contract</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:calendar-linear" style="color:var(--gold);"></span> Posted 5d ago</span>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
-            <span class="job-tag" style="border-color:rgba(184,135,11,0.3);color:var(--gold);background:var(--gold-pale);">Contract</span>
-            <a href="https://wa.me/2348135471582" target="_blank" class="btn-primary" style="font-size:0.7rem;padding:0.55rem 1.2rem;"><span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:0.9rem;"></span> Enquire</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="job-card reveal" data-type="Full-time" data-industry="Education" style="transition-delay:0.15s;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
-          <div style="display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:52px;height:52px;background:var(--parchment);border:1px solid rgba(184,135,11,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--charcoal);font-size:1.1rem;">UI</div>
-            <div>
-              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--charcoal);margin:0 0 0.25rem;">Lecturer – Computer Science</h3>
-              <p style="font-size:0.8rem;color:var(--muted);margin:0 0 0.75rem;">University of Ibadan</p>
-              <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> UI Campus</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> Full-time</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:calendar-linear" style="color:var(--gold);"></span> Posted 1w ago</span>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
-            <span class="job-tag" style="border-color:rgba(11,46,11,0.2);color:var(--forest);background:#EBF4EB;">Academic</span>
-            <a href="https://wa.me/2348135471582" target="_blank" class="btn-primary" style="font-size:0.7rem;padding:0.55rem 1.2rem;"><span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:0.9rem;"></span> Enquire</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="job-card reveal" data-type="Full-time" data-industry="Finance" style="transition-delay:0.2s;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
-          <div style="display:flex;gap:1rem;align-items:flex-start;">
-            <div style="width:52px;height:52px;background:#E3F0FF;border:1px solid rgba(0,80,200,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Cormorant Garamond',serif;font-weight:700;color:#0050C8;font-size:1.1rem;">FN</div>
-            <div>
-              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--charcoal);margin:0 0 0.25rem;">Finance Analyst</h3>
-              <p style="font-size:0.8rem;color:var(--muted);margin:0 0 0.75rem;">First Inland Bank, Ibadan</p>
-              <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Ring Road</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> Full-time</span>
-                <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.76rem;color:var(--mid);"><span class="iconify" data-icon="solar:calendar-linear" style="color:var(--gold);"></span> Posted 1w ago</span>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
-            <span class="job-tag" style="border-color:rgba(11,46,11,0.2);color:var(--forest);background:#EBF4EB;">Full-Time</span>
-            <a href="https://wa.me/2348135471582" target="_blank" class="btn-primary" style="font-size:0.7rem;padding:0.55rem 1.2rem;"><span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:0.9rem;"></span> Enquire</a>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <!-- Load more -->
@@ -365,11 +258,11 @@ document.getElementById('menu-close').addEventListener('click',()=>{document.get
 // Job Filtering Logic
 const searchInput = document.getElementById('job-search');
 const filterCheckboxes = document.querySelectorAll('.job-filter');
-const jobCards = document.querySelectorAll('.job-card');
 const jobCountLabel = document.getElementById('job-count');
 
-function applyFilters() {
+window.applyFilters = function() {
   const searchTerm = searchInput.value.toLowerCase();
+  const currentJobCards = document.querySelectorAll('.job-card');
   
   // Get selected checkboxes by category
   const selectedTypes = Array.from(filterCheckboxes)
@@ -382,7 +275,7 @@ function applyFilters() {
 
   let visibleCount = 0;
 
-  jobCards.forEach(card => {
+  currentJobCards.forEach(card => {
     // Text search (checks all text inside the card)
     const cardText = card.innerText.toLowerCase();
     const matchesSearch = searchTerm === '' || cardText.includes(searchTerm);
@@ -403,16 +296,22 @@ function applyFilters() {
     }
   });
 
-  jobCountLabel.innerText = visibleCount;
+  if (jobCountLabel) jobCountLabel.innerText = visibleCount;
 }
 
 // Attach event listeners
-searchInput.addEventListener('input', applyFilters);
-filterCheckboxes.forEach(cb => cb.addEventListener('change', applyFilters));
+searchInput.addEventListener('input', window.applyFilters);
+filterCheckboxes.forEach(cb => cb.addEventListener('change', window.applyFilters));
 
 // Initial call to set correct count
-applyFilters();
+// applyFilters(); // Disabled since data is async
 
+</script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="analytics.js"></script>
+<script src="frontend.js"></script>
+<script>
+  fetchJobs('job-listings');
 </script>
 </body>
 </html>

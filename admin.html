@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Dashboard | Explore Ibadan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root {
+            --forest:        #0B2E0B;
+            --forest-mid:    #1A5C1A;
+            --forest-light:  #245524;
+            --gold:          #B8870B;
+            --gold-bright:   #D4A520;
+            --gold-pale:     #F7F0DC;
+            --ivory:         #FAF8F2;
+            --parchment:     #F2EAD8;
+            --charcoal:      #1C1812;
+            --mid:           #4A4238;
+            --muted:         #8A8070;
+            --danger:        #dc2626;
+            --sidebar-w:     260px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #f4f2ed;
+            color: var(--charcoal);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+
+        /* ═══════════════════════════════
+           HEADER
+        ═══════════════════════════════ */
+        header {
+            background: var(--forest);
+            color: white;
+            padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+
+        header .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        header .logo span { color: var(--gold-bright); }
+        header .logo-badge {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: rgba(184,135,11,0.2);
+            color: var(--gold-bright);
+            padding: 0.2rem 0.6rem;
+            border-radius: 2px;
+            border: 1px solid rgba(184,135,11,0.3);
+        }
+
+        /* ═══════════════════════════════
+           BUTTONS
+        ═══════════════════════════════ */
+        .btn {
+            background: var(--gold);
+            color: var(--forest);
+            border: none;
+            padding: 0.55rem 1.25rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .btn:hover { background: var(--gold-bright); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(184,135,11,0.3); }
+        .btn:active { transform: translateY(0); }
+        .btn-danger { background: #fee2e2; color: var(--danger); }
+        .btn-danger:hover { background: #fecaca; box-shadow: 0 4px 12px rgba(220,38,38,0.2); }
+        .btn-header {
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(184,135,11,0.25);
+            font-size: 0.75rem;
+            padding: 0.45rem 1rem;
+        }
+        .btn-header:hover {
+            background: var(--gold);
+            color: var(--forest);
+            border-color: var(--gold);
+        }
+
+        /* ═══════════════════════════════
+           LOGIN SCREEN
+        ═══════════════════════════════ */
+        #login-screen {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            min-height: calc(100vh - 60px);
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(11,46,11,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(184,135,11,0.06) 0%, transparent 50%),
+                linear-gradient(135deg, #f4f2ed 0%, #ece8df 100%);
+        }
+        .login-box {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 16px;
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.06),
+                0 1px 3px rgba(0,0,0,0.04);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            border: 1px solid rgba(184,135,11,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--forest), var(--gold), var(--forest));
+        }
+        .login-box h2 {
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+            color: var(--forest);
+        }
+        .login-box .login-subtitle {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-group { margin-bottom: 1.25rem; text-align: left; }
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: var(--mid);
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid #e0ddd6;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            background: #fafaf8;
+            transition: all 0.25s;
+            outline: none;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--gold);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(184,135,11,0.1);
+        }
+
+        .login-box .btn { width: 100%; margin-top: 0.75rem; padding: 0.85rem; font-size: 0.85rem; border-radius: 8px; }
+
+        /* ═══════════════════════════════
+           DASHBOARD LAYOUT
+        ═══════════════════════════════ */
+        #dashboard-screen {
+            display: none;
+            min-height: calc(100vh - 60px);
+        }
+
+        .dashboard-layout {
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* ─── Sidebar ─── */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--forest);
+            color: white;
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+            flex-shrink: 0;
+            border-right: 1px solid rgba(184,135,11,0.15);
+        }
+
+        .sidebar-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            padding: 0 1.5rem;
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        .sidebar-label:first-child { margin-top: 0; }
+
+        .tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: 'Outfit', sans-serif;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-left: 3px solid transparent;
+            transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            color: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.04);
+            border-left-color: rgba(184,135,11,0.3);
+        }
+
+        .tab-btn.active {
+            color: var(--gold-bright);
+            background: rgba(184,135,11,0.08);
+            border-left-color: var(--gold-bright);
+            font-weight: 600;
+            border-bottom: none;
+        }
+
+        .tab-btn .tab-icon {
+            font-size: 1.15rem;
+            width: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(184,135,11,0.12);
+        }
+        .sidebar-footer p {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.2);
+            line-height: 1.6;
+        }
+
+        /* ─── Main Content ─── */
+        .main-content {
+            flex: 1;
+            padding: 2rem 2.5rem;
+            overflow-y: auto;
+            min-width: 0;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .dashboard-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .header-accent {
+            display: inline-block;
+            width: 4px;
+            height: 28px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════
+           DATA TABLE
+        ═══════════════════════════════ */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+            overflow: hidden;
+            border: 1px solid rgba(184,135,11,0.08);
+        }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 2px solid #f0ede6;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: #fafaf8;
+        }
+        td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid #f5f3ee;
+            font-size: 0.88rem;
+            color: var(--mid);
+            vertical-align: middle;
+        }
+        tbody tr {
+            transition: background 0.2s;
+        }
+        tbody tr:hover {
+            background: rgba(184,135,11,0.03);
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        td img {
+            width: 44px;
+            height: 44px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #f0ede6;
+        }
+
+        .action-btns { display: flex; gap: 0.35rem; }
+        .action-btns button {
+            background: none;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--muted);
+            transition: all 0.2s;
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .action-btns button:hover {
+            color: var(--forest);
+            background: rgba(11,46,11,0.06);
+            border-color: rgba(11,46,11,0.1);
+        }
+        .action-btns button.delete:hover {
+            color: var(--danger);
+            background: rgba(220,38,38,0.06);
+            border-color: rgba(220,38,38,0.1);
+        }
+
+        /* ═══════════════════════════════
+           MODAL
+        ═══════════════════════════════ */
+        #modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(11,46,11,0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        .modal-content {
+            background: white;
+            padding: 0;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow:
+                0 24px 80px rgba(0,0,0,0.12),
+                0 2px 6px rgba(0,0,0,0.04);
+            border: 1px solid rgba(184,135,11,0.1);
+            animation: modalIn 0.35s cubic-bezier(0.22,1,0.36,1);
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(16px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f0ede6;
+            background: #fafaf8;
+            border-radius: 16px 16px 0 0;
+        }
+        .modal-header h3 { font-size: 1.5rem; color: var(--forest); }
+        .close-btn {
+            background: none;
+            border: 1px solid #e0ddd6;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--muted);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .close-btn:hover {
+            background: #fee2e2;
+            border-color: rgba(220,38,38,0.2);
+            color: var(--danger);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-body .btn {
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        /* ═══════════════════════════════
+           LOADING
+        ═══════════════════════════════ */
+        #loading {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--muted);
+            display: none;
+            font-size: 0.9rem;
+        }
+        #loading::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 32px;
+            border: 3px solid #e0ddd6;
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ═══════════════════════════════
+           ANALYTICS VIEW
+        ═══════════════════════════════ */
+        #analytics-view {
+            display: none;
+        }
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+            text-align: center;
+            border: 1px solid rgba(184,135,11,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--forest), var(--gold));
+        }
+        .stat-card h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ═══════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════ */
+
+        /* Desktop: hide mobile tabs */
+        @media (min-width: 901px) {
+            .mobile-tabs { display: none !important; }
+        }
+
+        /* Tablet & small desktop */
+        @media (max-width: 900px) {
+            .sidebar {
+                display: none;
+            }
+
+            .dashboard-layout {
+                flex-direction: column;
+            }
+
+            /* ─── Mobile Tab Bar ─── */
+            .mobile-tabs {
+                display: flex !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                gap: 0;
+                background: white;
+                border-bottom: 2px solid #f0ede6;
+                padding: 0 0.5rem;
+                position: sticky;
+                top: 60px;
+                z-index: 90;
+                scrollbar-width: none;
+            }
+            .mobile-tabs::-webkit-scrollbar { display: none; }
+
+            .mobile-tabs .tab-btn {
+                color: var(--muted);
+                border-left: none;
+                border-bottom: 2px solid transparent;
+                white-space: nowrap;
+                padding: 0.7rem 0.9rem;
+                font-size: 0.75rem;
+                margin-bottom: -2px;
+                flex-direction: column;
+                gap: 0.2rem;
+                min-width: 60px;
+                text-align: center;
+                justify-content: center;
+            }
+            .mobile-tabs .tab-btn.active {
+                color: var(--forest);
+                border-bottom-color: var(--gold);
+                background: none;
+                border-left: none;
+            }
+            .mobile-tabs .tab-btn .tab-icon {
+                display: flex;
+                font-size: 1.2rem;
+                justify-content: center;
+            }
+
+            /* ─── Main Content ─── */
+            .main-content {
+                padding: 1.25rem 1rem;
+            }
+
+            /* ─── Dashboard Header ─── */
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .dashboard-header h2 {
+                font-size: 1.5rem;
+            }
+            .dashboard-header .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.7rem 1rem;
+            }
+
+            /* ─── Table ─── */
+            .table-container {
+                background: transparent;
+                box-shadow: none;
+                border: none;
+                overflow: visible;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+            thead tr {
+                display: none;
+            }
+            tbody tr {
+                margin-bottom: 1rem;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+                border: 1px solid rgba(184,135,11,0.08);
+                overflow: hidden;
+            }
+            tbody tr:hover { background: white; }
+            td {
+                text-align: right;
+                padding: 0.9rem 1.25rem 0.9rem 40% !important;
+                position: relative;
+                border-bottom: 1px solid #f5f3ee;
+                min-height: 50px;
+                word-break: break-word;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                font-size: 0.85rem;
+            }
+            td:last-child {
+                border-bottom: none;
+            }
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1.25rem;
+                width: calc(40% - 1.5rem);
+                text-align: left;
+                font-family: 'Outfit', sans-serif;
+                font-weight: 600;
+                font-size: 0.72rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--muted);
+                top: 0;
+                bottom: 0;
+                display: flex;
+                align-items: center;
+            }
+            td img {
+                width: 44px;
+                height: 44px;
+            }
+
+            /* ─── Modal ─── */
+            #modal {
+                padding: 0.75rem;
+                align-items: flex-end;
+            }
+            .modal-content {
+                max-width: 100%;
+                max-height: 92vh;
+                border-radius: 16px 16px 0 0;
+                animation: modalSlideUp 0.35s cubic-bezier(0.22,1,0.36,1);
+            }
+            @keyframes modalSlideUp {
+                from { opacity: 0; transform: translateY(100%); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+            .modal-header {
+                padding: 1.25rem 1.5rem;
+                border-radius: 16px 16px 0 0;
+            }
+            .modal-header h3 {
+                font-size: 1.3rem;
+            }
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            /* ─── Analytics View ─── */
+            #analytics-view > div:first-child {
+                grid-template-columns: 1fr !important;
+            }
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            /* ─── Login ─── */
+            .login-box {
+                padding: 2.5rem 1.75rem;
+                border-radius: 12px;
+            }
+            .login-box h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+            header {
+                padding: 0 1rem;
+                height: 54px;
+            }
+            header .logo {
+                font-size: 1.2rem;
+            }
+            header .logo-badge {
+                font-size: 0.5rem;
+                padding: 0.15rem 0.45rem;
+            }
+
+            .mobile-tabs .tab-btn {
+                padding: 0.6rem 0.65rem;
+                font-size: 0.65rem;
+                min-width: 52px;
+            }
+            .mobile-tabs .tab-btn .tab-icon {
+                font-size: 1.05rem;
+            }
+
+            .main-content {
+                padding: 1rem 0.75rem;
+            }
+
+            .dashboard-header h2 {
+                font-size: 1.3rem;
+            }
+            .header-accent {
+                height: 22px;
+                width: 3px;
+            }
+
+            table {
+                min-width: 100%;
+            }
+            th, td {
+                padding: 0.75rem 1rem !important;
+                font-size: 0.8rem;
+            }
+            td::before {
+                left: 1rem;
+            }
+
+            .form-group input, .form-group textarea, .form-group select {
+                padding: 0.7rem 0.85rem;
+                font-size: 0.85rem;
+            }
+            .form-group label {
+                font-size: 0.72rem;
+            }
+
+            .login-box {
+                padding: 2rem 1.5rem;
+            }
+            .login-box h2 {
+                font-size: 1.6rem;
+            }
+            .login-box .login-subtitle {
+                font-size: 0.8rem;
+            }
+            #login-screen {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            Explore <span>Ibadan</span>
+            <span class="logo-badge">Admin</span>
+        </div>
+        <button id="logout-btn" class="btn btn-header" style="display: none;">
+            <span class="iconify" data-icon="solar:logout-2-linear" style="font-size:1rem;"></span> Logout
+        </button>
+    </header>
+
+    <!-- LOGIN SCREEN -->
+    <main id="login-screen">
+        <div class="login-box">
+            <div style="margin-bottom:1.5rem;">
+                <span class="iconify" data-icon="solar:shield-keyhole-bold-duotone" style="font-size:2.5rem;color:var(--forest);"></span>
+            </div>
+            <h2>Welcome Back</h2>
+            <p class="login-subtitle">Sign in to your admin dashboard</p>
+            <form id="login-form" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" required placeholder="admin@exploreibadan.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn">
+                    <span class="iconify" data-icon="solar:login-2-bold" style="font-size:1.1rem;"></span> Sign In
+                </button>
+                <p id="login-error" style="color: var(--danger); margin-top: 1rem; font-size: 0.85rem;"></p>
+            </form>
+        </div>
+    </main>
+
+    <!-- DASHBOARD SCREEN -->
+    <main id="dashboard-screen">
+        <div class="dashboard-layout">
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-label">Content Management</div>
+                <div class="tabs" id="sidebar-tabs">
+                    <button class="tab-btn active" data-target="events">
+                        <span class="tab-icon"><span class="iconify" data-icon="solar:calendar-bold-duotone"></span></span>
+                        Events
+                    </button>
+                    <button class="tab-btn" data-target="jobs">
+                        <span class="tab-icon"><span class="iconify" data-icon="solar:case-round-bold-duotone"></span></span>
+                        Jobs
+                    </button>
+                    <button class="tab-btn" data-target="vendors">
+                        <span class="tab-icon"><span class="iconify" data-icon="solar:shop-2-bold-duotone"></span></span>
+                        Vendors
+                    </button>
+                    <button class="tab-btn" data-target="services">
+                        <span class="tab-icon"><span class="iconify" data-icon="solar:widget-2-bold-duotone"></span></span>
+                        Services
+                    </button>
+
+                    <div class="sidebar-label">Insights</div>
+                    <button class="tab-btn" data-target="crm_leads">
+                        <span class="tab-icon"><span class="iconify" data-icon="solar:users-group-rounded-bold-duotone"></span></span>
+                        CRM (Leads)
+                    </button>
+                    <button class="tab-btn" data-target="analytics">
+                        <span class="tab-icon"><span class="iconify" data-icon="solar:chart-square-bold-duotone"></span></span>
+                        Analytics
+                    </button>
+                </div>
+
+                <div class="sidebar-footer">
+                    <p>© 2026 Explore Ibadan<br>Admin Panel v2.0</p>
+                </div>
+            </aside>
+
+            <!-- Mobile Tabs (visible < 900px) -->
+            <div class="mobile-tabs" id="mobile-tabs-bar">
+                <button class="tab-btn active" data-target="events">
+                    <span class="tab-icon"><span class="iconify" data-icon="solar:calendar-bold-duotone"></span></span>
+                    Events
+                </button>
+                <button class="tab-btn" data-target="jobs">
+                    <span class="tab-icon"><span class="iconify" data-icon="solar:case-round-bold-duotone"></span></span>
+                    Jobs
+                </button>
+                <button class="tab-btn" data-target="vendors">
+                    <span class="tab-icon"><span class="iconify" data-icon="solar:shop-2-bold-duotone"></span></span>
+                    Vendors
+                </button>
+                <button class="tab-btn" data-target="services">
+                    <span class="tab-icon"><span class="iconify" data-icon="solar:widget-2-bold-duotone"></span></span>
+                    Services
+                </button>
+                <button class="tab-btn" data-target="crm_leads">
+                    <span class="tab-icon"><span class="iconify" data-icon="solar:users-group-rounded-bold-duotone"></span></span>
+                    CRM
+                </button>
+                <button class="tab-btn" data-target="analytics">
+                    <span class="tab-icon"><span class="iconify" data-icon="solar:chart-square-bold-duotone"></span></span>
+                    Analytics
+                </button>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="dashboard-header">
+                    <h2><span class="header-accent"></span> <span id="current-section-title">Manage Events</span></h2>
+                    <button id="add-new-btn" class="btn">
+                        <span class="iconify" data-icon="solar:add-circle-bold" style="font-size:1.1rem;"></span> Add New
+                    </button>
+                </div>
+
+                <div id="loading">Loading data...</div>
+
+                <div class="table-container">
+                    <table id="data-table">
+                        <thead>
+                            <tr id="table-head">
+                                <!-- Dynamic headers injected here -->
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Dynamic rows injected here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Custom Analytics View (hidden by default) -->
+                <div id="analytics-view" style="display: none;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <div class="stat-card">
+                            <h3>Total Page Views</h3>
+                            <div id="total-views" style="font-size: 3rem; font-weight: 700; color: var(--forest); font-family: 'Cormorant Garamond', serif;">0</div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem; font-size: 1.5rem; color: var(--charcoal);">Recent Visits</h3>
+                    <div class="table-container">
+                        <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Page</th>
+                                    <th>Date & Time</th>
+                                    <th>Browser/Device</th>
+                                </tr>
+                            </thead>
+                            <tbody id="analytics-table-body">
+                                <!-- Analytics rows here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL FORM -->
+    <div id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New</h3>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="crud-form">
+                    <input type="hidden" id="item-id">
+                    <div id="form-fields">
+                        <!-- Dynamic fields injected here -->
+                    </div>
+                    <div class="form-group" id="image-upload-group">
+                        <label>Image / Logo Upload</label>
+                        <input type="file" id="image-upload" accept="image/*" style="padding:0.6rem;">
+                        <input type="hidden" id="existing-image-url">
+                        <small style="color: var(--muted); display:block; margin-top:0.4rem;">Leave empty to keep existing image</small>
+                    </div>
+                    <button type="submit" class="btn" id="save-btn">
+                        <span class="iconify" data-icon="solar:diskette-bold" style="font-size:1.1rem;"></span> Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://uaokmfmvzxolvvigjjol.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVhb2ttZm12enhvbHZ2aWdqam9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDQwNzEsImV4cCI6MjA5NjU4MDA3MX0.VxOyTUQCc_MzlerTPPFXxPdA4_lHWHqzGMu-yVvNwRo';
+
+        // DOM Elements
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardScreen = document.getElementById('dashboard-screen');
+        const loginForm = document.getElementById('login-form');
+        const logoutBtn = document.getElementById('logout-btn');
+        const loginError = document.getElementById('login-error');
+
+        const tabs = document.querySelectorAll('.tab-btn');
+        const sectionTitle = document.getElementById('current-section-title');
+        const dataTable = document.getElementById('data-table');
+        const tableHead = document.getElementById('table-head');
+        const tableBody = document.getElementById('table-body');
+        const loading = document.getElementById('loading');
+
+        const modal = document.getElementById('modal');
+        const crudForm = document.getElementById('crud-form');
+        const formFields = document.getElementById('form-fields');
+        const closeModal = document.getElementById('close-modal');
+        const addNewBtn = document.getElementById('add-new-btn');
+        const modalTitle = document.getElementById('modal-title');
+        const itemIdInput = document.getElementById('item-id');
+        const imageUpload = document.getElementById('image-upload');
+        const existingImageUrl = document.getElementById('existing-image-url');
+        const saveBtn = document.getElementById('save-btn');
+
+        let currentTab = 'events';
+        let currentData = [];
+        let supabaseClient = null;
+
+        // Configurations for different entities
+        const entityConfigs = {
+            events: {
+                title: 'Manage Events',
+                imageField: 'image_url',
+                columns: ['Image', 'Title', 'Date', 'Location', 'Actions'],
+                fields: [
+                    { name: 'title', label: 'Event Title', type: 'text', required: true },
+                    { name: 'date', label: 'Date & Time', type: 'datetime-local', required: true },
+                    { name: 'location', label: 'Location', type: 'text', required: true },
+                    { name: 'description', label: 'Description', type: 'textarea', required: false },
+                    { name: 'rsvp_link', label: 'RSVP Link', type: 'url', required: false }
+                ]
+            },
+            jobs: {
+                title: 'Manage Jobs',
+                imageField: 'logo_url',
+                columns: ['Logo', 'Title', 'Company', 'Type', 'Location', 'Actions'],
+                fields: [
+                    { name: 'title', label: 'Job Title', type: 'text', required: true },
+                    { name: 'company', label: 'Company Name', type: 'text', required: true },
+                    { name: 'type', label: 'Job Type (e.g. Full-time, Remote)', type: 'text', required: true },
+                    { name: 'location', label: 'Location', type: 'text', required: true },
+                    { name: 'salary', label: 'Salary/Stipend', type: 'text', required: false },
+                    { name: 'link', label: 'Application Link/Email', type: 'text', required: false }
+                ]
+            },
+            vendors: {
+                title: 'Manage Vendors',
+                imageField: 'image_url',
+                columns: ['Image', 'Name', 'Category', 'Location', 'Phone', 'Actions'],
+                fields: [
+                    { name: 'name', label: 'Business Name', type: 'text', required: true },
+                    { name: 'category', label: 'Category', type: 'text', required: true },
+                    { name: 'location', label: 'Location', type: 'text', required: true },
+                    { name: 'phone', label: 'Phone Number', type: 'text', required: true }
+                ]
+            },
+            services: {
+                title: 'Manage Services',
+                imageField: 'image_url',
+                columns: ['Image', 'Name', 'Category', 'Phone', 'Actions'],
+                fields: [
+                    { name: 'name', label: 'Service Name', type: 'text', required: true },
+                    { name: 'category', label: 'Category', type: 'text', required: true },
+                    { name: 'description', label: 'Description', type: 'textarea', required: false },
+                    { name: 'phone', label: 'Phone Number', type: 'text', required: true }
+                ]
+            },
+            crm_leads: {
+                title: 'CRM / Contact Leads',
+                imageField: null,
+                columns: ['Status', 'Date', 'Name', 'Email', 'Subject', 'Actions'],
+                fields: [
+                    { name: 'name', label: 'Name', type: 'text', required: true },
+                    { name: 'email', label: 'Email', type: 'email', required: true },
+                    { name: 'subject', label: 'Subject', type: 'text', required: true },
+                    { name: 'message', label: 'Message', type: 'textarea', required: true },
+                    { name: 'status', label: 'Status (New / Responded)', type: 'text', required: true }
+                ]
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!window.supabase) {
+                loginError.textContent = "CRITICAL ERROR: Supabase library blocked. Please use VS Code Live Server.";
+                return;
+            }
+
+            try {
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                
+                // Auth State Check
+                supabaseClient.auth.onAuthStateChange((event, session) => {
+                    if (event === 'SIGNED_IN') showDashboard();
+                    if (event === 'SIGNED_OUT') showLogin();
+                });
+                
+                checkAuth();
+            } catch (err) {
+                loginError.textContent = "Error initializing: " + err.message;
+            }
+        });
+
+        async function checkAuth() {
+            if (!supabaseClient) return;
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        }
+
+        function showLogin() {
+            loginScreen.style.display = 'flex';
+            dashboardScreen.style.display = 'none';
+            logoutBtn.style.display = 'none';
+        }
+
+        function showDashboard() {
+            loginScreen.style.display = 'none';
+            dashboardScreen.style.display = 'block';
+            logoutBtn.style.display = 'block';
+            loadData();
+        }
+
+        // Login Handler
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            loginError.textContent = 'Logging in...';
+            loginError.style.color = "blue";
+            
+            if (!supabaseClient) {
+                loginError.textContent = "Database not connected. Please use Live Server.";
+                loginError.style.color = "red";
+                return;
+            }
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                
+                if (error) {
+                    loginError.textContent = error.message;
+                    loginError.style.color = "var(--danger)";
+                } else if (data.session) {
+                    loginError.textContent = 'Success! Loading dashboard...';
+                    loginError.style.color = "green";
+                    showDashboard();
+                } else {
+                    loginError.textContent = 'Please confirm your email address.';
+                    loginError.style.color = "var(--danger)";
+                }
+            } catch (err) {
+                loginError.textContent = 'Network error: ' + err.message;
+                loginError.style.color = "var(--danger)";
+            }
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+            if (supabaseClient) await supabaseClient.auth.signOut();
+        });
+
+        // Tabs Handler
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                tabs.forEach(t => t.classList.remove('active'));
+                // Activate all matching tab-btns (sidebar + mobile)
+                const target = e.currentTarget.dataset.target;
+                tabs.forEach(t => {
+                    if (t.dataset.target === target) t.classList.add('active');
+                });
+                currentTab = target;
+                loadData();
+            });
+        });
+
+        // Load Data
+        async function loadData() {
+            if (!supabaseClient) return;
+            loading.style.display = 'block';
+            tableBody.innerHTML = '';
+            tableHead.innerHTML = '';
+
+            // Handle Analytics View
+            if (currentTab === 'analytics') {
+                document.querySelector('.table-container').style.display = 'none';
+                document.getElementById('analytics-view').style.display = 'block';
+                document.getElementById('add-new-btn').style.display = 'none';
+                sectionTitle.textContent = "Website Analytics";
+                
+                const { data, error } = await supabaseClient.from('analytics').select('*').order('created_at', { ascending: false });
+                loading.style.display = 'none';
+                
+                if (error) {
+                    alert('Error loading analytics: ' + error.message);
+                    return;
+                }
+                
+                document.getElementById('total-views').textContent = data.length;
+                const tbody = document.getElementById('analytics-table-body');
+                tbody.innerHTML = '';
+                data.slice(0, 50).forEach(item => { // Show last 50
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Page">${item.page_url}</td>
+                        <td data-label="Date & Time">${new Date(item.created_at).toLocaleString()}</td>
+                        <td data-label="Browser/Device" style="font-size: 0.8rem; color: var(--muted);">${item.user_agent || 'Unknown'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                return;
+            }
+
+            // Restore normal CRUD view
+            document.querySelector('.table-container').style.display = 'block';
+            document.getElementById('analytics-view').style.display = 'none';
+            document.getElementById('add-new-btn').style.display = 'inline-flex';
+            
+            const config = entityConfigs[currentTab];
+            sectionTitle.textContent = config.title;
+
+            config.columns.forEach(col => {
+                const th = document.createElement('th');
+                th.textContent = col;
+                tableHead.appendChild(th);
+            });
+
+            const { data, error } = await supabaseClient.from(currentTab).select('*').order('created_at', { ascending: false });
+            
+            loading.style.display = 'none';
+            
+            if (error) {
+                console.error(error);
+                alert('Error loading data: ' + error.message);
+                return;
+            }
+
+            currentData = data;
+            renderTable(data);
+        }
+
+        function renderTable(data) {
+            const config = entityConfigs[currentTab];
+            
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="${config.columns.length}" style="text-align:center; padding: 2rem;">No data found.</td></tr>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                
+                if (config.imageField) {
+                    const tdImg = document.createElement('td');
+                    tdImg.setAttribute('data-label', config.columns[0]);
+                    const imgUrl = item[config.imageField] || 'https://via.placeholder.com/40';
+                    tdImg.innerHTML = `<img src="${imgUrl}" alt="image">`;
+                    tr.appendChild(tdImg);
+                }
+
+                if (currentTab === 'events') {
+                    tr.innerHTML += `
+                        <td data-label="Title">${item.title}</td>
+                        <td data-label="Date">${new Date(item.date).toLocaleString()}</td>
+                        <td data-label="Location">${item.location}</td>
+                    `;
+                } else if (currentTab === 'jobs') {
+                    tr.innerHTML += `
+                        <td data-label="Title">${item.title}</td>
+                        <td data-label="Company">${item.company}</td>
+                        <td data-label="Type">${item.type}</td>
+                        <td data-label="Location">${item.location}</td>
+                    `;
+                } else if (currentTab === 'vendors') {
+                    tr.innerHTML += `
+                        <td data-label="Name">${item.name}</td>
+                        <td data-label="Category">${item.category}</td>
+                        <td data-label="Location">${item.location}</td>
+                        <td data-label="Phone">${item.phone}</td>
+                    `;
+                } else if (currentTab === 'services') {
+                    tr.innerHTML += `
+                        <td data-label="Name">${item.name}</td>
+                        <td data-label="Category">${item.category}</td>
+                        <td data-label="Phone">${item.phone}</td>
+                    `;
+                } else if (currentTab === 'crm_leads') {
+                    const statusColor = item.status === 'New' ? 'var(--danger)' : 'green';
+                    tr.innerHTML += `
+                        <td data-label="Status" style="color: ${statusColor}; font-weight: bold;">${item.status || 'New'}</td>
+                        <td data-label="Date">${new Date(item.created_at).toLocaleDateString()}</td>
+                        <td data-label="Name">${item.name}</td>
+                        <td data-label="Email">${item.email}</td>
+                        <td data-label="Subject">${item.subject}</td>
+                    `;
+                }
+
+                const tdActions = document.createElement('td');
+                tdActions.className = 'action-btns';
+                tdActions.setAttribute('data-label', 'Actions');
+                tdActions.innerHTML = `
+                    <button onclick="editItem('${item.id}')"><span class="iconify" data-icon="solar:pen-bold"></span></button>
+                    <button class="delete" onclick="deleteItem('${item.id}')"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
+                `;
+                tr.appendChild(tdActions);
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Modal Handlers
+        addNewBtn.addEventListener('click', () => { openModal(); });
+        closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+
+        function openModal(item = null) {
+            const config = entityConfigs[currentTab];
+            modalTitle.textContent = item ? `Edit ${currentTab.slice(0,-1)}` : `Add New ${currentTab.slice(0,-1)}`;
+            formFields.innerHTML = '';
+            crudForm.reset();
+            itemIdInput.value = item ? item.id : '';
+            existingImageUrl.value = item && config.imageField ? (item[config.imageField] || '') : '';
+
+            if (config.imageField) {
+                document.getElementById('image-upload-group').style.display = 'block';
+            } else {
+                document.getElementById('image-upload-group').style.display = 'none';
+            }
+
+            config.fields.forEach(field => {
+                const div = document.createElement('div');
+                div.className = 'form-group';
+                
+                const label = document.createElement('label');
+                label.textContent = field.label;
+                div.appendChild(label);
+
+                let input;
+                if (field.type === 'textarea') {
+                    input = document.createElement('textarea');
+                    input.rows = 4;
+                } else {
+                    input = document.createElement('input');
+                    input.type = field.type;
+                }
+                
+                input.id = `field-${field.name}`;
+                input.name = field.name;
+                input.required = field.required;
+
+                if (item) {
+                    if (field.type === 'datetime-local' && item[field.name]) {
+                        const date = new Date(item[field.name]);
+                        date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+                        input.value = date.toISOString().slice(0,16);
+                    } else {
+                        input.value = item[field.name] || '';
+                    }
+                }
+
+                div.appendChild(input);
+                formFields.appendChild(div);
+            });
+
+            modal.style.display = 'flex';
+        }
+
+        window.editItem = function(id) {
+            const item = currentData.find(d => d.id === id);
+            if (item) openModal(item);
+        }
+
+        window.deleteItem = async function(id) {
+            if (!confirm('Are you sure you want to delete this item?')) return;
+            const { error } = await supabaseClient.from(currentTab).delete().eq('id', id);
+            if (error) {
+                alert('Error deleting item: ' + error.message);
+            } else {
+                loadData();
+            }
+        }
+
+        // Image Upload
+        async function uploadImage(file) {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Math.random()}.${fileExt}`;
+            const filePath = `${currentTab}/${fileName}`;
+
+            const { error: uploadError } = await supabaseClient.storage
+                .from('images')
+                .upload(filePath, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data } = supabaseClient.storage.from('images').getPublicUrl(filePath);
+            return data.publicUrl;
+        }
+
+        // Form Submit
+        crudForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+
+            try {
+                const config = entityConfigs[currentTab];
+                const id = itemIdInput.value;
+                const formData = new FormData(crudForm);
+                const payload = {};
+
+                config.fields.forEach(f => {
+                    payload[f.name] = formData.get(f.name);
+                });
+
+                const file = imageUpload.files[0];
+                if (file) {
+                    const publicUrl = await uploadImage(file);
+                    payload[config.imageField] = publicUrl;
+                } else if (existingImageUrl.value) {
+                    payload[config.imageField] = existingImageUrl.value;
+                }
+
+                if (id) {
+                    const { error } = await supabaseClient.from(currentTab).update(payload).eq('id', id);
+                    if (error) throw error;
+                } else {
+                    const { error } = await supabaseClient.from(currentTab).insert([payload]);
+                    if (error) throw error;
+                }
+
+                modal.style.display = 'none';
+                loadData();
+            } catch (error) {
+                console.error(error);
+                alert('Error saving data: ' + error.message);
+            } finally {
+                saveBtn.textContent = 'Save';
+                saveBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

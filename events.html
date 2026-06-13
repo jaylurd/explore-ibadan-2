@@ -154,22 +154,22 @@ img { max-width: 100%; height: auto; }
 
   <!-- Featured Event -->
   <div class="reveal" style="display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:4rem;">
-    <h2 style="font-size:1.8rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;">Featured Event</h2>
+    <h2 style="font-size:1.8rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;">Explore The City</h2>
     <div style="background:#fff;border:1px solid rgba(184,135,11,0.15);display:grid;grid-template-columns:minmax(280px, 1fr) 1fr;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.06);" class="featured-grid">
       <div style="position:relative;">
-        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=100&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;min-height:300px;" alt="Tech Summit">
-        <div style="position:absolute;top:1.5rem;left:1.5rem;background:var(--forest);color:var(--gold-bright);padding:0.4rem 1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Featured</div>
+        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1200&q=100&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;min-height:300px;" alt="Ibadan Events">
+        <div style="position:absolute;top:1.5rem;left:1.5rem;background:var(--forest);color:var(--gold-bright);padding:0.4rem 1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">All Categories</div>
       </div>
       <div style="padding:2.5rem;display:flex;flex-direction:column;justify-content:center;">
-        <div class="event-tag" style="align-self:flex-start;">Technology & Startup</div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--charcoal);line-height:1.1;margin-bottom:1rem;">Ibadan Tech Summit 2026</h3>
-        <p style="color:var(--mid);font-size:0.95rem;line-height:1.7;margin-bottom:1.5rem;">Join over 1,000 founders, developers, and investors for the largest technology gathering in Oyo State. Featuring keynote speakers from top African unicorns.</p>
+        <div class="event-tag" style="align-self:flex-start;">Discover Ibadan</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--charcoal);line-height:1.1;margin-bottom:1rem;">Showcasing All Events</h3>
+        <p style="color:var(--mid);font-size:0.95rem;line-height:1.7;margin-bottom:1.5rem;">From vibrant cultural festivals and tech summits to exclusive business gatherings, discover everything happening in the heart of Oyo State. Experience the true spirit of Ibadan through curated events tailored for you.</p>
         <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem;">
-          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:calendar-date-bold" style="color:var(--gold);"></span> June 15-16, 2026</div>
-          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:map-point-bold" style="color:var(--gold);"></span> Cocoa House, Dugbe</div>
-          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:ticket-bold" style="color:var(--gold);"></span> From ₦5,000</div>
+          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:calendar-date-bold" style="color:var(--gold);"></span> Weekly & Monthly Events</div>
+          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:map-point-bold" style="color:var(--gold);"></span> Multiple Venues Across Ibadan</div>
+          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:ticket-bold" style="color:var(--gold);"></span> Free & Paid Events</div>
         </div>
-        <a href="#" class="btn-primary" style="align-self:flex-start;padding:0.8rem 2rem;">Get Tickets</a>
+        <button class="btn-primary" style="align-self:flex-start;padding:0.8rem 2rem;border:none;cursor:pointer;" onclick="document.getElementById('events-page-container').scrollIntoView({behavior:'smooth'})">Browse All Events</button>
       </div>
     </div>
   </div>
@@ -179,72 +179,8 @@ img { max-width: 100%; height: auto; }
     <h2 style="font-size:1.8rem;font-weight:600;color:var(--charcoal);margin:0;">Upcoming Events</h2>
     <div style="font-size:0.8rem;color:var(--muted);"><span class="iconify" data-icon="solar:calendar-linear"></span> Showing June 2026</div>
   </div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:1.5rem;">
-    
-    <!-- Event Card -->
-    <div class="event-card reveal">
-      <div style="position:relative;">
-        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80&auto=format&fit=crop" class="event-img" alt="Music">
-        <div class="date-badge">
-          <div class="day">22</div>
-          <div class="month">Jun</div>
-        </div>
-      </div>
-      <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
-        <div class="event-tag">Arts & Music</div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Ibadan Sounds Night</h3>
-        <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;margin-bottom:1.5rem;flex:1;">Experience a magical night of live music featuring local highlife, afrobeat, and contemporary artists under the stars.</p>
-        <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
-          <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> 7:00 PM - 11:30 PM</span>
-          <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Mapo Hill Amphitheatre</span>
-        </div>
-        <a href="#" class="btn-ghost" style="width:100%;justify-content:center;">View Details</a>
-      </div>
-    </div>
-
-    <!-- Event Card -->
-    <div class="event-card reveal" style="transition-delay:0.1s;">
-      <div style="position:relative;">
-        <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?w=800&q=100&auto=format&fit=crop" class="event-img" alt="Startup">
-        <div class="date-badge">
-          <div class="day">04</div>
-          <div class="month">Jul</div>
-        </div>
-      </div>
-      <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
-        <div class="event-tag">Business & Networking</div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Startup Founders Meetup</h3>
-        <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;margin-bottom:1.5rem;flex:1;">A casual networking evening for founders, creators, and early-stage investors looking to build the next big thing in Oyo state.</p>
-        <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
-          <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> 5:00 PM - 8:00 PM</span>
-          <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> UI Business School Lounge</span>
-        </div>
-        <a href="#" class="btn-ghost" style="width:100%;justify-content:center;">View Details</a>
-      </div>
-    </div>
-
-    <!-- Event Card -->
-    <div class="event-card reveal" style="transition-delay:0.2s;">
-      <div style="position:relative;">
-        <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800&q=80&auto=format&fit=crop" class="event-img" alt="Market">
-        <div class="date-badge">
-          <div class="day">12</div>
-          <div class="month">Jul</div>
-        </div>
-      </div>
-      <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
-        <div class="event-tag">Community & Culture</div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Oja'ba Weekend Market Fair</h3>
-        <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;margin-bottom:1.5rem;flex:1;">Explore local crafts, traditional food, and artisanal goods from across the region in this vibrant weekend festival.</p>
-        <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
-          <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> 9:00 AM - 6:00 PM</span>
-          <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Oja'ba Central Square</span>
-        </div>
-        <a href="#" class="btn-ghost" style="width:100%;justify-content:center;">View Details</a>
-      </div>
-    </div>
-
+  <div id="events-page-container" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:1.5rem;">
+    <!-- Dynamic Events will load here -->
   </div>
 
 </main>
@@ -307,6 +243,12 @@ const hdr=document.getElementById('site-header');
 window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>60));
 document.getElementById('menu-open').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';});
 document.getElementById('menu-close').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';});
+</script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="analytics.js"></script>
+<script src="frontend.js"></script>
+<script>
+  fetchEvents('events-page-container');
 </script>
 </body>
 </html>

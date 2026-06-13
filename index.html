@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<!-- Supabase + frontend scripts moved to end of body for proper loading -->
 
 <style>
 :root {
@@ -673,57 +675,8 @@ img { max-width: 100%; height: auto; }
       </a>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
-
-      <!-- Job Card -->
-      <div class="card reveal" style="padding:1.75rem;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;">
-          <div style="width:48px;height:48px;background:var(--gold-pale);border:1px solid rgba(184,135,11,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;">
-            <span class="iconify" data-icon="logos:google" style="font-size:1.4rem;"></span>
-          </div>
-          <span class="job-tag">Full-Time</span>
-        </div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--charcoal);margin-bottom:0.4rem;">Senior Software Engineer</h3>
-        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem;">TechBridge Ibadan</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.25rem;">
-          <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Bodija</span>
-          <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--mid);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> Full-time</span>
-        </div>
-        <a href="https://wa.me/2348135471582" target="_blank" class="btn-primary" style="width:100%;justify-content:center;"><span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.3rem;"></span> Enquire</a>
-      </div>
-
-      <div class="card reveal reveal-delay-1" style="padding:1.75rem;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;">
-          <div style="width:48px;height:48px;background:#FFF3E0;border:1px solid rgba(255,152,0,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;">
-            <span class="iconify" data-icon="twemoji:briefcase" style="font-size:1.4rem;"></span>
-          </div>
-          <span class="job-tag">Remote</span>
-        </div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--charcoal);margin-bottom:0.4rem;">Marketing Manager</h3>
-        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem;">Cocoa Brands Ltd</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.25rem;">
-          <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Dugbe</span>
-          <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--mid);"><span class="iconify" data-icon="solar:dollar-minimalistic-linear" style="color:var(--gold);"></span> Negotiable</span>
-        </div>
-        <a href="https://wa.me/2348135471582" target="_blank" class="btn-primary" style="width:100%;justify-content:center;"><span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.3rem;"></span> Enquire</a>
-      </div>
-
-      <div class="card reveal reveal-delay-2" style="padding:1.75rem;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;">
-          <div style="width:48px;height:48px;background:#E8F5E9;border:1px solid rgba(0,100,0,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;">
-            <span class="iconify" data-icon="twemoji:seedling" style="font-size:1.4rem;"></span>
-          </div>
-          <span class="job-tag">Contract</span>
-        </div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--charcoal);margin-bottom:0.4rem;">Agro-Tech Project Manager</h3>
-        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem;">FarmForward Nigeria</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.25rem;">
-          <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> Moniya</span>
-          <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--mid);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> Contract</span>
-        </div>
-        <a href="https://wa.me/2348135471582" target="_blank" class="btn-primary" style="width:100%;justify-content:center;"><span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.3rem;"></span> Enquire</a>
-      </div>
-
+    <div id="home-jobs-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
+      <!-- Dynamic Jobs will load here -->
     </div>
   </div>
 </section>
@@ -741,71 +694,8 @@ img { max-width: 100%; height: auto; }
     </a>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
-
-    <!-- Event 1 -->
-    <div class="card reveal">
-      <div class="card-img" style="position:relative;height:220px;">
-        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=100&auto=format&fit=crop"
-             alt="Tech Summit" style="width:100%;height:100%;object-fit:cover;">
-        <div class="img-overlay"></div>
-        <div class="event-date-box">
-          <div class="day">15</div>
-          <div class="month">Jun</div>
-        </div>
-      </div>
-      <div style="padding:1.5rem;">
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Ibadan Tech Summit 2026</h3>
-        <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.25rem;">
-          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--forest);"></span> Cocoa House, Dugbe</span>
-          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:users-group-rounded-linear" style="color:var(--forest);"></span> 500 attending</span>
-        </div>
-        <a href="events.html" class="btn-primary" style="width:100%;justify-content:center;">RSVP Now</a>
-      </div>
-    </div>
-
-    <!-- Event 2 -->
-    <div class="card reveal reveal-delay-1">
-      <div class="card-img" style="position:relative;height:220px;">
-        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80&auto=format&fit=crop"
-             alt="Music Night" style="width:100%;height:100%;object-fit:cover;">
-        <div class="img-overlay"></div>
-        <div class="event-date-box">
-          <div class="day">22</div>
-          <div class="month">Jun</div>
-        </div>
-      </div>
-      <div style="padding:1.5rem;">
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Ibadan Sounds Night</h3>
-        <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.25rem;">
-          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--terra);"></span> Mapo Hill Amphitheatre</span>
-          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:ticket-linear" style="color:var(--terra);"></span> ₦3,000 admission</span>
-        </div>
-        <a href="events.html" class="btn-primary" style="width:100%;justify-content:center;background:var(--terra);" onmouseover="this.style.background='var(--terra-light)'" onmouseout="this.style.background='var(--terra)'">RSVP Now</a>
-      </div>
-    </div>
-
-    <!-- Event 3 -->
-    <div class="card reveal reveal-delay-2">
-      <div class="card-img" style="position:relative;height:220px;">
-        <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?w=800&q=100&auto=format&fit=crop"
-             alt="Startup Meetup" style="width:100%;height:100%;object-fit:cover;">
-        <div class="img-overlay"></div>
-        <div class="event-date-box">
-          <div class="day">04</div>
-          <div class="month">Jul</div>
-        </div>
-      </div>
-      <div style="padding:1.5rem;">
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Startup Founders Meetup</h3>
-        <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.25rem;">
-          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--forest);"></span> UI Business School</span>
-          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:ticket-linear" style="color:var(--forest);"></span> Free Entry</span>
-        </div>
-        <a href="events.html" class="btn-primary" style="width:100%;justify-content:center;">RSVP Now</a>
-      </div>
-    </div>
-
+  <div id="home-events-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
+    <!-- Dynamic Events will load here -->
   </div>
 </section>
 
@@ -1094,6 +984,13 @@ document.getElementById('menu-close').addEventListener('click', () => {
   document.getElementById('mobile-menu').classList.remove('open');
   document.body.style.overflow = '';
 });
+</script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="analytics.js"></script>
+<script src="frontend.js"></script>
+<script>
+  fetchJobs('home-jobs-container', 3);
+  fetchEvents('home-events-container', 3);
 </script>
 </body>
 </html>

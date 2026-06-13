@@ -524,7 +524,7 @@ img { max-width: 100%; height: auto; }
     <p style="color:var(--mid);font-size:1rem;max-width:600px;margin:0 auto;line-height:1.8;">Beyond curating the city's happenings, our expert team provides hands-on event planning and bridal assistance.</p>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr;gap:4rem;">
+  <div style="display:grid;grid-template-columns:1fr;gap:4rem;margin-bottom:4rem;">
     
     <!-- Event Planning -->
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:3rem;align-items:center;">
@@ -562,6 +562,10 @@ img { max-width: 100%; height: auto; }
       </div>
     </div>
 
+  </div>
+
+  <div id="services-page-container" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:2rem;">
+    <!-- Dynamic Services will load here -->
   </div>
   
 </main>
@@ -656,6 +660,12 @@ document.getElementById('menu-close').addEventListener('click', () => {
   document.getElementById('mobile-menu').classList.remove('open');
   document.body.style.overflow = '';
 });
+</script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="analytics.js"></script>
+<script src="frontend.js"></script>
+<script>
+  fetchServices('services-page-container');
 </script>
 </body>
 </html>
