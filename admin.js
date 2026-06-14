@@ -59,7 +59,9 @@ const entityConfigs = {
             { name: 'type', label: 'Job Type (e.g. Full-time, Remote)', type: 'text', required: true },
             { name: 'location', label: 'Location', type: 'text', required: true },
             { name: 'salary', label: 'Salary/Stipend', type: 'text', required: false },
-            { name: 'link', label: 'Application Link/Email', type: 'text', required: false }
+            { name: 'link', label: 'Application Link/Email', type: 'text', required: false },
+            { name: 'description', label: 'Job Description', type: 'textarea', required: false },
+            { name: 'requirements', label: 'Requirements', type: 'textarea', required: false }
         ]
     },
     vendors: {
@@ -70,7 +72,8 @@ const entityConfigs = {
             { name: 'name', label: 'Business Name', type: 'text', required: true },
             { name: 'category', label: 'Category', type: 'text', required: true },
             { name: 'location', label: 'Location', type: 'text', required: true },
-            { name: 'phone', label: 'Phone Number', type: 'text', required: true }
+            { name: 'phone', label: 'Phone Number', type: 'text', required: true },
+            { name: 'description', label: 'Description', type: 'textarea', required: false }
         ]
     },
     services: {
@@ -123,7 +126,7 @@ loginForm.addEventListener('submit', async (e) => {
 
     try {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        
+
         if (error) {
             console.error("Login error:", error);
             loginError.textContent = error.message;
@@ -161,7 +164,7 @@ async function loadData() {
     loading.style.display = 'block';
     tableBody.innerHTML = '';
     tableHead.innerHTML = '';
-    
+
     const config = entityConfigs[currentTab];
     sectionTitle.textContent = config.title;
 
@@ -173,9 +176,9 @@ async function loadData() {
     });
 
     const { data, error } = await supabase.from(currentTab).select('*').order('created_at', { ascending: false });
-    
+
     loading.style.display = 'none';
-    
+
     if (error) {
         console.error(error);
         alert('Error loading data');
@@ -188,7 +191,7 @@ async function loadData() {
 
 function renderTable(data) {
     const config = entityConfigs[currentTab];
-    
+
     if (data.length === 0) {
         tableBody.innerHTML = `<tr><td colspan="${config.columns.length}" style="text-align:center; padding: 2rem;">No data found.</td></tr>`;
         return;
@@ -196,7 +199,7 @@ function renderTable(data) {
 
     data.forEach(item => {
         const tr = document.createElement('tr');
-        
+
         // Image Column
         const tdImg = document.createElement('td');
         const imgUrl = item[config.imageField] || 'https://via.placeholder.com/40';
@@ -256,7 +259,7 @@ closeModal.addEventListener('click', () => {
 
 function openModal(item = null) {
     const config = entityConfigs[currentTab];
-    modalTitle.textContent = item ? `Edit ${currentTab.slice(0,-1)}` : `Add New ${currentTab.slice(0,-1)}`;
+    modalTitle.textContent = item ? `Edit ${currentTab.slice(0, -1)}` : `Add New ${currentTab.slice(0, -1)}`;
     formFields.innerHTML = '';
     crudForm.reset();
     itemIdInput.value = item ? item.id : '';
@@ -265,7 +268,7 @@ function openModal(item = null) {
     config.fields.forEach(field => {
         const div = document.createElement('div');
         div.className = 'form-group';
-        
+
         const label = document.createElement('label');
         label.textContent = field.label;
         div.appendChild(label);
@@ -278,7 +281,7 @@ function openModal(item = null) {
             input = document.createElement('input');
             input.type = field.type;
         }
-        
+
         input.id = `field-${field.name}`;
         input.name = field.name;
         input.required = field.required;
@@ -288,7 +291,7 @@ function openModal(item = null) {
                 // Convert UTC to local datetime for input
                 const date = new Date(item[field.name]);
                 date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-                input.value = date.toISOString().slice(0,16);
+                input.value = date.toISOString().slice(0, 16);
             } else {
                 input.value = item[field.name] || '';
             }
@@ -301,14 +304,14 @@ function openModal(item = null) {
     modal.style.display = 'flex';
 }
 
-window.editItem = function(id) {
+window.editItem = function (id) {
     const item = currentData.find(d => d.id === id);
     if (item) openModal(item);
 }
 
-window.deleteItem = async function(id) {
+window.deleteItem = async function (id) {
     if (!confirm('Are you sure you want to delete this item?')) return;
-    
+
     const { error } = await supabase.from(currentTab).delete().eq('id', id);
     if (error) {
         alert('Error deleting item: ' + error.message);
@@ -334,7 +337,7 @@ async function uploadImage(file) {
     const { data } = supabase.storage
         .from('images')
         .getPublicUrl(filePath);
-        
+
     return data.publicUrl;
 }
 

@@ -1,254 +1,731 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Events | Explore Ibadan</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-<style>
-:root{--forest:#0B2E0B;--forest-mid:#1A5C1A;--gold:#B8870B;--gold-bright:#D4A520;--gold-pale:#F7F0DC;--ivory:#FAF8F2;--parchment:#F2EAD8;--charcoal:#1C1812;--mid:#4A4238;--muted:#8A8070;--terra:#8B3A1A;--terra-light:#B44E24;}
-*,*::before,*::after{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Outfit',sans-serif;background:var(--ivory);color:var(--charcoal);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-h1,h2,h3,h4,h5{font-family:'Cormorant Garamond',serif;letter-spacing:-0.01em;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
-#site-header{position:sticky;top:0;z-index:200;background:rgba(250,248,242,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,135,11,0.12);transition:background 0.4s,box-shadow 0.4s;}
-#site-header.scrolled{background:rgba(11,46,11,0.97);box-shadow:0 2px 40px rgba(0,0,0,0.25);}
-#site-header.scrolled .logo-text{color:#fff;}#site-header.scrolled .logo-accent{color:var(--gold-bright);}
-#site-header.scrolled .nav-a{color:rgba(255,255,255,0.7);}#site-header.scrolled .nav-a:hover,#site-header.scrolled .nav-a.active{color:var(--gold-bright);}#site-header.scrolled .nav-a::after{background:var(--gold-bright);}
-.logo-text{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--forest);font-size:1.4rem;text-decoration:none;}.logo-accent{color:var(--gold);}
-.nav-a{position:relative;font-size:0.8rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.3s;}
-.nav-a::after{content:'';position:absolute;bottom:-5px;left:50%;width:0;height:1.5px;background:var(--gold);transition:width 0.3s,left 0.3s;}
-.nav-a:hover::after,.nav-a.active::after{width:100%;left:0;}.nav-a:hover,.nav-a.active{color:var(--forest);}
-.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--forest);color:var(--gold-bright);font-family:'Outfit',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.6rem;border-radius:2px;border:1px solid transparent;text-decoration:none;transition:all 0.3s;}
-.btn-primary:hover{background:var(--gold);color:var(--forest);}
-.btn-gold{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold);color:var(--forest);font-family:'Outfit',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.6rem;border-radius:2px;text-decoration:none;transition:all 0.3s;border:none;cursor:pointer;}
-.btn-gold:hover{background:var(--gold-bright);}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1);}
-.reveal.active{opacity:1;transform:translateY(0);}
-.eyebrow{font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.75rem;}
-.eyebrow::before{content:'';display:inline-block;width:2rem;height:1px;background:var(--gold);}
-.mobile-nav-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(11,46,11,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(184,135,11,0.2);z-index:200;display:flex;justify-content:space-around;padding:0.6rem 0.5rem;padding-bottom:calc(0.6rem + env(safe-area-inset-bottom));}
-.mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;color:rgba(255,255,255,0.5);font-size:0.6rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;transition:color 0.2s;min-width:48px;}
-.mobile-nav-item.active,.mobile-nav-item:hover{color:var(--gold-bright);}
-.mobile-nav-item .iconify{font-size:1.3rem;}
-.footer-link{color:rgba(255,255,255,0.55);font-size:0.8rem;text-decoration:none;transition:color 0.2s;}.footer-link:hover{color:var(--gold-bright);}
-#mobile-menu{position:fixed;inset:0;background:var(--forest);z-index:300;transform:translateX(-100%);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column;justify-content:center;padding:3rem 2.5rem;}
-#mobile-menu.open{transform:translateX(0);}
-.mobile-menu-link{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:500;color:rgba(255,255,255,0.75);text-decoration:none;display:block;padding:0.5rem 0;border-bottom:1px solid rgba(184,135,11,0.1);transition:color 0.2s,padding-left 0.3s;}
-.mobile-menu-link:hover,.mobile-menu-link.active{color:var(--gold-bright);padding-left:0.75rem;}
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Events | Explore Ibadan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <style>
+    :root {
+      --forest: #0B2E0B;
+      --forest-mid: #1A5C1A;
+      --gold: #B8870B;
+      --gold-bright: #D4A520;
+      --gold-pale: #F7F0DC;
+      --ivory: #FAF8F2;
+      --parchment: #F2EAD8;
+      --charcoal: #1C1812;
+      --mid: #4A4238;
+      --muted: #8A8070;
+      --terra: #8B3A1A;
+      --terra-light: #B44E24;
+    }
 
-/* Events specific */
-.event-card { background:#fff; border:1px solid rgba(184,135,11,0.1); border-radius:2px; overflow:hidden; transition:all 0.35s; box-shadow:0 2px 16px rgba(0,0,0,0.04); display:flex; flex-direction:column; height: 100%; }
-.event-card:hover { border-color:var(--gold); box-shadow:0 12px 40px rgba(0,0,0,0.1); transform:translateY(-4px); }
-.event-img { width:100%; height:200px; object-fit:cover; position:relative; }
-.date-badge { position:absolute; top:1rem; right:1rem; background:var(--forest); color:var(--gold-bright); text-align:center; padding:0.4rem 0.8rem; border-radius:2px; box-shadow:0 4px 12px rgba(0,0,0,0.15); }
-.date-badge .day { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; line-height:1; }
-.date-badge .month { font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.8); }
-.event-tag { display:inline-flex; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; padding:0.25rem 0.7rem; background:var(--gold-pale); color:var(--gold); border-radius:1px; margin-bottom:0.75rem; }
-</style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-<style id="global-responsive-fixes">
-/* GLOBAL RESPONSIVE FIXES */
-img { max-width: 100%; height: auto; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* Hero mobile fix */
-.hero-wrapper { position:relative; width:100%; min-height:clamp(600px,78vh,820px); overflow:hidden; border-radius:3px; }
-.hero-content { position:relative; z-index:10; height:100%; min-height:clamp(600px,78vh,820px); display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(2rem,5vw,4.5rem); padding-top:6rem; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-@media (max-width: 768px) {
-  /* Hero: let it grow with content */
-  .hero-wrapper { min-height: auto !important; height: auto !important; }
-  .hero-content { min-height: auto !important; height: auto !important; padding: 2rem 1.5rem 2.5rem !important; padding-top: 5rem !important; }
-  .hero-title { font-size: clamp(2rem, 8vw, 3rem) !important; }
-  .hero-sub { font-size: 0.9rem !important; margin-bottom: 1.5rem !important; }
-  .hero-badge { font-size: 0.55rem !important; padding: 0.35rem 0.75rem !important; }
-  .scroll-cue { display: none !important; }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: -0.01em;
+    }
 
-  /* Fix Stats Bar */
-  .stat-pill { padding: 1rem !important; }
-  .stat-number { font-size: 2rem !important; }
-  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
-  /* Fix Mosaic */
-  .features-grid > div > div[style*="height:480px"] { height: auto !important; }
-  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-  /* Fix Footer Grid */
-  footer > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
-  footer > div > div:first-child > div { grid-column: 1 / -1 !important; }
-  /* Fix Founder Bio */
-  .reveal[style*="flex-wrap:wrap"] > div { min-width: 100% !important; }
-  /* Fix feature cards grid */
-  div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
-  /* Fix CTA buttons */
-  .btn-gold, .btn-primary { font-size: 0.7rem !important; padding: 0.6rem 1.2rem !important; }
-}
-@media (max-width: 480px) {
-  .hero-title { font-size: 1.9rem !important; line-height: 1.15 !important; }
-  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
-}
-</style>
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(250, 248, 242, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(184, 135, 11, 0.12);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+
+    #site-header.scrolled {
+      background: rgba(11, 46, 11, 0.97);
+      box-shadow: 0 2px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    #site-header.scrolled .logo-text {
+      color: #fff;
+    }
+
+    #site-header.scrolled .logo-accent {
+      color: var(--gold-bright);
+    }
+
+    #site-header.scrolled .nav-a {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    #site-header.scrolled .nav-a:hover,
+    #site-header.scrolled .nav-a.active {
+      color: var(--gold-bright);
+    }
+
+    #site-header.scrolled .nav-a::after {
+      background: var(--gold-bright);
+    }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--forest);
+      font-size: 1.4rem;
+      text-decoration: none;
+    }
+
+    .logo-accent {
+      color: var(--gold);
+    }
+
+    .nav-a {
+      position: relative;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background: var(--gold);
+      transition: width 0.3s, left 0.3s;
+    }
+
+    .nav-a:hover::after,
+    .nav-a.active::after {
+      width: 100%;
+      left: 0;
+    }
+
+    .nav-a:hover,
+    .nav-a.active {
+      color: var(--forest);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--forest);
+      color: var(--gold-bright);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.6rem;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--forest);
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gold);
+      color: var(--forest);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.6rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-bright);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .eyebrow {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .mobile-nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 46, 11, 0.97);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(184, 135, 11, 0.2);
+      z-index: 200;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.6rem 0.5rem;
+      padding-bottom: calc(0.6rem + env(safe-area-inset-bottom));
+    }
+
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+      min-width: 48px;
+    }
+
+    .mobile-nav-item.active,
+    .mobile-nav-item:hover {
+      color: var(--gold-bright);
+    }
+
+    .mobile-nav-item .iconify {
+      font-size: 1.3rem;
+    }
+
+    .footer-link {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--gold-bright);
+    }
+
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--forest);
+      z-index: 300;
+      transform: translateX(-100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 2.5rem;
+    }
+
+    #mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      display: block;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(184, 135, 11, 0.1);
+      transition: color 0.2s, padding-left 0.3s;
+    }
+
+    .mobile-menu-link:hover,
+    .mobile-menu-link.active {
+      color: var(--gold-bright);
+      padding-left: 0.75rem;
+    }
+
+    /* Events specific */
+    .event-card {
+      background: #fff;
+      border: 1px solid rgba(184, 135, 11, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: all 0.35s;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .event-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .event-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      position: relative;
+    }
+
+    .date-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--forest);
+      color: var(--gold-bright);
+      text-align: center;
+      padding: 0.4rem 0.8rem;
+      border-radius: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .date-badge .day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .date-badge .month {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .event-tag {
+      display: inline-flex;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.7rem;
+      background: var(--gold-pale);
+      color: var(--gold);
+      border-radius: 1px;
+      margin-bottom: 0.75rem;
+    }
+  </style>
+
+  <style id="global-responsive-fixes">
+    /* GLOBAL RESPONSIVE FIXES */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Hero mobile fix */
+    .hero-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: clamp(600px, 78vh, 820px);
+      overflow: hidden;
+      border-radius: 3px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      min-height: clamp(600px, 78vh, 820px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(2rem, 5vw, 4.5rem);
+      padding-top: 6rem;
+    }
+
+    @media (max-width: 768px) {
+
+      /* Hero: let it grow with content */
+      .hero-wrapper {
+        min-height: auto !important;
+        height: auto !important;
+      }
+
+      .hero-content {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 2rem 1.5rem 2.5rem !important;
+        padding-top: 5rem !important;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem) !important;
+      }
+
+      .hero-sub {
+        font-size: 0.9rem !important;
+        margin-bottom: 1.5rem !important;
+      }
+
+      .hero-badge {
+        font-size: 0.55rem !important;
+        padding: 0.35rem 0.75rem !important;
+      }
+
+      .scroll-cue {
+        display: none !important;
+      }
+
+      /* Fix Stats Bar */
+      .stat-pill {
+        padding: 1rem !important;
+      }
+
+      .stat-number {
+        font-size: 2rem !important;
+      }
+
+      .reveal[style*="grid-template-columns:repeat(4,1fr)"] {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1rem !important;
+      }
+
+      /* Fix Mosaic */
+      .features-grid>div>div[style*="height:480px"] {
+        height: auto !important;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+      }
+
+      /* Fix Footer Grid */
+      footer>div>div:first-child {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+
+      footer>div>div:first-child>div {
+        grid-column: 1 / -1 !important;
+      }
+
+      /* Fix Founder Bio */
+      .reveal[style*="flex-wrap:wrap"]>div {
+        min-width: 100% !important;
+      }
+
+      /* Fix feature cards grid */
+      div[style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Fix CTA buttons */
+      .btn-gold,
+      .btn-primary {
+        font-size: 0.7rem !important;
+        padding: 0.6rem 1.2rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.9rem !important;
+        line-height: 1.15 !important;
+      }
+
+      .reveal[style*="grid-template-columns:repeat(4,1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="mobile-menu">
-  <div style="margin-bottom:3rem;"><span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;">Explore <span style="color:var(--gold-bright)">Ibadan</span></span></div>
-  <a href="index.html" class="mobile-menu-link">Home</a>
-  <a href="about.html" class="mobile-menu-link">About Us</a>
-  <a href="events.html" class="mobile-menu-link active">Events</a>
-  <a href="jobs.html" class="mobile-menu-link">Jobs</a>
-  <a href="vendors.html" class="mobile-menu-link">Vendors</a>
-  <a href="services.html" class="mobile-menu-link">Services</a>
-  <a href="contact.html" class="btn-gold" style="margin-top:2.5rem;align-self:flex-start;">Contact Us</a>
-  <button id="menu-close" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,0.6);font-size:1.8rem;cursor:pointer;">✕</button>
-</div>
-
-<header id="site-header">
-  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;">
-    <a href="index.html" class="logo-text" style="flex-shrink:0;">Explore <span class="logo-accent">Ibadan</span></a>
-    <nav style="display:none;align-items:center;gap:2rem;" class="desktop-nav">
-      <a href="index.html" class="nav-a">Home</a>
-      <a href="about.html" class="nav-a">About</a>
-      <a href="events.html" class="nav-a active">Events</a>
-      <a href="jobs.html" class="nav-a">Jobs</a>
-      <a href="vendors.html" class="nav-a">Vendors</a>
-      <a href="services.html" class="nav-a">Services</a>
-      <a href="contact.html" class="btn-primary" style="margin-left:0.5rem;">Contact Us</a>
-    </nav>
-    <button id="menu-open" style="background:var(--forest);border:none;color:#fff;cursor:pointer;padding:0.5rem;border-radius:4px;" class="hamburger-btn">
-      <span class="iconify" data-icon="solar:hamburger-menu-linear" style="font-size:1.6rem;"></span>
-    </button>
+  <div id="mobile-menu">
+    <div style="margin-bottom:3rem;"><span
+        style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;">Explore <span
+          style="color:var(--gold-bright)">Ibadan</span></span></div>
+    <a href="index.html" class="mobile-menu-link">Home</a>
+    <a href="about.html" class="mobile-menu-link">About Us</a>
+    <a href="events.html" class="mobile-menu-link active">Events</a>
+    <a href="jobs.html" class="mobile-menu-link">Jobs</a>
+    <a href="vendors.html" class="mobile-menu-link">Vendors</a>
+    <a href="services.html" class="mobile-menu-link">Services</a>
+    <a href="contact.html" class="btn-gold" style="margin-top:2.5rem;align-self:flex-start;">Contact Us</a>
+    <button id="menu-close"
+      style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,0.6);font-size:1.8rem;cursor:pointer;">✕</button>
   </div>
-</header>
 
-<!-- Page Banner -->
-<div style="background:var(--forest);padding:3.5rem 1.5rem;position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=3840&q=100&auto=format&fit=crop');background-size:cover;background-position:center;opacity:0.15;"></div>
-  <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(212,165,32,0.1) 1px,transparent 0);background-size:28px 28px;"></div>
-  <div style="max-width:1280px;margin:0 auto;position:relative;">
-    <span class="eyebrow" style="color:rgba(212,165,32,0.8);margin-bottom:1rem;"><span style="background:rgba(212,165,32,0.8);"></span>Happenings</span>
-    <h1 style="font-size:clamp(2.5rem,5vw,4rem);font-weight:600;color:#fff;margin:0 0 0.75rem;line-height:1.1;">City <em>Events</em></h1>
-    <div style="width:60px;height:2px;background:var(--gold);margin-bottom:1rem;"></div>
-    <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;margin:0 0 1.75rem;max-width:500px;">From tech summits in Dugbe to cultural festivals at Mapo Hall. Never miss what's happening in Ibadan.</p>
-  </div>
-</div>
-
-<main style="max-width:1280px;margin:0 auto;padding:2.5rem 1.5rem 5rem;">
-
-  <!-- Filters & Search -->
-  <div class="reveal" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;background:#fff;padding:1rem 1.5rem;border:1px solid rgba(184,135,11,0.1);box-shadow:0 2px 12px rgba(0,0,0,0.02);">
-    <div style="display:flex;gap:0.5rem;overflow-x:auto;padding-bottom:0.25rem;">
-      <button style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:0.5rem 1rem;background:var(--forest);color:var(--gold-bright);border:1px solid var(--forest);cursor:pointer;">All Events</button>
-      <button style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:0.5rem 1rem;background:none;color:var(--mid);border:1px solid rgba(184,135,11,0.2);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.2)';this.style.color='var(--mid)'">Technology</button>
-      <button style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:0.5rem 1rem;background:none;color:var(--mid);border:1px solid rgba(184,135,11,0.2);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.2)';this.style.color='var(--mid)'">Arts & Culture</button>
-      <button style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:0.5rem 1rem;background:none;color:var(--mid);border:1px solid rgba(184,135,11,0.2);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.2)';this.style.color='var(--mid)'">Business</button>
+  <header id="site-header">
+    <div
+      style="max-width:1280px;margin:0 auto;padding:0 1.5rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;">
+      <a href="index.html" class="logo-text" style="flex-shrink:0;">Explore <span class="logo-accent">Ibadan</span></a>
+      <nav style="display:none;align-items:center;gap:2rem;" class="desktop-nav">
+        <a href="index.html" class="nav-a">Home</a>
+        <a href="about.html" class="nav-a">About</a>
+        <a href="events.html" class="nav-a active">Events</a>
+        <a href="jobs.html" class="nav-a">Jobs</a>
+        <a href="vendors.html" class="nav-a">Vendors</a>
+        <a href="services.html" class="nav-a">Services</a>
+        <a href="contact.html" class="btn-primary" style="margin-left:0.5rem;">Contact Us</a>
+      </nav>
+      <button id="menu-open"
+        style="background:var(--forest);border:none;color:#fff;cursor:pointer;padding:0.5rem;border-radius:4px;"
+        class="hamburger-btn">
+        <span class="iconify" data-icon="solar:hamburger-menu-linear" style="font-size:1.6rem;"></span>
+      </button>
     </div>
-    <div style="position:relative;min-width:260px;">
-      <span class="iconify" data-icon="solar:minimalistic-magnifer-linear" style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem;"></span>
-      <input type="text" placeholder="Search events..." style="width:100%;padding:0.6rem 1rem 0.6rem 2.25rem;font-family:'Outfit',sans-serif;font-size:0.8rem;border:1px solid rgba(184,135,11,0.2);outline:none;background:var(--ivory);transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(184,135,11,0.2)'">
-    </div>
-  </div>
+  </header>
 
-  <!-- Featured Event -->
-  <div class="reveal" style="display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:4rem;">
-    <h2 style="font-size:1.8rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;">Explore The City</h2>
-    <div style="background:#fff;border:1px solid rgba(184,135,11,0.15);display:grid;grid-template-columns:minmax(280px, 1fr) 1fr;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.06);" class="featured-grid">
-      <div style="position:relative;">
-        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1200&q=100&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;min-height:300px;" alt="Ibadan Events">
-        <div style="position:absolute;top:1.5rem;left:1.5rem;background:var(--forest);color:var(--gold-bright);padding:0.4rem 1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">All Categories</div>
-      </div>
-      <div style="padding:2.5rem;display:flex;flex-direction:column;justify-content:center;">
-        <div class="event-tag" style="align-self:flex-start;">Discover Ibadan</div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--charcoal);line-height:1.1;margin-bottom:1rem;">Showcasing All Events</h3>
-        <p style="color:var(--mid);font-size:0.95rem;line-height:1.7;margin-bottom:1.5rem;">From vibrant cultural festivals and tech summits to exclusive business gatherings, discover everything happening in the heart of Oyo State. Experience the true spirit of Ibadan through curated events tailored for you.</p>
-        <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem;">
-          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:calendar-date-bold" style="color:var(--gold);"></span> Weekly & Monthly Events</div>
-          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:map-point-bold" style="color:var(--gold);"></span> Multiple Venues Across Ibadan</div>
-          <div style="display:flex;align-items:center;gap:0.5rem;color:var(--forest);font-size:0.85rem;font-weight:500;"><span class="iconify" data-icon="solar:ticket-bold" style="color:var(--gold);"></span> Free & Paid Events</div>
-        </div>
-        <button class="btn-primary" style="align-self:flex-start;padding:0.8rem 2rem;border:none;cursor:pointer;" onclick="document.getElementById('events-page-container').scrollIntoView({behavior:'smooth'})">Browse All Events</button>
-      </div>
-    </div>
-  </div>
+  <!-- New Header Style specific to this page to match screenshot -->
+  <style>
+    #site-header {
+      background: var(--forest) !important;
+      border-bottom: none !important;
+    }
+    .logo-text { color: #fff !important; }
+    .logo-accent { color: var(--gold-bright) !important; }
+    .nav-a { color: rgba(255, 255, 255, 0.7) !important; }
+    .nav-a:hover, .nav-a.active { color: var(--gold-bright) !important; }
+  </style>
 
-  <!-- Upcoming Events Grid -->
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;">
-    <h2 style="font-size:1.8rem;font-weight:600;color:var(--charcoal);margin:0;">Upcoming Events</h2>
-    <div style="font-size:0.8rem;color:var(--muted);"><span class="iconify" data-icon="solar:calendar-linear"></span> Showing June 2026</div>
-  </div>
-  <div id="events-page-container" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:1.5rem;">
-    <!-- Dynamic Events will load here -->
-  </div>
+  <main style="max-width:1280px;margin:0 auto;padding:4rem 1.5rem 5rem;">
 
-</main>
-
-<!-- ═══════ FOOTER ═══════ -->
-<footer class="footer-bg" style="background:var(--forest);padding:5rem 1.5rem 2.5rem;">
-  <div style="max-width:1280px;margin:0 auto;">
-    <!-- Top grid -->
-    <div style="display:grid;grid-template-columns:2fr 1fr 2fr;gap:3rem;margin-bottom:4rem;">
-      <div>
-        <a href="index.html" style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:1rem;">
-          Explore <span style="color:var(--gold-bright);">Ibadan</span>
-        </a>
-        <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:1.5rem;max-width:260px;">The premier community platform for everyone living, working, and exploring the ancient city of seven hills.</p>
-        <div style="display:flex;gap:0.5rem;">
-          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
-            <span class="iconify" data-icon="ri:twitter-x-fill" style="font-size:0.9rem;"></span>
-          </a>
-          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
-            <span class="iconify" data-icon="ri:instagram-fill" style="font-size:0.9rem;"></span>
-          </a>
-          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
-            <span class="iconify" data-icon="ri:linkedin-fill" style="font-size:0.9rem;"></span>
-          </a>
-        </div>
-      </div>
-      <div>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Platform</h4>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.8rem;"><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="events.html" class="footer-link">Events</a></li><li><a href="jobs.html" class="footer-link">Jobs</a></li><li><a href="vendors.html" class="footer-link">Vendors</a></li><li><a href="services.html" class="footer-link">Services</a></li></ul>
-      </div>
+    <!-- "Explore The City" Section -->
+    <div style="margin-bottom: 5rem;">
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;color:var(--charcoal);margin-bottom:2rem;">Explore The City</h1>
       
-      <div>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Newsletter</h4>
-        <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:1rem;line-height:1.6;">Get the latest jobs and events delivered every week.</p>
-        <div style="display:flex;gap:0.5rem;">
-          <input type="email" placeholder="Your email address" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(184,135,11,0.2);padding:0.65rem 1rem;font-size:0.8rem;font-family:'Outfit',sans-serif;color:#fff;outline:none;border-radius:1px;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(184,135,11,0.2)'" placeholder-style="color:rgba(255,255,255,0.3)">
-          <button class="btn-gold" style="padding:0.65rem 1.25rem;font-size:0.7rem;white-space:nowrap;">Join</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+        <!-- Left Image Side -->
+        <div class="reveal" style="position:relative;height:100%;min-height:450px;border-radius:2px;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1200&q=100&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" alt="Concert Event">
+          <div style="position:absolute;top:2rem;left:2rem;background:var(--forest);color:var(--gold-bright);padding:0.5rem 1.25rem;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">
+            ALL CATEGORIES
+          </div>
+        </div>
+        
+        <!-- Right Content Side -->
+        <div class="reveal" style="padding-right:2rem;">
+          <div style="display:inline-block;background:var(--gold-pale);color:var(--gold-bright);padding:0.4rem 1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.25rem;">
+            DISCOVER IBADAN
+          </div>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:400;color:var(--charcoal);line-height:1.1;margin-bottom:1.5rem;letter-spacing: -0.02em;">
+            Showcasing All Events
+          </h2>
+          <p style="color:var(--mid);font-size:1.05rem;line-height:1.8;margin-bottom:2.5rem;max-width: 500px;">
+            From vibrant cultural festivals and tech summits to exclusive business gatherings, discover everything happening in the heart of Oyo State. Experience the true spirit of Ibadan through curated events tailored for you.
+          </p>
+          
+          <div style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:3rem;">
+            <div style="display:flex;align-items:center;gap:1rem;color:var(--forest);font-size:0.95rem;font-weight:600;">
+              <span class="iconify" data-icon="solar:calendar-bold" style="color:var(--gold);font-size:1.3rem;"></span> Weekly & Monthly Events
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;color:var(--forest);font-size:0.95rem;font-weight:600;">
+              <span class="iconify" data-icon="solar:map-point-bold" style="color:var(--gold);font-size:1.3rem;"></span> Multiple Venues Across Ibadan
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;color:var(--forest);font-size:0.95rem;font-weight:600;">
+              <span class="iconify" data-icon="solar:ticket-bold" style="color:var(--gold);font-size:1.3rem;"></span> Free & Paid Events
+            </div>
+          </div>
+          
+          <a href="#events-page-container" class="btn-primary" style="padding:1rem 2.5rem;font-size:0.8rem;">
+            BROWSE ALL EVENTS
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Bottom bar -->
-    <div style="border-top:1px solid rgba(184,135,11,0.15);padding-top:1.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
-      <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin:0;">© 2026 Explore Ibadan. All rights reserved.</p>
-      <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin:0;">Made with <span style="color:var(--gold);">♥</span> in Ìbàdàn by BadBoyJay</p>
+    <!-- Upcoming Events Grid -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;">
+      <h2 style="font-size:1.8rem;font-weight:600;color:var(--charcoal);margin:0;">Upcoming Events</h2>
+      <div style="font-size:0.8rem;color:var(--muted);"><span class="iconify" data-icon="solar:calendar-linear"></span>
+        Showing June 2026</div>
     </div>
-  </div>
-</footer>
+    <div id="events-page-container"
+      style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:1.5rem;">
+      <!-- Dynamic Events will load here -->
+    </div>
+
+  </main>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer class="footer-bg" style="background:var(--forest);padding:5rem 1.5rem 2.5rem;">
+    <div style="max-width:1280px;margin:0 auto;">
+      <!-- Top grid -->
+      <div style="display:grid;grid-template-columns:2fr 1fr 2fr;gap:3rem;margin-bottom:4rem;">
+        <div>
+          <a href="index.html"
+            style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:1rem;">
+            Explore <span style="color:var(--gold-bright);">Ibadan</span>
+          </a>
+          <p
+            style="font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:1.5rem;max-width:260px;">
+            The premier community platform for everyone living, working, and exploring the ancient city of seven hills.
+          </p>
+          <div style="display:flex;gap:0.5rem;">
+            <a href="#"
+              style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;"
+              onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+              <span class="iconify" data-icon="ri:twitter-x-fill" style="font-size:0.9rem;"></span>
+            </a>
+            <a href="#"
+              style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;"
+              onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+              <span class="iconify" data-icon="ri:instagram-fill" style="font-size:0.9rem;"></span>
+            </a>
+            <a href="#"
+              style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;"
+              onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+              <span class="iconify" data-icon="ri:linkedin-fill" style="font-size:0.9rem;"></span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4
+            style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">
+            Platform</h4>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.8rem;">
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="events.html" class="footer-link">Events</a></li>
+            <li><a href="jobs.html" class="footer-link">Jobs</a></li>
+            <li><a href="vendors.html" class="footer-link">Vendors</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4
+            style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">
+            Newsletter</h4>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:1rem;line-height:1.6;">Get the latest
+            jobs and events delivered every week.</p>
+          <div style="display:flex;gap:0.5rem;">
+            <input type="email" placeholder="Your email address"
+              style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(184,135,11,0.2);padding:0.65rem 1rem;font-size:0.8rem;font-family:'Outfit',sans-serif;color:#fff;outline:none;border-radius:1px;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(184,135,11,0.2)'"
+              placeholder-style="color:rgba(255,255,255,0.3)">
+            <button class="btn-gold" style="padding:0.65rem 1.25rem;font-size:0.7rem;white-space:nowrap;">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div
+        style="border-top:1px solid rgba(184,135,11,0.15);padding-top:1.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin:0;">© 2026 Explore Ibadan. All rights reserved.
+        </p>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin:0;">Made with <span
+            style="color:var(--gold);">♥</span> in Ìbàdàn by BadBoyJay</p>
+      </div>
+    </div>
+  </footer>
 
 
 
-<style>
-@media(min-width:768px){.desktop-nav{display:flex!important;}.hamburger-btn{display:none!important;}.mobile-nav-bar{display:none!important;}main{padding-bottom:2.5rem!important;}}
-@media(max-width:768px){.featured-grid{grid-template-columns:1fr!important;}}
-</style>
-<script>
-const obs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('active');obs.unobserve(i.target);}});},{threshold:0.06});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-const hdr=document.getElementById('site-header');
-window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>60));
-document.getElementById('menu-open').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';});
-document.getElementById('menu-close').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';});
-</script>
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script src="analytics.js"></script>
-<script src="frontend.js"></script>
-<script>
-  fetchEvents('events-page-container');
-</script>
+  <style>
+    @media(min-width:768px) {
+      .desktop-nav {
+        display: flex !important;
+      }
+
+      .hamburger-btn {
+        display: none !important;
+      }
+
+      .mobile-nav-bar {
+        display: none !important;
+      }
+
+      main {
+        padding-bottom: 2.5rem !important;
+      }
+    }
+
+    @media(max-width:768px) {
+      .featured-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+  <script>
+    const obs = new IntersectionObserver(e => { e.forEach(i => { if (i.isIntersecting) { i.target.classList.add('active'); obs.unobserve(i.target); } }); }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    const hdr = document.getElementById('site-header');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 60));
+    document.getElementById('menu-open').addEventListener('click', () => { document.getElementById('mobile-menu').classList.add('open'); document.body.style.overflow = 'hidden'; });
+    document.getElementById('menu-close').addEventListener('click', () => { document.getElementById('mobile-menu').classList.remove('open'); document.body.style.overflow = ''; });
+  </script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="analytics.js"></script>
+  <script src="frontend.js"></script>
+  <script>
+    fetchEvents('events-page-container');
+  </script>
 </body>
+
 </html>

@@ -23,6 +23,8 @@ CREATE TABLE jobs (
   location text NOT NULL,
   salary text,
   link text,
+  description text,
+  requirements text,
   logo_url text,
   created_at timestamp with time zone DEFAULT now()
 );

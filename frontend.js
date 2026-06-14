@@ -74,13 +74,13 @@ async function fetchJobs(containerId, limit) {
             }
 
             const card = document.createElement('div');
-            
+
             if (containerId === 'job-listings') {
                 card.className = 'job-card reveal';
                 // Set data attributes for filtering
                 card.dataset.type = job.type || '';
                 card.dataset.industry = job.industry || '';
-                
+
                 card.innerHTML = `
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
                       <div style="display:flex;gap:1rem;align-items:flex-start;">
@@ -99,16 +99,16 @@ async function fetchJobs(containerId, limit) {
                       </div>
                       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
                         <span class="job-tag" style="border-color:rgba(11,46,11,0.2);color:var(--forest);background:#EBF4EB;">${job.type || 'Job'}</span>
-                        <a href="${job.link || '#'}" target="_blank" class="btn-primary" style="font-size:0.7rem;padding:0.55rem 1.2rem;">
-                            ${job.link && job.link.includes('wa.me') ? '<span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:0.9rem;"></span> Enquire' : 'Apply Now'}
-                        </a>
+                        <button onclick="openJobModal('${job.id}')" class="btn-primary" style="font-size:0.7rem;padding:0.55rem 1.2rem;border:none;cursor:pointer;">
+                            View Job Description
+                        </button>
                       </div>
                     </div>
                 `;
             } else {
                 card.className = 'card reveal';
                 card.style.cssText = 'padding:1.75rem;';
-                
+
                 card.innerHTML = `
                     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;">
                         <div style="width:48px;height:48px;background:var(--gold-pale);border:1px solid rgba(184,135,11,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
@@ -123,12 +123,16 @@ async function fetchJobs(containerId, limit) {
                         <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--mid);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> ${job.salary || 'Negotiable'}</span>
                         <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--mid);"><span class="iconify" data-icon="solar:calendar-linear" style="color:var(--gold);"></span> Posted ${timeAgo(job.created_at)}</span>
                     </div>
-                    <a href="${job.link || '#'}" target="_blank" class="btn-primary" style="width:100%;justify-content:center;">
-                        ${job.link && job.link.includes('wa.me') ? '<span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.3rem;"></span> Enquire' : 'Apply Now'}
-                    </a>
+                    <button onclick="openJobModal('${job.id}')" class="btn-primary" style="width:100%;justify-content:center;border:none;cursor:pointer;">
+                        View Job Description
+                    </button>
                 `;
             }
             container.appendChild(card);
+            
+            // Store job data for modal
+            window.jobsData = window.jobsData || {};
+            window.jobsData[job.id] = job;
         });
 
         // Force all cards visible
@@ -168,8 +172,23 @@ async function fetchEvents(containerId, limit) {
             const imgUrl = event.image_url || getFallbackImage('event');
             const dateObj = formatDate(event.date);
 
+            let waLink = event.rsvp_link || '#';
+            if (waLink !== '#' && !waLink.includes('http')) {
+                let phoneNum = waLink.replace(/[^\d+]/g, '');
+                if (phoneNum) {
+                    if (phoneNum.startsWith('0')) {
+                        phoneNum = '234' + phoneNum.substring(1);
+                    } else if (phoneNum.startsWith('+')) {
+                        phoneNum = phoneNum.substring(1);
+                    }
+                    waLink = `https://wa.me/${phoneNum}`;
+                } else {
+                    waLink = '#';
+                }
+            }
+
             const card = document.createElement('div');
-            
+
             if (containerId === 'events-page-container') {
                 card.className = 'event-card reveal';
                 card.innerHTML = `
@@ -188,7 +207,9 @@ async function fetchEvents(containerId, limit) {
                         <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> ${event.time || 'TBD'}</span>
                         <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> ${event.location}</span>
                         </div>
-                        <a href="${event.rsvp_link || '#'}" class="btn-ghost" style="width:100%;justify-content:center;">View Details</a>
+                        <a href="${waLink}" target="_blank" class="btn-ghost" style="width:100%;justify-content:center;color:#25D366;border-color:#25D366;">
+                            <span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.4rem;"></span> Enquire
+                        </a>
                     </div>
                 `;
             } else {
@@ -208,7 +229,9 @@ async function fetchEvents(containerId, limit) {
                             <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--forest);"></span> ${event.location}</span>
                             ${event.description ? `<span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:info-circle-linear" style="color:var(--forest);"></span> ${event.description.substring(0, 60)}...</span>` : ''}
                         </div>
-                        <a href="${event.rsvp_link || '#'}" target="_blank" class="btn-primary" style="width:100%;justify-content:center;">RSVP Now</a>
+                        <a href="${waLink}" target="_blank" class="btn-primary" style="width:100%;justify-content:center;background:#25D366;border-color:#25D366;color:#fff;">
+                            <span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.4rem;"></span> WhatsApp
+                        </a>
                     </div>
                 `;
             }
@@ -246,17 +269,35 @@ async function fetchVendors(containerId) {
 
             const card = document.createElement('div');
             card.className = 'card reveal';
+
+            // Build WhatsApp link from phone number
+            let waLink = vendor.phone || '#';
+            if (waLink !== '#') {
+                let phoneNum = waLink.replace(/[^\d+]/g, '');
+                if (phoneNum) {
+                    if (phoneNum.startsWith('0')) {
+                        phoneNum = '234' + phoneNum.substring(1);
+                    } else if (phoneNum.startsWith('+')) {
+                        phoneNum = phoneNum.substring(1);
+                    }
+                    waLink = `https://wa.me/${phoneNum}`;
+                } else {
+                    waLink = '#';
+                }
+            }
+
             card.innerHTML = `
-                <div style="height:180px;background:#eee;position:relative;">
-                    <img src="${imgUrl}" style="width:100%;height:100%;object-fit:cover;" alt="${vendor.category || 'Vendor'}">
+                <div style="height:260px;background:#f9f9f9;position:relative;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #eee;">
+                    <img src="${imgUrl}" style="width:100%;height:100%;object-fit:contain;" alt="${vendor.category || 'Vendor'}">
                 </div>
                 <div style="padding:1.5rem;">
                     <div style="display:inline-block;font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.7rem;background:var(--gold-pale);color:var(--gold);border-radius:1px;margin-bottom:0.75rem;">${vendor.category || 'Vendor'}</div>
-                    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;">${vendor.name}</h3>
-                    <p style="color:var(--muted);font-size:0.8rem;line-height:1.5;margin-bottom:1.25rem;">${vendor.description || 'Premium local and continental dishes.'}</p>
+                    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:0.4rem;">${vendor.name}</h3>
+                    ${vendor.location ? `<div style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);margin-bottom:0.8rem;"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> ${vendor.location}</div>` : ''}
+                    ${vendor.description ? `<p style="color:var(--muted);font-size:0.8rem;line-height:1.5;margin-bottom:1.25rem;">${vendor.description}</p>` : `<div style="margin-bottom:1.25rem;"></div>`}
                     <div style="display:flex;justify-content:space-between;align-items:center;">
                         <div style="color:var(--gold);font-size:0.8rem;">★★★★★ <span style="color:var(--muted)">(24)</span></div>
-                        <a href="${vendor.link || '#'}" target="_blank" class="btn-ghost" style="padding:0.4rem 1rem;font-size:0.65rem;">Contact</a>
+                        <a href="${waLink}" target="_blank" class="btn-ghost" style="padding:0.4rem 1rem;font-size:0.65rem;">Contact</a>
                     </div>
                 </div>
             `;
@@ -330,3 +371,108 @@ async function fetchServices(containerId) {
         container.innerHTML = '<p style="color:#c00;grid-column:1/-1;text-align:center;padding:2rem;">Error loading services. Please refresh the page.</p>';
     }
 }
+
+// Job Modal Logic
+window.openJobModal = function(jobId) {
+    const job = window.jobsData && window.jobsData[jobId];
+    if (!job) return;
+
+    let modal = document.getElementById('job-detail-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'job-detail-modal';
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity 0.3s;padding:1rem;';
+        
+        modal.innerHTML = `
+            <div style="background:#fff;border-radius:8px;width:100%;max-width:600px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,0.2);transform:translateY(20px);transition:transform 0.3s;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem;border-bottom:1px solid #eee;">
+                    <h3 id="job-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin:0;">Job Title</h3>
+                    <button onclick="closeJobModal()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--muted);">&times;</button>
+                </div>
+                <div style="padding:1.5rem;overflow-y:auto;flex:1;">
+                    <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;background:#f9f9f9;padding:1rem;border-radius:4px;">
+                        <div style="flex:1;min-width:120px;">
+                            <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.2rem;">Company</div>
+                            <div id="job-modal-company" style="font-weight:600;"></div>
+                        </div>
+                        <div style="flex:1;min-width:120px;">
+                            <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.2rem;">Location</div>
+                            <div id="job-modal-location" style="font-weight:600;"></div>
+                        </div>
+                        <div style="flex:1;min-width:120px;">
+                            <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.2rem;">Type</div>
+                            <div id="job-modal-type" style="font-weight:600;"></div>
+                        </div>
+                        <div style="flex:1;min-width:120px;">
+                            <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.2rem;">Salary</div>
+                            <div id="job-modal-salary" style="font-weight:600;"></div>
+                        </div>
+                    </div>
+                    
+                    <h4 style="font-size:1rem;font-weight:600;margin-bottom:0.75rem;color:var(--charcoal);">Job Description</h4>
+                    <div id="job-modal-description" style="font-size:0.9rem;color:var(--mid);line-height:1.6;margin-bottom:1.5rem;white-space:pre-wrap;"></div>
+                    
+                    <h4 style="font-size:1rem;font-weight:600;margin-bottom:0.75rem;color:var(--charcoal);">Requirements</h4>
+                    <div id="job-modal-requirements" style="font-size:0.9rem;color:var(--mid);line-height:1.6;margin-bottom:1.5rem;white-space:pre-wrap;"></div>
+                </div>
+                <div style="padding:1.5rem;border-top:1px solid #eee;display:flex;justify-content:flex-end;gap:1rem;">
+                    <button onclick="closeJobModal()" class="btn-ghost" style="padding:0.7rem 1.5rem;">Cancel</button>
+                    <a id="job-modal-apply" href="#" target="_blank" class="btn-primary" style="padding:0.7rem 1.5rem;">Apply Now</a>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    document.getElementById('job-modal-title').textContent = job.title || 'Job Description';
+    document.getElementById('job-modal-company').textContent = job.company || '-';
+    document.getElementById('job-modal-location').textContent = job.location || '-';
+    document.getElementById('job-modal-type').textContent = job.type || '-';
+    document.getElementById('job-modal-salary').textContent = job.salary || 'Negotiable';
+    document.getElementById('job-modal-description').textContent = job.description || 'No description provided.';
+    document.getElementById('job-modal-requirements').textContent = job.requirements || 'No specific requirements listed.';
+    
+    const applyBtn = document.getElementById('job-modal-apply');
+    
+    let applyLink = job.link || '#';
+    let isEmail = false;
+
+    if (applyLink !== '#' && applyLink.includes('@') && !applyLink.includes('http')) {
+        isEmail = true;
+        // Clean up the email just in case it has 'mailto:'
+        let emailAddress = applyLink.replace('mailto:', '').trim();
+        applyLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}&su=${encodeURIComponent('Application for ' + (job.title || 'Job'))}`;
+    }
+
+    applyBtn.href = applyLink;
+
+    if (job.link && job.link.includes('wa.me')) {
+        applyBtn.innerHTML = '<span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.3rem;"></span> Enquire on WhatsApp';
+        applyBtn.style.background = '#25D366';
+        applyBtn.style.borderColor = '#25D366';
+        applyBtn.style.color = '#fff';
+    } else if (isEmail) {
+        applyBtn.innerHTML = '<span class="iconify" data-icon="logos:google-gmail" style="font-size:1.1rem;margin-right:0.3rem;"></span> Apply via Gmail';
+        applyBtn.style.background = '#EA4335';
+        applyBtn.style.borderColor = '#EA4335';
+        applyBtn.style.color = '#fff';
+    } else {
+        applyBtn.innerHTML = 'Apply Now';
+        applyBtn.style.background = 'var(--terra)';
+        applyBtn.style.borderColor = 'var(--terra)';
+        applyBtn.style.color = '#fff';
+    }
+    
+    modal.style.pointerEvents = 'auto';
+    modal.style.opacity = '1';
+    modal.querySelector('div').style.transform = 'translateY(0)';
+};
+
+window.closeJobModal = function() {
+    const modal = document.getElementById('job-detail-modal');
+    if (modal) {
+        modal.style.opacity = '0';
+        modal.style.pointerEvents = 'none';
+        modal.querySelector('div').style.transform = 'translateY(20px)';
+    }
+};
