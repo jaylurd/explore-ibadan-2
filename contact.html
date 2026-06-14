@@ -546,8 +546,7 @@ img { max-width: 100%; height: auto; }
     <div class="reveal" style="background:#fff;border:1px solid rgba(184,135,11,0.15);padding:3rem;box-shadow:0 8px 30px rgba(0,0,0,0.04);">
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--charcoal);margin-bottom:1.5rem;">Submit a Request</h3>
       
-      <form id="contact-form" action="https://formsubmit.co/exploreibadan06@gmail.com" method="POST" style="display:flex;flex-direction:column;gap:1.5rem;">
-        <input type="hidden" name="_next" value="https://jaylurd.github.io/explore-ibadan-2/thank-you.html">
+      <form id="contact-form" style="display:flex;flex-direction:column;gap:1.5rem;">
         <input type="hidden" name="_captcha" value="false">
 
         <div style="display:flex;flex-direction:column;gap:0.5rem;">
@@ -678,8 +677,50 @@ document.getElementById('menu-close').addEventListener('click', () => {
   document.body.style.overflow = '';
 });
 
+// AJAX FormSubmit Integration & Redirect
+const contactForm = document.getElementById('contact-form');
+const submitBtn = document.getElementById('contact-submit-btn');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    const payload = {
+      _subject: "New Request from " + document.getElementById('contact-name').value,
+      Subject: document.getElementById('contact-subject').value,
+      Name: document.getElementById('contact-name').value,
+      Email: document.getElementById('contact-email').value,
+      Message: document.getElementById('contact-message').value
+    };
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/exploreibadan06@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        // Redirect to the relative thank you page locally or live!
+        window.location.href = "thank-you.html";
+      } else {
+        alert('There was an error sending your message. Please try again later.');
+        submitBtn.textContent = 'Submit Message';
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      console.error(err);
+      alert('There was an error sending your message. Please try again later.');
+      submitBtn.textContent = 'Submit Message';
+      submitBtn.disabled = false;
+    }
+  });
+}
 </script>
-
-
 </body>
 </html>
