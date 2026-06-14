@@ -517,7 +517,7 @@ window.openJobModal = function(jobId) {
     if (applyLink !== '#') {
         const jobTitle = job.title || 'Job';
         const company = job.company || 'your company';
-        const messageBody = `Hello, I discovered the ${jobTitle} job posting on the Explore Ibadan website. I would love to submit an application for this position at ${company}. Please find my details below:\n\nFull Name: \nPhone Number: \nExperience: \n\nThank you.`;
+        const messageBody = `Hello, I discovered the ${jobTitle} job posting on the Explore Ibadan website. I would love to submit an application for this position at ${company}. Please find my details below:`;
 
         const cleanPhone = applyLink.replace(/[\s\-\(\)\+]/g, '');
         if (/^\d{10,15}$/.test(cleanPhone) && !applyLink.includes('@') && !applyLink.includes('http')) {
