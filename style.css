@@ -745,3 +745,6 @@ img {
     grid-template-columns: 1fr !important;
   }
 }
+/* Performance: GPU-accelerated animations */
+.reveal { will-change: transform, opacity; }
+img { content-visibility: auto; }

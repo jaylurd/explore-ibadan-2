@@ -11,7 +11,13 @@ function getSupabase() {
             console.error('Supabase JS library not loaded yet!');
             return null;
         }
-        _supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        _supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: {
+                persistSession: false,
+                autoRefreshToken: false,
+                detectSessionInUrl: false
+            }
+        });
     }
     return _supabaseClient;
 }
@@ -35,14 +41,20 @@ function timeAgo(dateString) {
     if (!dateString) return '';
     const now = new Date();
     const date = new Date(dateString);
-    const diffMs = now - date;
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    if (diffDays === 0) return 'Today';
+    const diffMs = now.getTime() - date.getTime();
+    if (diffMs < 0) return 'Just now';
+    const diffMins = Math.floor(diffMs / (1000 * 60));
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return diffMins + 'm ago';
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours < 24) return diffHours + 'h ago';
+    const diffDays = Math.floor(diffHours / 24);
     if (diffDays === 1) return '1d ago';
     if (diffDays < 7) return diffDays + 'd ago';
     if (diffDays < 14) return '1w ago';
     if (diffDays < 30) return Math.floor(diffDays / 7) + 'w ago';
-    return Math.floor(diffDays / 30) + 'mo ago';
+    if (diffDays < 365) return Math.floor(diffDays / 30) + 'mo ago';
+    return Math.floor(diffDays / 365) + 'y ago';
 }
 
 async function fetchJobs(containerId, limit) {
@@ -67,7 +79,7 @@ async function fetchJobs(containerId, limit) {
         jobs.forEach((job, index) => {
             let logoHtml = '';
             if (job.logo_url && job.logo_url.startsWith('http')) {
-                logoHtml = `<img src="${job.logo_url}" alt="${job.company}" style="width:100%;height:100%;object-fit:cover;border-radius:2px;">`;
+                logoHtml = `<img src="${job.logo_url}" alt="${job.company}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:2px;">`;
             } else {
                 const initials = (job.company || 'J').substring(0, 2).toUpperCase();
                 logoHtml = `<span style="font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--forest);font-size:1.1rem;">${initials}</span>`;
@@ -193,7 +205,7 @@ async function fetchEvents(containerId, limit) {
                 card.className = 'event-card reveal';
                 card.innerHTML = `
                     <div style="position:relative;">
-                        <img src="${imgUrl}" class="event-img" alt="${event.title}">
+                        <img src="${imgUrl}" class="event-img" alt="${event.title}" loading="lazy">
                         <div class="date-badge">
                         <div class="day">${dateObj.day}</div>
                         <div class="month">${dateObj.month}</div>
@@ -342,7 +354,7 @@ async function fetchServices(containerId) {
             card.style.cssText = 'display:flex;flex-direction:column;';
             card.innerHTML = `
                 <div style="height:200px;position:relative;">
-                    <img src="${imgUrl}" alt="${service.name}" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img src="${imgUrl}" alt="${service.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div style="position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,0.6);color:#fff;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.6rem;border-radius:2px;backdrop-filter:blur(4px);">
                         ${service.category}
                     </div>
@@ -417,7 +429,7 @@ async function fetchGallery(containerId, limit) {
             item.style.width = '240px';
 
             item.innerHTML = `
-                <img src="${imgUrl}" alt="${photo.title || 'Gallery photo'}">
+                <img src="${imgUrl}" alt="${photo.title || 'Gallery photo'}" loading="lazy" loading="lazy">
                 ${photo.title ? `
                 <div class="gallery-overlay">
                     <p class="gallery-name">${photo.title}</p>
@@ -500,17 +512,31 @@ window.openJobModal = function(jobId) {
     
     let applyLink = job.link || '#';
     let isEmail = false;
+    let isWhatsApp = false;
 
-    if (applyLink !== '#' && applyLink.includes('@') && !applyLink.includes('http')) {
-        isEmail = true;
-        // Clean up the email just in case it has 'mailto:'
-        let emailAddress = applyLink.replace('mailto:', '').trim();
-        applyLink = `mailto:${encodeURIComponent(emailAddress)}?subject=${encodeURIComponent('Application for ' + (job.title || 'Job'))}`;
+    if (applyLink !== '#') {
+        const jobTitle = job.title || 'Job';
+        const company = job.company || 'your company';
+        const messageBody = `Hello, I discovered the ${jobTitle} job posting on the Explore Ibadan website. I would love to submit an application for this position at ${company}. Please find my details below:\n\nFull Name: \nPhone Number: \nExperience: \n\nThank you.`;
+
+        const cleanPhone = applyLink.replace(/[\s\-\(\)\+]/g, '');
+        if (/^\d{10,15}$/.test(cleanPhone) && !applyLink.includes('@') && !applyLink.includes('http')) {
+            let waNumber = cleanPhone;
+            if (waNumber.startsWith('0')) {
+                waNumber = '234' + waNumber.substring(1);
+            }
+            applyLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(messageBody)}`;
+            isWhatsApp = true;
+        } else if (applyLink.includes('@') && !applyLink.includes('http')) {
+            isEmail = true;
+            let emailAddress = applyLink.replace('mailto:', '').trim();
+            applyLink = `mailto:${emailAddress}?subject=${encodeURIComponent('Application for ' + jobTitle + ' - Explore Ibadan')}&body=${encodeURIComponent(messageBody)}`;
+        }
     }
 
     applyBtn.href = applyLink;
 
-    if (job.link && job.link.includes('wa.me')) {
+    if (isWhatsApp || (job.link && job.link.includes('wa.me'))) {
         applyBtn.innerHTML = '<span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.3rem;"></span> Enquire on WhatsApp';
         applyBtn.style.background = '#25D366';
         applyBtn.style.borderColor = '#25D366';
