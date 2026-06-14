@@ -1,15 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Contact Us | Explore Ibadan</title>
+<title>Explore Ibadan | Discover. Connect. Grow.</title>
 <meta name="description" content="The premier community platform for everyone living, working, and exploring the ancient city of Ibadan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<!-- Supabase + frontend scripts moved to end of body for proper loading -->
 
 <style>
 :root {
@@ -253,7 +255,7 @@ body::before {
 }
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-size: clamp(2.2rem, 6vw, 6.5rem);
   font-weight: 600;
   color: #fff;
   line-height: 1.05;
@@ -433,8 +435,8 @@ img { max-width: 100%; height: auto; }
 
 @media (max-width: 768px) {
   /* Hero: let it grow with content */
-  .hero-wrapper { min-height: auto !important; height: auto !important; }
-  .hero-content { min-height: auto !important; height: auto !important; padding: 2rem 1.5rem 2.5rem !important; padding-top: 5rem !important; }
+  .hero-wrapper { min-height: auto !important; height: auto !important; overflow: visible !important; }
+  .hero-content { min-height: auto !important; height: auto !important; padding: 2rem 1.5rem 4rem !important; padding-top: 5rem !important; }
   .hero-title { font-size: clamp(2rem, 8vw, 3rem) !important; }
   .hero-sub { font-size: 0.9rem !important; margin-bottom: 1.5rem !important; }
   .hero-badge { font-size: 0.55rem !important; padding: 0.35rem 0.75rem !important; }
@@ -471,7 +473,7 @@ img { max-width: 100%; height: auto; }
   <div style="margin-bottom:3rem;">
     <span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;">Explore <span style="color:var(--gold-bright)">Ibadan</span></span>
   </div>
-  <a href="index.html" class="mobile-menu-link">Home</a>
+  <a href="index.html" class="mobile-menu-link active">Home</a>
   <a href="about.html" class="mobile-menu-link">About Us</a>
   <a href="events.html" class="mobile-menu-link">Events</a>
   <a href="jobs.html" class="mobile-menu-link">Jobs</a>
@@ -498,7 +500,7 @@ img { max-width: 100%; height: auto; }
 
     <!-- Desktop Nav -->
     <nav style="display:none;align-items:center;gap:2rem;" class="desktop-nav">
-      <a href="index.html" class="nav-a">Home</a>
+      <a href="index.html" class="nav-a active">Home</a>
       <a href="about.html" class="nav-a">About</a>
       <a href="events.html" class="nav-a">Events</a>
       <a href="jobs.html" class="nav-a">Jobs</a>
@@ -515,73 +517,13 @@ img { max-width: 100%; height: auto; }
 </header>
 
 <!-- ═══════ MAIN ═══════ -->
-<main style="max-width:1280px;margin:0 auto;padding:4rem 1.5rem 5rem;">
-
-  <div style="max-width:800px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:3rem;">
-      <span class="eyebrow" style="justify-content:center;margin-bottom:1rem;"><span style="background:var(--gold);"></span> Get in Touch <span style="background:var(--gold);"></span></span>
-      <h1 style="font-size:clamp(2.5rem,5vw,3.5rem);font-weight:600;color:var(--charcoal);margin:0 0 1rem;line-height:1.1;">Contact <em>Us</em></h1>
-      <div style="width:60px;height:2px;background:var(--gold);margin:0 auto 1.5rem;"></div>
-      <p style="color:var(--mid);font-size:1rem;line-height:1.8;">Have a question, want to post a job, register as a vendor, or submit an event? We'd love to hear from you.</p>
-    </div>
-
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:1.5rem;margin-bottom:4rem;">
-      <a href="https://wa.me/2348135471582" target="_blank" style="background:#fff;border:1px solid rgba(184,135,11,0.15);padding:2rem;text-align:center;text-decoration:none;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.15)';this.style.transform='translateY(0)'">
-        <span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:2.5rem;margin-bottom:1rem;"></span>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;">WhatsApp</h4>
-        <p style="font-size:0.8rem;color:var(--muted);">Chat with our team</p>
-      </a>
-      <a href="mailto:exploreibadan06@gmail.com" style="text-decoration:none;background:#fff;border:1px solid rgba(184,135,11,0.15);padding:2rem;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.15)';this.style.transform='translateY(0)'">
-        <span class="iconify" data-icon="solar:letter-bold" style="font-size:2.5rem;color:var(--forest);margin-bottom:1rem;"></span>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;">Email</h4>
-        <p style="font-size:0.8rem;color:var(--muted);">exploreibadan06@gmail.com</p>
-      </a>
-      <a href="tel:+2348135471582" style="text-decoration:none;background:#fff;border:1px solid rgba(184,135,11,0.15);padding:2rem;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.15)';this.style.transform='translateY(0)'">
-        <span class="iconify" data-icon="solar:phone-bold" style="font-size:2.5rem;color:var(--forest);margin-bottom:1rem;"></span>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;">Phone</h4>
-        <p style="font-size:0.8rem;color:var(--muted);">08135471582</p>
-      </a>
-    </div>
-
-    <div class="reveal" style="background:#fff;border:1px solid rgba(184,135,11,0.15);padding:3rem;box-shadow:0 8px 30px rgba(0,0,0,0.04);">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--charcoal);margin-bottom:1.5rem;">Submit a Request</h3>
-      
-      <form id="contact-form" action="https://formsubmit.co/exploreibadan06@gmail.com" method="POST" style="display:flex;flex-direction:column;gap:1.5rem;">
-        <input type="hidden" name="_next" value="https://jaylurd.github.io/explore-ibadan-2/thank-you.html">
-        <input type="hidden" name="_captcha" value="false">
-
-        <div style="display:flex;flex-direction:column;gap:0.5rem;">
-          <label style="font-size:0.8rem;font-weight:600;color:var(--charcoal);">What are you reaching out about?</label>
-          <select name="Subject" name="Subject" id="contact-subject" style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
-            <option>General Inquiry</option>
-            <option>Post a Job</option>
-            <option>Register as a Vendor</option>
-            <option>Submit an Event</option>
-            <option>Book Event Planning</option>
-          </select>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
-          <div style="display:flex;flex-direction:column;gap:0.5rem;">
-            <label style="font-size:0.8rem;font-weight:600;color:var(--charcoal);">Name</label>
-            <input type="text" name="Name" name="Name" id="contact-name" placeholder="Your name" required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
-          </div>
-          <div style="display:flex;flex-direction:column;gap:0.5rem;">
-            <label style="font-size:0.8rem;font-weight:600;color:var(--charcoal);">Email</label>
-            <input type="email" name="Email" name="Email" id="contact-email" placeholder="Your email address" required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
-          </div>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:0.5rem;">
-          <label style="font-size:0.8rem;font-weight:600;color:var(--charcoal);">Message</label>
-          <textarea name="Message" name="Message" id="contact-message" rows="5" placeholder="Tell us more details..." required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;resize:vertical;"></textarea>
-        </div>
-
-        <button type="submit" id="contact-submit-btn" class="btn-primary" style="align-self:flex-start;padding:0.8rem 2.5rem;font-size:0.85rem;border:none;cursor:pointer;">Submit Message</button>
-      </form>
-    </div>
+<main style="max-width:1280px;margin:0 auto;padding:6rem 1.5rem 8rem;display:flex;align-items:center;justify-content:center;min-height:60vh;">
+  <div style="background:#fff;border:1px solid rgba(184,135,11,0.15);padding:4rem 3rem;border-radius:8px;text-align:center;max-width:500px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,0.05);">
+    <span class="iconify" data-icon="solar:check-circle-bold" style="font-size:5rem;color:var(--forest);margin-bottom:1.5rem;"></span>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--charcoal);margin-bottom:1rem;">Thank You!</h1>
+    <p style="color:var(--mid);font-size:1.1rem;line-height:1.6;margin-bottom:2.5rem;">Your feedback has been received. We will get back to you as soon as possible.</p>
+    <a href="index.html" class="btn-primary" style="display:inline-block;padding:1rem 2.5rem;text-decoration:none;font-size:0.9rem;">Back to Home</a>
   </div>
-  
 </main>
 
 <!-- ═══════ FOOTER ═══════ -->
@@ -632,8 +574,8 @@ img { max-width: 100%; height: auto; }
   </div>
 </footer>
 
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script src="analytics.js"></script>
+<!-- ═══════ MOBILE BOTTOM NAV ═══════ -->
+
 
 <style>
 @media (min-width: 768px) {
@@ -677,9 +619,18 @@ document.getElementById('menu-close').addEventListener('click', () => {
   document.getElementById('mobile-menu').classList.remove('open');
   document.body.style.overflow = '';
 });
-
 </script>
-
-
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="analytics.js"></script>
+<script src="frontend.js"></script>
+<script>
+  fetchJobs('home-jobs-container', 3);
+  fetchEvents('home-events-container', 3);
+  fetchGallery('home-gallery-container', 8);
+</script>
 </body>
 </html>
+
+
+
+
