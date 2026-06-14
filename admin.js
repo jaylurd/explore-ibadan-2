@@ -70,6 +70,7 @@ const entityConfigs = {
         columns: ['Image', 'Name', 'Category', 'Location', 'Phone', 'Actions'],
         fields: [
             { name: 'name', label: 'Business Name', type: 'text', required: true },
+            { name: 'vendor_name', label: 'Vendor Owner Name', type: 'text', required: false },
             { name: 'category', label: 'Category', type: 'text', required: true },
             { name: 'location', label: 'Location', type: 'text', required: true },
             { name: 'phone', label: 'Phone Number', type: 'text', required: true },
@@ -85,6 +86,14 @@ const entityConfigs = {
             { name: 'category', label: 'Category', type: 'text', required: true },
             { name: 'description', label: 'Description', type: 'textarea', required: false },
             { name: 'phone', label: 'Phone Number', type: 'text', required: true }
+        ]
+    },
+    gallery: {
+        title: 'Manage Gallery',
+        imageField: 'image_url',
+        columns: ['Image', 'Title', 'Actions'],
+        fields: [
+            { name: 'title', label: 'Photo Title (optional)', type: 'text', required: false }
         ]
     }
 };

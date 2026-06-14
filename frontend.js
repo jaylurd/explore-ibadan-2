@@ -293,6 +293,7 @@ async function fetchVendors(containerId) {
                 <div style="padding:1.5rem;">
                     <div style="display:inline-block;font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.7rem;background:var(--gold-pale);color:var(--gold);border-radius:1px;margin-bottom:0.75rem;">${vendor.category || 'Vendor'}</div>
                     <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:0.4rem;">${vendor.name}</h3>
+                    ${vendor.vendor_name ? `<div style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--charcoal);font-weight:500;margin-bottom:0.4rem;"><span class="iconify" data-icon="solar:user-circle-linear" style="color:var(--forest);"></span> ${vendor.vendor_name}</div>` : ''}
                     ${vendor.location ? `<div style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);margin-bottom:0.8rem;"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> ${vendor.location}</div>` : ''}
                     ${vendor.description ? `<p style="color:var(--muted);font-size:0.8rem;line-height:1.5;margin-bottom:1.25rem;">${vendor.description}</p>` : `<div style="margin-bottom:1.25rem;"></div>`}
                     <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -369,6 +370,69 @@ async function fetchServices(containerId) {
     } catch (err) {
         console.error('Error fetching services:', err);
         container.innerHTML = '<p style="color:#c00;grid-column:1/-1;text-align:center;padding:2rem;">Error loading services. Please refresh the page.</p>';
+    }
+}
+
+async function fetchGallery(containerId, limit) {
+    const sb = getSupabase();
+    if (!sb) return;
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    try {
+        let query = sb.from('gallery').select('*').order('created_at', { ascending: false });
+        if (limit) query = query.limit(limit);
+
+        const { data: photos, error } = await query;
+        if (error) throw error;
+
+        container.innerHTML = '';
+        container.style.display = 'block'; // Remove grid
+
+        if (!photos || photos.length === 0) {
+            container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">No gallery photos yet.</p>';
+            return;
+        }
+
+        // Create the track wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gallery-track-wrapper';
+        wrapper.style.padding = '1rem 0';
+        
+        const track = document.createElement('div');
+        track.className = 'gallery-track gallery-scroll-left';
+
+        // Duplicate photos array for seamless infinite scroll
+        const scrollPhotos = [...photos, ...photos, ...photos];
+
+        scrollPhotos.forEach((photo, index) => {
+            const imgUrl = photo.image_url;
+            if (!imgUrl) return;
+
+            const item = document.createElement('div');
+            item.className = 'gallery-member';
+            // Optional: slight variations in height for a more dynamic look
+            const heightOffsets = ['280px', '320px', '260px', '300px'];
+            item.style.height = heightOffsets[index % heightOffsets.length];
+            item.style.width = '240px';
+
+            item.innerHTML = `
+                <img src="${imgUrl}" alt="${photo.title || 'Gallery photo'}">
+                ${photo.title ? `
+                <div class="gallery-overlay">
+                    <p class="gallery-name">${photo.title}</p>
+                </div>` : ''}
+            `;
+
+            track.appendChild(item);
+        });
+
+        wrapper.appendChild(track);
+        container.appendChild(wrapper);
+
+    } catch (err) {
+        console.error('Error fetching gallery:', err);
+        container.innerHTML = '<p style="color:#c00;text-align:center;padding:2rem;grid-column:1/-1;">Error loading gallery. Please refresh the page.</p>';
     }
 }
 

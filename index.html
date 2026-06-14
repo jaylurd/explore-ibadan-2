@@ -771,15 +771,30 @@ img { max-width: 100%; height: auto; }
           <span style="background:var(--gold);"></span>
           The Visionary
         </span>
-        <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:1rem;">
+        <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:0.5rem;">
           Meet the <em>Founder</em>
         </h2>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:500;color:var(--gold-bright);margin-bottom:1.25rem;">
+          Alankara Shukurat Opeyemi
+        </h3>
         <div class="gold-rule"></div>
-        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.5rem;">
-          Driven by a deep passion for the city of seven hills, she created Explore Ibadan to bridge the gap between talented professionals, thriving local businesses, and the vibrant culture of the city. 
+        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+          Long before Explore Ibadan had a name, it started with a simple passion: bringing people together to experience the city in a different way.
+        </p>
+        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+          Since 2022, I have organized outings, experiences, and events that helped people discover new places, build connections, and create lasting memories. Through those experiences, I noticed something important—many people lived in or visited Ibadan without truly knowing all the city had to offer.
+        </p>
+        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+          That realization inspired Explore Ibadan.
+        </p>
+        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+          Today, Explore Ibadan is more than a tourism platform. It is a growing community designed to connect people with the best of the city—from events and experiences to businesses, opportunities, and local communities.
+        </p>
+        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+          Our mission is simple: to help more people discover, experience, and connect with Ibadan.
         </p>
         <p style="color:var(--mid);font-size:1rem;line-height:1.8;">
-          Her vision is to build a centralized hub where opportunities are accessible, connections are meaningful, and every resident can experience the true essence of Ibadan.
+          Because Ibadan is more than a city. It is a culture, a community, and a story worth exploring.
         </p>
       </div>
     </div>
@@ -789,9 +804,6 @@ img { max-width: 100%; height: auto; }
 <style>
 /* Members Gallery Slideshow */
 .gallery-track-wrapper { overflow:hidden; position:relative; }
-.gallery-track-wrapper::before,.gallery-track-wrapper::after { content:''; position:absolute; top:0; bottom:0; width:120px; z-index:2; pointer-events:none; }
-.gallery-track-wrapper::before { left:0; background:linear-gradient(to right, var(--ivory), transparent); }
-.gallery-track-wrapper::after { right:0; background:linear-gradient(to left, var(--ivory), transparent); }
 
 .gallery-track { display:flex; gap:1.25rem; width:max-content; }
 
@@ -861,6 +873,27 @@ img { max-width: 100%; height: auto; }
 </style>
 
 
+
+<!-- ── PHOTO GALLERY ── -->
+<section style="padding:5rem 0;background:#fafafa;overflow:hidden;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+      <span class="eyebrow" style="justify-content:center;margin-bottom:1rem;color:var(--gold);">
+        <span style="background:var(--gold);"></span>
+        Our Community
+        <span style="background:var(--gold);"></span>
+      </span>
+      <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:1rem;">Photo <em>Gallery</em></h2>
+      <div class="gold-rule" style="margin:0 auto;"></div>
+      <p style="color:var(--mid);font-size:0.95rem;line-height:1.8;margin-top:1rem;max-width:520px;margin-left:auto;margin-right:auto;">A glimpse into the vibrant life and culture of Ibadan through our community's eyes.</p>
+    </div>
+
+    <div id="home-gallery-container">
+      <!-- Dynamic gallery photos will load here -->
+    </div>
+  </div>
+</section>
+
 <!-- ── CTA BANNER ── -->
 <section style="padding:6rem 1.5rem;position:relative;overflow:hidden;background:var(--parchment);">
   <div class="cta-pattern" style="position:absolute;inset:0;opacity:0.6;"></div>
@@ -904,15 +937,18 @@ img { max-width: 100%; height: auto; }
           Explore <span style="color:var(--gold-bright);">Ibadan</span>
         </a>
         <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:1.5rem;max-width:260px;">The premier community platform for everyone living, working, and exploring the ancient city of seven hills.</p>
-        <div style="display:flex;gap:0.5rem;">
-          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
-            <span class="iconify" data-icon="ri:twitter-x-fill" style="font-size:0.9rem;"></span>
-          </a>
-          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <a href="https://www.instagram.com/explore.ibadan?igsh=MXZja2U3c2N2dDk1YQ==" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
             <span class="iconify" data-icon="ri:instagram-fill" style="font-size:0.9rem;"></span>
           </a>
-          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+          <a href="https://www.linkedin.com/in/alankara-shukurat-opeyemi-41a582198?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
             <span class="iconify" data-icon="ri:linkedin-fill" style="font-size:0.9rem;"></span>
+          </a>
+          <a href="https://www.facebook.com/share/1bWVrsSmgv/" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+            <span class="iconify" data-icon="ri:facebook-fill" style="font-size:0.9rem;"></span>
+          </a>
+          <a href="https://www.tiktok.com/@exploreib?_r=1&_t=ZS-97BbDlEzW6x" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+            <span class="iconify" data-icon="ic:baseline-tiktok" style="font-size:0.9rem;"></span>
           </a>
         </div>
       </div>
@@ -991,6 +1027,7 @@ document.getElementById('menu-close').addEventListener('click', () => {
 <script>
   fetchJobs('home-jobs-container', 3);
   fetchEvents('home-events-container', 3);
+  fetchGallery('home-gallery-container', 8);
 </script>
 </body>
 </html>
