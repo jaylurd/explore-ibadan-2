@@ -505,7 +505,7 @@ window.openJobModal = function(jobId) {
         isEmail = true;
         // Clean up the email just in case it has 'mailto:'
         let emailAddress = applyLink.replace('mailto:', '').trim();
-        applyLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}&su=${encodeURIComponent('Application for ' + (job.title || 'Job'))}`;
+        applyLink = `mailto:${encodeURIComponent(emailAddress)}?subject=${encodeURIComponent('Application for ' + (job.title || 'Job'))}`;
     }
 
     applyBtn.href = applyLink;
