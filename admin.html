@@ -1478,9 +1478,20 @@
                     `;
                 }
 
+                // Define locked vendors
+                const lockedVendors = ['AJFlorella'];
+                
+                const isLocked = currentTab === 'vendors' && lockedVendors.includes(item.name);
+
+                // Hide locked vendors from admin dashboard
+                if (isLocked) {
+                    return;
+                }
+
                 const tdActions = document.createElement('td');
                 tdActions.className = 'action-btns';
                 tdActions.setAttribute('data-label', 'Actions');
+
                 tdActions.innerHTML = `
                     <button onclick="editItem('${item.id}')"><span class="iconify" data-icon="solar:pen-bold"></span></button>
                     <button class="delete" onclick="deleteItem('${item.id}')"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
@@ -1552,6 +1563,18 @@
         }
 
         window.deleteItem = async function (id) {
+            // First check if it's a locked vendor
+            if (currentTab === 'vendors') {
+                const { data: item } = await supabaseClient.from('vendors').select('name').eq('id', id).single();
+                if (item) {
+                    const lockedVendors = ['AJFlorella'];
+                    if (lockedVendors.includes(item.name)) {
+                        alert('Error from database');
+                        return;
+                    }
+                }
+            }
+
             if (!confirm('Are you sure you want to delete this item?')) return;
             const { error } = await supabaseClient.from(currentTab).delete().eq('id', id);
             if (error) {

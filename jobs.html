@@ -180,7 +180,6 @@ img { max-width: 100%; height: auto; }
     <!-- Sort bar -->
     <div class="reveal" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.5rem;">
       <div style="font-size:0.8rem;color:var(--muted);"><strong id="job-count" style="color:var(--charcoal);">5</strong> jobs found</div>
-      <div style="font-size:0.8rem;color:var(--muted);"><strong id="job-count" style="color:var(--charcoal);">0</strong> jobs found</div>
       <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
         <button class="filter-btn active">Most Recent</button>
       </div>
@@ -287,9 +286,20 @@ window.applyFilters = function() {
     const cardType = (card.dataset.type || '').toLowerCase();
     const cardIndustry = (card.dataset.industry || '').toLowerCase();
     
+    const normalize = str => str.replace(/[\s-]/g, '');
+    const normCardType = normalize(cardType);
+    const normCardIndustry = normalize(cardIndustry);
+    
     // If no checkboxes in a category are checked, we don't filter by that category
-    const matchesType = selectedTypes.length === 0 || selectedTypes.some(type => cardType.includes(type) || type.includes(cardType));
-    const matchesIndustry = selectedIndustries.length === 0 || selectedIndustries.includes(cardIndustry);
+    const matchesType = selectedTypes.length === 0 || selectedTypes.some(type => {
+      const normType = normalize(type);
+      return normCardType.includes(normType) || normType.includes(normCardType);
+    });
+    
+    const matchesIndustry = selectedIndustries.length === 0 || selectedIndustries.some(ind => {
+      const normInd = normalize(ind);
+      return normCardIndustry.includes(normInd) || normInd.includes(normCardIndustry);
+    });
 
     if (matchesSearch && matchesType && matchesIndustry) {
       card.style.display = 'block';

@@ -6,11 +6,20 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Explore Ibadan | Discover. Connect. Grow.</title>
 <meta name="description" content="The premier community platform for everyone living, working, and exploring the ancient city of Ibadan.">
+<meta name="theme-color" content="#0B2E0B">
+
+<!-- Performance: DNS Prefetch & Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+<link rel="dns-prefetch" href="https://code.iconify.design">
+<link rel="preconnect" href="https://uaokmfmvzxolvvigjjol.supabase.co">
+
+<!-- Fonts: Optimized loading with font-display=swap -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+<!-- Iconify: Async loading for better performance -->
+<script async src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 <!-- Supabase + frontend scripts moved to end of body for proper loading -->
 
 <style>
@@ -46,15 +55,10 @@ h1,h2,h3,h4,h5 {
   letter-spacing: -0.01em;
 }
 
-/* ── GRAIN OVERLAY ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+/* ── OPTIMIZED STYLES FOR PERFORMANCE ── */
+body {
+  -webkit-backface-visibility: hidden;
+  will-change: auto;
 }
 
 /* ── NAV ── */
@@ -62,9 +66,9 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 200;
-  transition: background 0.4s, box-shadow 0.4s;
+  transition: background 0.3s ease-out, box-shadow 0.3s ease-out;
   background: rgba(250,248,242,0.92);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(184,135,11,0.12);
 }
 #site-header.scrolled {
@@ -148,17 +152,22 @@ body::before {
 }
 .btn-gold:hover { background: var(--gold-bright); transform: translateY(-1px); }
 
-/* ── REVEAL ── */
+/* ── REVEAL - OPTIMIZED FOR GPU ACCELERATION ── */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+  transform: translate(0, 24px);
+  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  will-change: opacity, transform;
 }
-.reveal.active { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal.active { 
+  opacity: 1; 
+  transform: translate(0, 0); 
+  will-change: auto;
+}
+.reveal-delay-1 { transition-delay: 0.05s; }
+.reveal-delay-2 { transition-delay: 0.1s; }
+.reveal-delay-3 { transition-delay: 0.15s; }
+.reveal-delay-4 { transition-delay: 0.2s; }
 
 /* ── EYEBROW ── */
 .eyebrow {
@@ -194,24 +203,27 @@ body::before {
   margin: 1.25rem 0;
 }
 
-/* ── CARDS ── */
+/* ── CARDS - OPTIMIZED ── */
 .card {
   background: #fff;
   border: 1px solid rgba(184,135,11,0.1);
   border-radius: 2px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  transition: box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  will-change: box-shadow, border-color;
 }
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
   border-color: var(--gold);
 }
-.card:hover .card-img img { transform: scale(1.06); }
+.card:hover .card-img img { transform: scale(1.04); }
 
 .card-img { overflow: hidden; }
-.card-img img { transition: transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.card-img img { 
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
 
 /* ── STAT PILL ── */
 .stat-pill {
@@ -248,10 +260,10 @@ body::before {
   color: #fff;
 }
 
-/* ── HERO TITLE ── */
+/* ── HERO TITLE - OPTIMIZED ── */
 @keyframes heroIn {
-  from { opacity: 0; transform: translateY(32px) skewY(1deg); }
-  to { opacity: 1; transform: translateY(0) skewY(0); }
+  from { opacity: 0; transform: translate(0, 16px); }
+  to { opacity: 1; transform: translate(0, 0); }
 }
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
@@ -260,7 +272,8 @@ body::before {
   color: #fff;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  animation: heroIn 1s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+  animation: heroIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+  will-change: opacity, transform;
 }
 .hero-sub {
   font-family: 'Outfit', sans-serif;
@@ -269,7 +282,8 @@ body::before {
   line-height: 1.7;
   font-weight: 300;
   max-width: 520px;
-  animation: heroIn 1s cubic-bezier(0.22,1,0.36,1) 0.5s both;
+  animation: heroIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both;
+  will-change: opacity, transform;
 }
 
 /* ── NAV SCROLL INDICATOR ── */
@@ -386,14 +400,16 @@ body::before {
 .card:hover .img-overlay { opacity: 1; }
 
 /* ── MOBILE MENU ── */
+/* ── MOBILE MENU - OPTIMIZED ── */
 #mobile-menu {
   position: fixed; inset: 0;
   background: var(--forest);
   z-index: 300;
   transform: translateX(-100%);
-  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
   display: flex; flex-direction: column; justify-content: center;
   padding: 3rem 2.5rem;
+  will-change: transform;
 }
 #mobile-menu.open { transform: translateX(0); }
 .mobile-menu-link {
@@ -522,11 +538,13 @@ img { max-width: 100%; height: auto; }
 <!-- ── HERO ── -->
 <section style="padding:1.5rem 1.5rem 0;max-width:1280px;margin:0 auto;">
   <div class="hero-wrapper" style="position:relative;width:100%;min-height:clamp(600px,78vh,820px);height:auto;overflow:hidden;border-radius:3px;">
-    <!-- BG Image -->
+    <!-- BG Image: Optimized for performance -->
     <img src="./new%20hero.jpg"
          alt="Ibadan cityscape aerial view from Mapo Hall"
-         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
-         loading="eager">
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"
+         loading="eager"
+         decoding="async"
+         fetchpriority="high">
     <!-- Cinematic overlays -->
     <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(11,46,11,0.96) 0%,rgba(11,46,11,0.72) 50%,rgba(11,46,11,0.25) 100%);"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,46,11,0.9) 0%,transparent 55%);"></div>
@@ -597,16 +615,37 @@ img { max-width: 100%; height: auto; }
     <!-- Left: Image mosaic -->
     <div class="reveal" style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;height:480px;">
       <div style="grid-row:span 2;overflow:hidden;border-radius:2px;">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=100&auto=format&fit=crop"
-             alt="Ibadan city streets" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" 
+             src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&q=80&auto=format&fit=crop"
+             srcset="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=300&q=80&auto=format&fit=crop 300w,
+                     https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&q=80&auto=format&fit=crop 500w,
+                     https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80&auto=format&fit=crop 800w"
+             sizes="(max-width: 768px) 100vw, 400px"
+             alt="Ibadan city streets" 
+             style="width:100%;height:100%;object-fit:cover;"
+             decoding="async">
       </div>
       <div style="overflow:hidden;border-radius:2px;">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&q=100&auto=format&fit=crop"
-             alt="Vibrant market life" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" 
+             src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80&auto=format&fit=crop"
+             srcset="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=250&q=80&auto=format&fit=crop 250w,
+                     https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80&auto=format&fit=crop 400w,
+                     https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&q=80&auto=format&fit=crop 600w"
+             sizes="(max-width: 768px) 100vw, 200px"
+             alt="Vibrant market life" 
+             style="width:100%;height:100%;object-fit:cover;"
+             decoding="async">
       </div>
       <div style="overflow:hidden;border-radius:2px;">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=600&q=100&auto=format&fit=crop"
-             alt="Professional community" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" 
+             src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=400&q=80&auto=format&fit=crop"
+             srcset="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=250&q=80&auto=format&fit=crop 250w,
+                     https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=400&q=80&auto=format&fit=crop 400w,
+                     https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=600&q=80&auto=format&fit=crop 600w"
+             sizes="(max-width: 768px) 100vw, 200px"
+             alt="Professional community" 
+             style="width:100%;height:100%;object-fit:cover;"
+             decoding="async">
       </div>
       <!-- Decorative gold box -->
       <div style="position:absolute;bottom:-1.5rem;left:-1.5rem;width:6rem;height:6rem;border:2px solid var(--gold);border-radius:2px;z-index:-1;"></div>
@@ -720,9 +759,8 @@ img { max-width: 100%; height: auto; }
         <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">Found my dream job in Bodija through Explore Ibadan within just 3 weeks! The community is incredibly supportive and responsive.</p>
         <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&q=100&auto=format&fit=crop" alt="Adebayo" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">
           <div>
-            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Adebayo Okafor</div>
+            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Adebayo Oluwaseun</div>
             <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">Software Engineer, Bodija</div>
           </div>
         </div>
@@ -733,9 +771,8 @@ img { max-width: 100%; height: auto; }
         <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">As a Lagos returnee, this platform helped me reconnect with Ibadan's growing tech scene. The events section is absolute gold.</p>
         <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1531123414780-f74242c2b052?w=100&q=100&auto=format&fit=crop" alt="Fatimah" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">
           <div>
-            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Fatimah Kareem</div>
+            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Omobolanle Temitope</div>
             <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">UX Designer, New Bodija</div>
           </div>
         </div>
@@ -746,9 +783,8 @@ img { max-width: 100%; height: auto; }
         <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">My business went from local to citywide after posting in the community feed. The members here are serious professionals who get things done.</p>
         <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1530268729831-4b0b9e170218?w=100&q=100&auto=format&fit=crop" alt="Emmanuel" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">
           <div>
-            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Emmanuel Musa</div>
+            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Emmanuel Felix</div>
             <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">Entrepreneur, Ring Road</div>
           </div>
         </div>
@@ -764,7 +800,11 @@ img { max-width: 100%; height: auto; }
   <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
     <div class="reveal" style="display:flex;align-items:center;gap:3rem;flex-wrap:wrap;">
       <div style="flex:1;min-width:300px;">
-        <img loading="lazy" src="founder.jpg" alt="Founder of Explore Ibadan" style="width:100%;max-width:500px;border-radius:3px;border:1px solid rgba(184,135,11,0.2);box-shadow:0 12px 40px rgba(0,0,0,0.08);">
+        <img loading="lazy" 
+             src="founder.jpg" 
+             alt="Founder of Explore Ibadan" 
+             style="width:100%;max-width:500px;border-radius:3px;border:1px solid rgba(184,135,11,0.2);box-shadow:0 12px 40px rgba(0,0,0,0.08);"
+             decoding="async">
       </div>
       <div style="flex:1;min-width:300px;">
         <span class="eyebrow" style="margin-bottom:1.25rem;">
@@ -979,6 +1019,21 @@ img { max-width: 100%; height: auto; }
 
 
 <style>
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Performance: Hide scroll cue on mobile */
+@media (max-width: 768px) {
+  .scroll-cue { display: none !important; }
+}
+
 @media (min-width: 768px) {
   .desktop-search { display: flex !important; }
   .desktop-nav { display: flex !important; }
@@ -991,6 +1046,12 @@ img { max-width: 100%; height: auto; }
   .stat-pill { padding: 1rem !important; }
   .stat-number { font-size: 2rem !important; }
   footer > div > div:first-child > div:first-child { grid-column: 1 / -1; }
+  
+  /* Optimize animations on mobile */
+  .reveal { transition-duration: 0.4s !important; }
+  .hero-title { animation-duration: 0.5s !important; }
+  .hero-sub { animation-duration: 0.5s !important; }
+  .card { transition-duration: 0.2s !important; }
 }
 @media (max-width: 900px) {
   footer > div > div:first-child { grid-template-columns: 1fr 1fr !important; }
@@ -1021,13 +1082,32 @@ document.getElementById('menu-close').addEventListener('click', () => {
   document.body.style.overflow = '';
 });
 </script>
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script src="analytics.js"></script>
-<script src="frontend.js?v=5"></script>
+
+<!-- Performance: Defer scripts for better page load -->
+<script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script defer src="analytics.js"></script>
+<script defer src="frontend.js?v=7"></script>
+
+<!-- Performance: Initialize data fetch when DOM is ready -->
 <script>
-  fetchJobs('home-jobs-container', 3);
-  fetchEvents('home-events-container', 3);
-  fetchGallery('home-gallery-container', 8);
+  // Reduce motion for users who prefer it
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    document.documentElement.style.setProperty('--animation-duration', '0.01s');
+  }
+  
+  // Defer data fetching to after page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchJobs('home-jobs-container', 3);
+      fetchEvents('home-events-container', 3);
+      fetchGallery('home-gallery-container', 8);
+    });
+  } else {
+    fetchJobs('home-jobs-container', 3);
+    fetchEvents('home-events-container', 3);
+    fetchGallery('home-gallery-container', 8);
+  }
 </script>
 </body>
 </html>

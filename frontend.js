@@ -23,9 +23,9 @@ function getSupabase() {
 }
 
 function getFallbackImage(type) {
-    if (type === 'event') return 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=100&auto=format&fit=crop';
-    if (type === 'vendor') return 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=800&q=100&auto=format&fit=crop';
-    if (type === 'service') return 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=100&auto=format&fit=crop';
+    if (type === 'event') return 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=75&auto=format&fit=crop';
+    if (type === 'vendor') return 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=600&q=75&auto=format&fit=crop';
+    if (type === 'service') return 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=75&auto=format&fit=crop';
     return '';
 }
 
@@ -147,13 +147,13 @@ async function fetchJobs(containerId, limit) {
             window.jobsData[job.id] = job;
         });
 
-        // Force all cards visible
-        setTimeout(() => {
+        // Force all cards visible using requestAnimationFrame for better performance
+        requestAnimationFrame(() => {
             container.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
             if (typeof window.applyFilters === 'function') {
                 window.applyFilters();
             }
-        }, 50);
+        });
 
     } catch (err) {
         console.error('Error fetching jobs:', err);
@@ -285,6 +285,9 @@ async function fetchVendors(containerId) {
             // Build WhatsApp link from phone number
             let waLink = vendor.phone || '#';
             if (waLink !== '#') {
+                const vendorName = vendor.name || 'your business';
+                const messageBody = `Hello, I discovered you on the Explore Ibadan page and I want to make an inquiry about ${vendorName}.`;
+
                 let phoneNum = waLink.replace(/[^\d+]/g, '');
                 if (phoneNum) {
                     if (phoneNum.startsWith('0')) {
@@ -292,7 +295,7 @@ async function fetchVendors(containerId) {
                     } else if (phoneNum.startsWith('+')) {
                         phoneNum = phoneNum.substring(1);
                     }
-                    waLink = `https://wa.me/${phoneNum}`;
+                    waLink = `https://wa.me/${phoneNum}?text=${encodeURIComponent(messageBody)}`;
                 } else {
                     waLink = '#';
                 }
