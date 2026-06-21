@@ -286,7 +286,7 @@ async function fetchVendors(containerId) {
             let waLink = vendor.phone || '#';
             if (waLink !== '#') {
                 const vendorName = vendor.name || 'your business';
-                const messageBody = `Hello, I discovered you on the Explore Ibadan page and I want to make an inquiry about ${vendorName}.`;
+                const messageBody = `Hello, I discovered you on the Explore Ibadan website and I want to make an inquiry about ${vendorName}.`;
 
                 let phoneNum = waLink.replace(/[^\d+]/g, '');
                 if (phoneNum) {
