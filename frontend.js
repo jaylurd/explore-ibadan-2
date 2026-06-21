@@ -311,6 +311,11 @@ async function fetchVendors(containerId) {
                     ${vendor.vendor_name ? `<div style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--charcoal);font-weight:500;margin-bottom:0.4rem;"><span class="iconify" data-icon="solar:user-circle-linear" style="color:var(--forest);"></span> ${vendor.vendor_name}</div>` : ''}
                     ${vendor.location ? `<div style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);margin-bottom:0.8rem;"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> ${vendor.location}</div>` : ''}
                     ${vendor.description ? `<p style="color:var(--muted);font-size:0.8rem;line-height:1.5;margin-bottom:1.25rem;">${vendor.description}</p>` : `<div style="margin-bottom:1.25rem;"></div>`}
+                    <div style="display:flex;gap:0.75rem;align-items:center;margin-bottom:1rem;">
+                        ${vendor.instagram ? `<a href="${vendor.instagram}" target="_blank" style="color:#E1306C;font-size:1.2rem;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><span class="iconify" data-icon="ri:instagram-fill"></span></a>` : ''}
+                        ${vendor.tiktok ? `<a href="${vendor.tiktok}" target="_blank" style="color:var(--charcoal);font-size:1.2rem;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><span class="iconify" data-icon="ic:baseline-tiktok"></span></a>` : ''}
+                        ${vendor.linkedin ? `<a href="${vendor.linkedin}" target="_blank" style="color:#0077b5;font-size:1.2rem;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><span class="iconify" data-icon="ri:linkedin-fill"></span></a>` : ''}
+                    </div>
                     <div style="display:flex;justify-content:space-between;align-items:center;">
                         <div style="color:var(--gold);font-size:0.8rem;">★★★★★ <span style="color:var(--muted)">(24)</span></div>
                         <a href="${waLink}" target="_blank" class="btn-ghost" style="padding:0.4rem 1rem;font-size:0.65rem;">Contact</a>

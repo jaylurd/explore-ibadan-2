@@ -74,7 +74,10 @@ const entityConfigs = {
             { name: 'category', label: 'Category', type: 'text', required: true },
             { name: 'location', label: 'Location', type: 'text', required: true },
             { name: 'phone', label: 'Phone Number', type: 'text', required: true },
-            { name: 'description', label: 'Description', type: 'textarea', required: false }
+            { name: 'description', label: 'Description', type: 'textarea', required: false },
+            { name: 'instagram', label: 'Instagram URL', type: 'text', required: false },
+            { name: 'tiktok', label: 'TikTok URL', type: 'text', required: false },
+            { name: 'linkedin', label: 'LinkedIn URL', type: 'text', required: false }
         ]
     },
     services: {

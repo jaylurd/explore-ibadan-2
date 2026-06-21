@@ -37,6 +37,9 @@ CREATE TABLE vendors (
   location text NOT NULL,
   phone text NOT NULL,
   image_url text,
+  instagram text,
+  tiktok text,
+  linkedin text,
   created_at timestamp with time zone DEFAULT now()
 );
 
