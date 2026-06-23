@@ -277,6 +277,8 @@ async function fetchVendors(containerId) {
         }
 
         vendors.forEach(vendor => {
+            if (vendor.name === 'AJFlorella') return; // Exclude AJFlorella
+
             const imgUrl = vendor.image_url || getFallbackImage('vendor');
 
             const card = document.createElement('div');

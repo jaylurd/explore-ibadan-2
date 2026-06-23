@@ -1482,12 +1482,12 @@
                 }
 
                 // Define locked vendors
-                const lockedVendors = ['AJFlorella'];
+                const lockedVendors = [];
                 
                 const isLocked = currentTab === 'vendors' && lockedVendors.includes(item.name);
 
                 // Hide locked vendors from admin dashboard
-                if (isLocked) {
+                if (isLocked || item.name === 'AJFlorella') {
                     return;
                 }
 
@@ -1570,7 +1570,7 @@
             if (currentTab === 'vendors') {
                 const { data: item } = await supabaseClient.from('vendors').select('name').eq('id', id).single();
                 if (item) {
-                    const lockedVendors = ['AJFlorella'];
+                    const lockedVendors = [];
                     if (lockedVendors.includes(item.name)) {
                         alert('Error from database');
                         return;
