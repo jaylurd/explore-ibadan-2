@@ -529,15 +529,10 @@ img { max-width: 100%; height: auto; }
   <div class="reveal" style="background:#fff;padding:1.5rem;border:1px solid rgba(184,135,11,0.15);margin-bottom:3rem;display:flex;gap:1rem;flex-wrap:wrap;">
     <div style="position:relative;flex:1;min-width:280px;">
       <span class="iconify" data-icon="solar:minimalistic-magnifer-linear" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1.1rem;"></span>
-      <input type="text" placeholder="Find vendors in Ibadan..." style="width:100%;padding:0.75rem 1rem 0.75rem 2.5rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);outline:none;background:var(--ivory);">
+      <input type="text" id="vendor-search" placeholder="Find vendors in Ibadan..." style="width:100%;padding:0.75rem 1rem 0.75rem 2.5rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);outline:none;background:var(--ivory);">
     </div>
-    <select style="padding:0.75rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);color:var(--mid);min-width:180px;outline:none;">
+    <select id="vendor-category" style="padding:0.75rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);color:var(--mid);min-width:180px;outline:none;">
       <option>All Categories</option>
-      <option>Catering</option>
-      <option>Photography</option>
-      <option>Decoration</option>
-      <option>Makeup</option>
-      <option>DJ & Sound</option>
     </select>
   </div>
 
@@ -645,6 +640,37 @@ document.getElementById('menu-close').addEventListener('click', () => {
 <script src="analytics.js"></script>
 <script src="frontend.js?v=9"></script>
 <script>
+window.applyVendorFilters = function() {
+  const searchInput = document.getElementById('vendor-search');
+  const categorySelect = document.getElementById('vendor-category');
+  if (!searchInput || !categorySelect) return;
+  
+  const searchTerm = searchInput.value.toLowerCase();
+  const selectedCategory = categorySelect.value;
+  
+  const vendorCards = document.querySelectorAll('.vendor-card');
+  vendorCards.forEach(card => {
+    const cardText = card.innerText.toLowerCase();
+    const matchesSearch = searchTerm === '' || cardText.includes(searchTerm);
+    
+      const cardCategory = card.dataset.category || '';
+    const matchesCategory = selectedCategory === 'All Categories' || categoriesMatch(cardCategory, selectedCategory);
+    
+    if (matchesSearch && matchesCategory) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('vendor-search');
+    const categorySelect = document.getElementById('vendor-category');
+    if (searchInput) searchInput.addEventListener('input', window.applyVendorFilters);
+    if (categorySelect) categorySelect.addEventListener('change', window.applyVendorFilters);
+});
+
   fetchVendors('vendors-page-container');
 </script>
 </body>

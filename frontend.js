@@ -276,13 +276,17 @@ async function fetchVendors(containerId) {
             return;
         }
 
+        updateVendorCategoryDropdown(vendors);
+
         vendors.forEach(vendor => {
             if (vendor.name === 'AJFlorella') return; // Exclude AJFlorella
 
             const imgUrl = vendor.image_url || getFallbackImage('vendor');
 
             const card = document.createElement('div');
-            card.className = 'card reveal';
+            card.className = 'card reveal vendor-card';
+            card.dataset.category = vendor.category || '';
+            card.dataset.name = vendor.name || '';
 
             // Build WhatsApp link from phone number
             let waLink = vendor.phone || '#';
@@ -329,6 +333,9 @@ async function fetchVendors(containerId) {
 
         setTimeout(() => {
             container.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            if (typeof window.applyVendorFilters === 'function') {
+                window.applyVendorFilters();
+            }
         }, 50);
 
         const countEl = document.getElementById('vendor-count');
@@ -338,6 +345,124 @@ async function fetchVendors(containerId) {
         console.error('Error fetching vendors:', err);
         container.innerHTML = '<p style="color:#c00;grid-column:1/-1;text-align:center;padding:2rem;">Error loading vendors. Please refresh the page.</p>';
     }
+}
+
+function getCanonicalVendorCategories(rawCategory) {
+    const labels = new Set();
+    const normalized = (rawCategory || '').toString().trim().toLowerCase();
+    if (!normalized) return labels;
+
+    if (/\b(food|catering|bakery|cakes|baking|bakeshop|meal|meals|caterer)\b/.test(normalized)) {
+        labels.add('Food');
+    }
+    if (/\b(tech|technology|digital|software|app|it)\b/.test(normalized)) {
+        labels.add('Technology');
+    }
+    if (/\b(photo|photography|photographer)\b/.test(normalized)) {
+        labels.add('Photography');
+    }
+    if (/\b(decor|decoration|floral|styling|design|venue decor|set up)\b/.test(normalized)) {
+        labels.add('Decoration');
+    }
+    if (/\b(makeup|beauty|hair|stylist|grooming)\b/.test(normalized)) {
+        labels.add('Hair & Beauty');
+    }
+    if (/\b(dj|sound|music|band|audio|entertainment)\b/.test(normalized)) {
+        labels.add('DJ & Sound');
+    }
+    if (/\b(venue|hall|space|location|center|garden|lounge)\b/.test(normalized)) {
+        labels.add('Venue');
+    }
+    if (/\b(planner|planning|coordinator|management|events manager)\b/.test(normalized)) {
+        labels.add('Event Planner');
+    }
+    if (/\b(light|lighting|av|audio visual|audio-visual)\b/.test(normalized)) {
+        labels.add('Lighting & AV');
+    }
+    if (/\b(print|signage|banner|flyer|graphics|branding|printing)\b/.test(normalized)) {
+        labels.add('Printing & Signage');
+    }
+    if (/\b(equipment|rentals|rental|props|furniture|gear)\b/.test(normalized)) {
+        labels.add('Event Equipment');
+    }
+    if (/\b(transport|driver|logistics|vehicle|van|bus|car)\b/.test(normalized)) {
+        labels.add('Transportation');
+    }
+    if (/\b(wedding cake|cake|cakes)\b/.test(normalized)) {
+        labels.add('Wedding Cakes');
+    }
+    if (/\b(bar|beverage|drinks|cocktail|bartender)\b/.test(normalized)) {
+        labels.add('Beverages & Bars');
+    }
+    if (/\b(hospitality|hotel|guest|service|catering service)\b/.test(normalized)) {
+        labels.add('Hospitality Services');
+    }
+    if (/\b(entertainment|performance|show|artists)\b/.test(normalized)) {
+        labels.add('Entertainment');
+    }
+
+    if (labels.size === 0) {
+        rawCategory.split(/[,\/&+]+/).map(part => part.trim()).filter(Boolean).forEach(part => {
+            labels.add(part.charAt(0).toUpperCase() + part.slice(1).toLowerCase());
+        });
+    }
+
+    return labels;
+}
+
+function normalizeCategory(value) {
+    return value.toString().toLowerCase().replace(/[\s\-&\/]+/g, ' ').trim();
+}
+
+function getCategoryKeys(value) {
+    const normalized = normalizeCategory(value);
+    const keys = new Set();
+    if (normalized.length === 0) return keys;
+
+    if (/\b(food|catering|bakery|cakes|baking|meal|meals|caterer|chef|restaurant)\b/.test(normalized)) keys.add('food');
+    if (/\b(tech|technology|digital|software|app|it|systems|innovation)\b/.test(normalized)) keys.add('technology');
+    if (/\b(photo|photography|photographer)\b/.test(normalized)) keys.add('photography');
+    if (/\b(decor|decoration|floral|styling|design|venue decor|set up|setup)\b/.test(normalized)) keys.add('decoration');
+    if (/\b(makeup|beauty|hair|stylist|grooming|salon)\b/.test(normalized)) keys.add('hair beauty');
+    if (/\b(dj|sound|music|band|audio|entertainment)\b/.test(normalized)) keys.add('dj sound');
+    if (/\b(venue|hall|space|location|center|garden|lounge)\b/.test(normalized)) keys.add('venue');
+    if (/\b(planner|planning|coordinator|management|events manager)\b/.test(normalized)) keys.add('event planner');
+    if (/\b(light|lighting|av|audio visual|audio-visual)\b/.test(normalized)) keys.add('lighting av');
+    if (/\b(print|signage|banner|flyer|graphics|branding|printing)\b/.test(normalized)) keys.add('printing signage');
+    if (/\b(equipment|rentals|rental|props|furniture|gear)\b/.test(normalized)) keys.add('event equipment');
+    if (/\b(transport|driver|logistics|vehicle|van|bus|car|delivery)\b/.test(normalized)) keys.add('transportation');
+    if (/\b(wedding cake|cake|cakes|pastries)\b/.test(normalized)) keys.add('wedding cakes');
+    if (/\b(bar|beverage|drinks|cocktail|bartender|bar service)\b/.test(normalized)) keys.add('beverages & bars');
+    if (/\b(hospitality|hotel|guest|service|catering service|lodging)\b/.test(normalized)) keys.add('hospitality services');
+    if (/\b(entertainment|performance|show|artists)\b/.test(normalized)) keys.add('entertainment');
+
+    if (keys.size === 0) {
+        keys.add(normalized);
+    }
+    return keys;
+}
+
+function categoriesMatch(cardCategory, selectedCategory) {
+    const cardKeys = getCategoryKeys(cardCategory);
+    const selectedKeys = getCategoryKeys(selectedCategory);
+    for (const selectedKey of selectedKeys) {
+        if (cardKeys.has(selectedKey)) return true;
+    }
+    return false;
+}
+
+function updateVendorCategoryDropdown(vendors) {
+    const categorySelect = document.getElementById('vendor-category');
+    if (!categorySelect) return;
+
+    const categorySet = new Set();
+    vendors.forEach(vendor => {
+        const rawCategory = vendor.category || '';
+        getCanonicalVendorCategories(rawCategory).forEach(label => categorySet.add(label));
+    });
+
+    const categories = [...categorySet].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+    categorySelect.innerHTML = '<option>All Categories</option>' + categories.map(item => `<option>${item}</option>`).join('');
 }
 
 async function fetchServices(containerId) {
