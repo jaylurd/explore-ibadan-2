@@ -385,6 +385,9 @@ function getCanonicalVendorCategories(rawCategory) {
     if (/\b(equipment|rentals|rental|props|furniture|gear)\b/.test(normalized)) {
         labels.add('Event Equipment');
     }
+    if (/\b(construction|building|contractor|contracting|masonry|civil|fabrication|site works|sitework|site work)\b/.test(normalized)) {
+        labels.add('Construction');
+    }
     if (/\b(transport|driver|logistics|vehicle|van|bus|car)\b/.test(normalized)) {
         labels.add('Transportation');
     }
@@ -430,6 +433,7 @@ function getCategoryKeys(value) {
     if (/\b(light|lighting|av|audio visual|audio-visual)\b/.test(normalized)) keys.add('lighting av');
     if (/\b(print|signage|banner|flyer|graphics|branding|printing)\b/.test(normalized)) keys.add('printing signage');
     if (/\b(equipment|rentals|rental|props|furniture|gear)\b/.test(normalized)) keys.add('event equipment');
+    if (/\b(construction|building|contractor|contracting|masonry|civil|fabrication|site works|sitework|site work)\b/.test(normalized)) keys.add('construction');
     if (/\b(transport|driver|logistics|vehicle|van|bus|car|delivery)\b/.test(normalized)) keys.add('transportation');
     if (/\b(wedding cake|cake|cakes|pastries)\b/.test(normalized)) keys.add('wedding cakes');
     if (/\b(bar|beverage|drinks|cocktail|bartender|bar service)\b/.test(normalized)) keys.add('beverages & bars');
