@@ -268,6 +268,39 @@ button#menu-close {
   #mobile-menu #menu-close, button#menu-close { font-size: 1.5rem !important; top: 1rem !important; right: 1rem !important; }
 }
 
+/* Mobile full-screen menu overlay (global) */
+#mobile-menu {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(11,46,11,0.98) !important;
+  color: #fff !important;
+  padding: 2.5rem 1.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  transform: translateX(-8%) !important;
+  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1) !important;
+  z-index: 99980 !important;
+  overflow-y: auto !important;
+}
+
+#mobile-menu.open {
+  transform: translateX(0) !important;
+}
+
+#mobile-menu .mobile-menu-link {
+  display: block !important;
+  color: rgba(255,255,255,0.92) !important;
+  font-size: 1.05rem !important;
+  margin: 0.15rem 0 !important;
+  padding: 0.45rem 0.25rem !important;
+  text-decoration: none !important;
+}
+
+#mobile-menu .btn-gold {
+  align-self: flex-start !important;
+}
+
 /* ── EYEBROW ── */
 .eyebrow {
   font-family: 'Outfit', sans-serif;
