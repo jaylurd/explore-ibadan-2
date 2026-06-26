@@ -705,3 +705,185 @@ window.closeJobModal = function() {
         modal.querySelector('div').style.transform = 'translateY(20px)';
     }
 };
+
+// ── Hotels & Restaurants ──
+function renderPriceRange(range) {
+    if (!range) return '';
+    const filled = (range.match(/₦/g) || []).length || 0;
+    const total = 4;
+    let html = '<span class="price-range">';
+    for (let i = 0; i < total; i++) {
+        html += i < filled
+            ? '₦'
+            : '<span class="price-range-dim">₦</span>';
+    }
+    html += '</span>';
+    return html;
+}
+
+function renderStars(rating) {
+    const r = parseFloat(rating) || 4.0;
+    const fullStars = Math.floor(r);
+    const halfStar = r - fullStars >= 0.5;
+    let html = '<span class="star-rating">';
+    for (let i = 0; i < fullStars; i++) html += '★';
+    if (halfStar) html += '★';
+    for (let i = fullStars + (halfStar ? 1 : 0); i < 5; i++) html += '<span style="color:rgba(184,135,11,0.25);">★</span>';
+    html += '</span>';
+    return html;
+}
+
+async function fetchHotelsRestaurants(containerId, limit) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const fallbackItems = [
+        {
+            name: 'The Palm Royal Hotel',
+            type: 'Hotel',
+            location: 'Ikolaba Estate',
+            rating: '4.8',
+            price_range: '₦₦₦₦',
+            description: 'Poolside suites, warm service and a luxury refuge close to Mokola market.',
+            image_url: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80',
+            phone: '+2348023456789',
+            instagram: 'https://instagram.com/thepalmroyal',
+            website: 'https://example.com/thepalmroyal'
+        },
+        {
+            name: 'Bisi\'s Table',
+            type: 'Restaurant',
+            location: 'Mokola',
+            rating: '4.7',
+            price_range: '₦₦',
+            description: 'Authentic Ibadan flavours with classic amala bowls, grilled favourites and cozy service.',
+            image_url: 'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=900&q=80',
+            phone: '+2348098765432',
+            instagram: 'https://instagram.com/bisistable',
+            website: 'https://example.com/bisistable'
+        },
+        {
+            name: 'Mapo Garden Suites',
+            type: 'Hotel',
+            location: 'Mapo Hill',
+            rating: '4.6',
+            price_range: '₦₦₦',
+            description: 'Charming suites with lush garden views, free Wi-Fi and a calm stay in the city centre.',
+            image_url: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80',
+            phone: '+2347012345678',
+            instagram: 'https://instagram.com/mapogardensuites',
+            website: 'https://example.com/mapogardensuites'
+        },
+        {
+            name: 'Harvest & Honey',
+            type: 'Restaurant',
+            location: 'Dugbe',
+            rating: '4.7',
+            price_range: '₦₦₦',
+            description: 'A bright brunch room serving sweet pastries, cocktails and weekend favorites.',
+            image_url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80',
+            phone: '+2348187654321',
+            instagram: 'https://instagram.com/harvestandhoney',
+            website: 'https://example.com/harvestandhoney'
+        }
+    ];
+    let items = [];
+    const sb = typeof getSupabase === 'function' ? getSupabase() : null;
+
+    try {
+        if (sb) {
+            let query = sb.from('hotels_restaurants').select('*').order('created_at', { ascending: false });
+            if (limit) query = query.limit(limit);
+
+            const { data, error } = await query;
+            if (error) {
+                console.error('Hotels/restaurants fetch error:', error);
+            } else if (data && data.length) {
+                items = data;
+            }
+        }
+
+        if (!items || items.length === 0) {
+            items = fallbackItems;
+        }
+
+        container.innerHTML = '';
+
+        items.forEach(item => {
+            const imgUrl = item.image_url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=75&auto=format&fit=crop';
+            const isHotel = (item.type || '').toLowerCase() === 'hotel';
+            const typeBadgeClass = isHotel ? 'hotel' : 'restaurant';
+            const typeIcon = isHotel ? 'solar:buildings-2-bold' : 'solar:chef-hat-bold';
+            const typeLabel = item.type || 'Restaurant';
+
+            // Build WhatsApp link from phone
+            let waLink = item.phone || '#';
+            if (waLink !== '#') {
+                const bizName = item.name || 'your business';
+                const messageBody = `Hello, I discovered ${bizName} on the Explore Ibadan website and I would like to make an inquiry.`;
+                let phoneNum = waLink.replace(/[^\d+]/g, '');
+                if (phoneNum) {
+                    if (phoneNum.startsWith('0')) {
+                        phoneNum = '234' + phoneNum.substring(1);
+                    } else if (phoneNum.startsWith('+')) {
+                        phoneNum = phoneNum.substring(1);
+                    }
+                    waLink = `https://wa.me/${phoneNum}?text=${encodeURIComponent(messageBody)}`;
+                } else {
+                    waLink = '#';
+                }
+            }
+
+            const card = document.createElement('div');
+            card.className = 'card reveal hr-card';
+            card.dataset.type = item.type || '';
+
+            card.innerHTML = `
+                <div style="height:220px;position:relative;overflow:hidden;">
+                    <img src="${imgUrl}" alt="${item.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s cubic-bezier(0.22,1,0.36,1);" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="position:absolute;top:1rem;left:1rem;">
+                        <span class="type-badge ${typeBadgeClass}">
+                            <span class="iconify" data-icon="${typeIcon}" style="font-size:0.85rem;"></span>
+                            ${typeLabel}
+                        </span>
+                    </div>
+                    ${item.price_range ? `<div style="position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);color:var(--gold-bright);padding:0.3rem 0.7rem;border-radius:2px;font-size:0.75rem;font-weight:700;">${item.price_range}</div>` : ''}
+                    <div style="position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(11,46,11,0.6) 0%,transparent 100%);pointer-events:none;"></div>
+                </div>
+                <div style="padding:1.5rem;">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;">
+                        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin:0;">${item.name}</h3>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-wrap:wrap;">
+                        ${renderStars(item.rating)}
+                        <span style="font-size:0.78rem;color:var(--muted);">${item.rating ? parseFloat(item.rating).toFixed(1) : '4.0'}</span>
+                        ${item.price_range ? `<span style="font-size:0.78rem;color:var(--gold);font-weight:600;">${item.price_range}</span>` : ''}
+                    </div>
+                    ${item.location ? `<div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">
+                        <span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);flex-shrink:0;"></span> ${item.location}
+                    </div>` : ''}
+                    ${item.description ? `<p style="color:var(--mid);font-size:0.82rem;line-height:1.6;margin-bottom:1.25rem;">${item.description.length > 120 ? item.description.substring(0, 120) + '...' : item.description}</p>` : '<div style="margin-bottom:1.25rem;"></div>'}
+                    <div style="display:flex;gap:0.75rem;align-items:center;margin-bottom:0.75rem;">
+                        ${item.instagram ? `<a href="${item.instagram}" target="_blank" style="color:#E1306C;font-size:1.2rem;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"><span class="iconify" data-icon="ri:instagram-fill"></span></a>` : ''}
+                        ${item.website ? `<a href="${item.website}" target="_blank" style="color:var(--forest);font-size:1.2rem;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"><span class="iconify" data-icon="solar:global-bold"></span></a>` : ''}
+                    </div>
+                    <a href="${waLink}" target="_blank" class="btn-ghost" style="width:100%;justify-content:center;color:#25D366;border-color:#25D366;">
+                        <span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.3rem;"></span> Enquire
+                    </a>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        setTimeout(() => {
+            container.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            if (typeof window.applyHRFilters === 'function') {
+                window.applyHRFilters();
+            }
+        }, 50);
+
+    } catch (err) {
+        console.error('Error fetching hotels/restaurants:', err);
+        container.innerHTML = '<p style="color:#c00;grid-column:1/-1;text-align:center;padding:2rem;">Error loading hotels & restaurants. Please refresh the page.</p>';
+    }
+}

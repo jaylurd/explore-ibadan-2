@@ -3,13 +3,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>About Us | Explore Ibadan</title>
-<meta name="description" content="The premier community platform for everyone living, working, and exploring the ancient city of Ibadan.">
+<title>Hotels & Restaurants | Explore Ibadan</title>
+<meta name="description" content="Discover the best hotels and restaurants in Ibadan. From luxury stays to authentic local cuisine, find your perfect spot in the ancient city.">
+<meta name="theme-color" content="#0B2E0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+<link rel="dns-prefetch" href="https://code.iconify.design">
+<link rel="preconnect" href="https://uaokmfmvzxolvvigjjol.supabase.co">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<script async src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 
 <style>
 :root {
@@ -42,17 +45,6 @@ body {
 h1,h2,h3,h4,h5 {
   font-family: 'Cormorant Garamond', serif;
   letter-spacing: -0.01em;
-}
-
-/* ── GRAIN OVERLAY ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
 
 /* ── NAV ── */
@@ -156,7 +148,6 @@ body::before {
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
 
 /* ── EYEBROW ── */
 .eyebrow {
@@ -173,16 +164,6 @@ body::before {
   display: inline-block;
   width: 2rem; height: 1px;
   background: var(--gold);
-}
-
-/* ── GOLD RULE ── */
-.gold-rule {
-  display: flex; align-items: center; gap: 1rem;
-  margin: 1.5rem 0;
-}
-.gold-rule::before, .gold-rule::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
 }
 
 /* ── SECTION DIVIDER ── */
@@ -206,182 +187,11 @@ body::before {
   box-shadow: 0 16px 48px rgba(0,0,0,0.1);
   border-color: var(--gold);
 }
-.card:hover .card-img img { transform: scale(1.06); }
-
-.card-img { overflow: hidden; }
-.card-img img { transition: transform 0.8s cubic-bezier(0.22,1,0.36,1); }
-
-/* ── STAT PILL ── */
-.stat-pill {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 1.5rem 2rem;
-  border-right: 1px solid rgba(184,135,11,0.15);
-}
-.stat-pill:last-child { border-right: none; }
-.stat-number {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.75rem; font-weight: 700;
-  color: var(--forest);
-  line-height: 1;
-}
-.stat-label {
-  font-size: 0.7rem; font-weight: 500;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 0.35rem;
-}
-
-/* ── HERO ── */
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 0.45rem 1rem;
-  border-radius: 1px;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-/* ── HERO TITLE ── */
-@keyframes heroIn {
-  from { opacity: 0; transform: translateY(32px) skewY(1deg); }
-  to { opacity: 1; transform: translateY(0) skewY(0); }
-}
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  font-weight: 600;
-  color: #fff;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  animation: heroIn 1s cubic-bezier(0.22,1,0.36,1) 0.3s both;
-}
-.hero-sub {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-  color: rgba(255,255,255,0.82);
-  line-height: 1.7;
-  font-weight: 300;
-  max-width: 520px;
-  animation: heroIn 1s cubic-bezier(0.22,1,0.36,1) 0.5s both;
-}
-
-/* ── NAV SCROLL INDICATOR ── */
-@keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(6px); opacity: 0.5; }
-}
-.scroll-cue { animation: scrollBounce 2s ease-in-out infinite; }
-
-/* ── MOBILE NAV ── */
-.mobile-nav-bar {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: rgba(11,46,11,0.97);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(184,135,11,0.2);
-  z-index: 200;
-  display: flex;
-  justify-content: space-around;
-  padding: 0.6rem 0.5rem;
-  padding-bottom: calc(0.6rem + env(safe-area-inset-bottom));
-}
-.mobile-nav-item {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  color: rgba(255,255,255,0.5);
-  font-size: 0.6rem; font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 0.2s;
-  min-width: 48px;
-}
-.mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold-bright); }
-.mobile-nav-item .iconify { font-size: 1.3rem; }
-
-/* ── FEATURE GRID ── */
-.feature-icon-wrap {
-  width: 52px; height: 52px;
-  background: var(--gold-pale);
-  border: 1px solid rgba(184,135,11,0.2);
-  border-radius: 2px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gold);
-  font-size: 1.4rem;
-  transition: all 0.3s;
-}
-.feature-card:hover .feature-icon-wrap {
-  background: var(--forest);
-  color: var(--gold-bright);
-  border-color: var(--forest);
-}
-
-/* ── TESTIMONIAL ── */
-.testimonial-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 4.5rem; line-height: 0.5;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  display: block;
-}
-
-/* ── JOB TAG ── */
-.job-tag {
-  font-size: 0.65rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.25rem 0.7rem;
-  border: 1px solid rgba(184,135,11,0.3);
-  border-radius: 1px;
-  color: var(--gold);
-  background: var(--gold-pale);
-}
-
-/* ── CTA SECTION ── */
-.cta-pattern {
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(212,165,32,0.15) 1px, transparent 0);
-  background-size: 32px 32px;
-}
 
 /* ── FOOTER ── */
 .footer-bg { background: var(--forest); }
 .footer-link { color: rgba(255,255,255,0.55); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
 .footer-link:hover { color: var(--gold-bright); }
-
-/* ── EVENT DATE BOX ── */
-.event-date-box {
-  position: absolute; top: 0.75rem; left: 0.75rem;
-  background: var(--forest);
-  color: #fff;
-  padding: 0.4rem 0.75rem;
-  text-align: center;
-  border-radius: 1px;
-  min-width: 50px;
-}
-.event-date-box .day {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem; font-weight: 700;
-  line-height: 1;
-  color: var(--gold-bright);
-}
-.event-date-box .month {
-  font-size: 0.6rem; font-weight: 600;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-}
-
-/* ── HOVER OVERLAY ── */
-.img-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(11,46,11,0.7) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.card:hover .img-overlay { opacity: 1; }
 
 /* ── MOBILE MENU ── */
 #mobile-menu {
@@ -421,45 +231,121 @@ body::before {
 }
 .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,135,11,0.08); }
 .search-input::placeholder { color: var(--muted); }
+
+/* ── HERO BANNER ── */
+.page-hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 3px;
+  margin-bottom: 3rem;
+}
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--forest) 0%, #0d3b0d 40%, #1a4a1a 100%);
+}
+.page-hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(212,165,32,0.08) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11,46,11,0.95) 0%, rgba(11,46,11,0.3) 60%, transparent 100%);
+}
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  width: 100%;
+}
+
+/* ── TYPE BADGE ── */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 1px;
+}
+.type-badge.hotel {
+  background: #EBF4EB;
+  color: var(--forest);
+  border: 1px solid rgba(11,46,11,0.2);
+}
+.type-badge.restaurant {
+  background: #FFF5E6;
+  color: var(--terra);
+  border: 1px solid rgba(139,58,26,0.2);
+}
+
+/* ── PRICE RANGE ── */
+.price-range {
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.price-range-dim {
+  color: rgba(184,135,11,0.25);
+}
+
+/* ── RATING STARS ── */
+.star-rating {
+  color: var(--gold);
+  font-size: 0.8rem;
+  display: inline-flex;
+  gap: 1px;
+}
+
+/* ── TAB FILTER ── */
+.filter-tab {
+  padding: 0.6rem 1.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(184,135,11,0.2);
+  background: transparent;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.filter-tab:first-child { border-radius: 2px 0 0 2px; }
+.filter-tab:last-child { border-radius: 0 2px 2px 0; }
+.filter-tab + .filter-tab { border-left: none; }
+.filter-tab.active,
+.filter-tab:hover {
+  background: var(--forest);
+  color: var(--gold-bright);
+  border-color: var(--forest);
+}
 </style>
 
 <style id="global-responsive-fixes">
 /* GLOBAL RESPONSIVE FIXES */
 img { max-width: 100%; height: auto; }
 
-/* Hero mobile fix */
-.hero-wrapper { position:relative; width:100%; min-height:clamp(600px,78vh,820px); overflow:hidden; border-radius:3px; }
-.hero-content { position:relative; z-index:10; height:100%; min-height:clamp(600px,78vh,820px); display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(2rem,5vw,4.5rem); padding-top:6rem; }
-
 @media (max-width: 768px) {
-  /* Hero: let it grow with content */
-  .hero-wrapper { min-height: auto !important; height: auto !important; }
-  .hero-content { min-height: auto !important; height: auto !important; padding: 2rem 1.5rem 2.5rem !important; padding-top: 5rem !important; }
-  .hero-title { font-size: clamp(2rem, 8vw, 3rem) !important; }
-  .hero-sub { font-size: 0.9rem !important; margin-bottom: 1.5rem !important; }
-  .hero-badge { font-size: 0.55rem !important; padding: 0.35rem 0.75rem !important; }
-  .scroll-cue { display: none !important; }
-
-  /* Fix Stats Bar */
-  .stat-pill { padding: 1rem !important; }
-  .stat-number { font-size: 2rem !important; }
-  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
-  /* Fix Mosaic */
-  .features-grid > div > div[style*="height:480px"] { height: auto !important; }
-  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-  /* Fix Footer Grid */
+  .page-hero { min-height: 260px; }
+  .page-hero-content h1 { font-size: clamp(1.8rem, 6vw, 2.5rem) !important; }
+  .btn-gold, .btn-primary { font-size: 0.7rem !important; padding: 0.6rem 1.2rem !important; }
   footer > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
   footer > div > div:first-child > div { grid-column: 1 / -1 !important; }
-  /* Fix Founder Bio */
-  .reveal[style*="flex-wrap:wrap"] > div { min-width: 100% !important; }
-  /* Fix feature cards grid */
-  div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
-  /* Fix CTA buttons */
-  .btn-gold, .btn-primary { font-size: 0.7rem !important; padding: 0.6rem 1.2rem !important; }
 }
 @media (max-width: 480px) {
-  .hero-title { font-size: 1.9rem !important; line-height: 1.15 !important; }
-  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
+  .page-hero-content h1 { font-size: 1.8rem !important; }
+  .filter-tabs-wrap { flex-direction: column !important; }
+  .filter-tab { border-radius: 2px !important; border-left: 1px solid rgba(184,135,11,0.2) !important; }
 }
 </style>
 </head>
@@ -472,11 +358,11 @@ img { max-width: 100%; height: auto; }
     <span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;">Explore <span style="color:var(--gold-bright)">Ibadan</span></span>
   </div>
   <a href="index.html" class="mobile-menu-link">Home</a>
-  <a href="about.html" class="mobile-menu-link active">About Us</a>
+  <a href="about.html" class="mobile-menu-link">About Us</a>
   <a href="events.html" class="mobile-menu-link">Events</a>
   <a href="jobs.html" class="mobile-menu-link">Jobs</a>
   <a href="vendors.html" class="mobile-menu-link">Vendors</a>
-  <a href="hotels-restaurants.html" class="mobile-menu-link">Hotels</a>
+  <a href="hotels-restaurants.html" class="mobile-menu-link active">Hotels & Dining</a>
   <a href="services.html" class="mobile-menu-link">Services</a>
   <a href="contact.html" class="btn-gold" style="margin-top:2.5rem;align-self:flex-start;">Contact Us</a>
   <button id="menu-close" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,0.6);font-size:1.8rem;cursor:pointer;">✕</button>
@@ -494,17 +380,17 @@ img { max-width: 100%; height: auto; }
     <!-- Search (desktop) -->
     <div style="flex:1;max-width:300px;display:none;position:relative;" class="desktop-search">
       <span class="iconify" data-icon="solar:minimalistic-magnifer-linear" style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.95rem;"></span>
-      <input type="text" placeholder="Search jobs, events…" class="search-input">
+      <input type="text" placeholder="Search hotels, restaurants…" class="search-input">
     </div>
 
     <!-- Desktop Nav -->
     <nav style="display:none;align-items:center;gap:2rem;" class="desktop-nav">
       <a href="index.html" class="nav-a">Home</a>
-      <a href="about.html" class="nav-a active">About</a>
+      <a href="about.html" class="nav-a">About</a>
       <a href="events.html" class="nav-a">Events</a>
       <a href="jobs.html" class="nav-a">Jobs</a>
       <a href="vendors.html" class="nav-a">Vendors</a>
-      <a href="hotels-restaurants.html" class="nav-a">Hotels</a>
+      <a href="hotels-restaurants.html" class="nav-a active">Hotels</a>
       <a href="services.html" class="nav-a">Services</a>
       <a href="contact.html" class="btn-primary" style="margin-left:0.5rem;">Contact Us</a>
     </nav>
@@ -517,48 +403,67 @@ img { max-width: 100%; height: auto; }
 </header>
 
 <!-- ═══════ MAIN ═══════ -->
-<main style="max-width:1280px;margin:0 auto;padding:4rem 1.5rem 5rem;">
+<main style="max-width:1280px;margin:0 auto;padding:1.5rem 1.5rem 5rem;">
 
-  <div style="text-align:center;margin-bottom:4rem;">
-    <span class="eyebrow" style="justify-content:center;margin-bottom:1rem;"><span style="background:var(--gold);"></span> About Explore Ibadan <span style="background:var(--gold);"></span></span>
-    <h1 style="font-size:clamp(2.5rem,5vw,3.5rem);font-weight:600;color:var(--charcoal);margin:0 0 1rem;line-height:1.1;">Our Hub, <em>Your City</em></h1>
-    <div style="width:60px;height:2px;background:var(--gold);margin:0 auto 1.5rem;"></div>
-    <p style="color:var(--mid);font-size:1rem;max-width:600px;margin:0 auto;line-height:1.8;">Explore Ibadan connects people to events, jobs, trusted vendors, and expert event services across the ancient city of seven hills.</p>
+  <!-- ── PAGE HERO BANNER ── -->
+  <div class="page-hero reveal">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-pattern"></div>
+    <div class="page-hero-overlay"></div>
+    <!-- Gold frame accent -->
+    <div style="position:absolute;inset:0.75rem;border:1px solid rgba(184,135,11,0.15);pointer-events:none;border-radius:2px;z-index:1;"></div>
+    <div class="page-hero-content">
+      <span class="eyebrow" style="color:var(--gold-bright);margin-bottom:1rem;">
+        <span style="background:var(--gold-bright);"></span>
+        Stay & Dine
+        <span style="background:var(--gold-bright);"></span>
+      </span>
+      <h1 style="font-size:clamp(2.2rem,5vw,3.5rem);font-weight:600;color:#fff;line-height:1.1;margin-bottom:0.75rem;">
+        Hotels & <em>Restaurants</em>
+      </h1>
+      <p style="color:rgba(255,255,255,0.7);font-size:0.95rem;max-width:480px;line-height:1.7;">
+        From luxurious stays to authentic Ibadan cuisine — discover the best places to stay and dine across the city of seven hills.
+      </p>
+    </div>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:2rem;">
-    <div class="card reveal" style="padding:2rem;">
-      <span class="iconify" data-icon="solar:calendar-date-bold" style="font-size:2.5rem;color:var(--gold);margin-bottom:1rem;"></span>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Events Showcase</h3>
-      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;">We share top events happening in Ibadan so you never miss out on networking, entertainment, and cultural gatherings.</p>
+  <!-- ── FEATURED PICKS ── -->
+  <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:2.5rem;">
+    <div class="card" style="padding:1.5rem;">
+      <span class="type-badge hotel">Luxury Stays</span>
+      <h3 style="font-size:1.15rem;font-weight:600;margin:1rem 0 0.75rem;color:var(--charcoal);">Comfort, privacy and rooftop views</h3>
+      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;margin:0;">Discover tranquil hotels with pools, breakfast lounges and seamless service in central Ibadan.</p>
     </div>
-    <div class="card reveal" style="padding:2rem;transition-delay:0.1s;">
-      <span class="iconify" data-icon="solar:magic-stick-3-bold" style="font-size:2.5rem;color:var(--gold);margin-bottom:1rem;"></span>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Event Creation</h3>
-      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;">We conceptualize and create our own signature events for Ibadan residents to attend, connect, and grow together.</p>
+    <div class="card" style="padding:1.5rem;">
+      <span class="type-badge restaurant">Local Flavours</span>
+      <h3 style="font-size:1.15rem;font-weight:600;margin:1rem 0 0.75rem;color:var(--charcoal);">Authentic dining experiences</h3>
+      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;margin:0;">Savour local meals, modern brunches and intimate dinner spots chosen by Ibadan food lovers.</p>
     </div>
-    <div class="card reveal" style="padding:2rem;transition-delay:0.2s;">
-      <span class="iconify" data-icon="solar:case-minimalistic-bold" style="font-size:2.5rem;color:var(--gold);margin-bottom:1rem;"></span>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Job Opportunities</h3>
-      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;">Local and remote companies send us jobs. We curate and list them so you can easily apply to top opportunities.</p>
-    </div>
-    <div class="card reveal" style="padding:2rem;">
-      <span class="iconify" data-icon="solar:shop-bold" style="font-size:2.5rem;color:var(--gold);margin-bottom:1rem;"></span>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Vendor Directory</h3>
-      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;">A curated directory of genuine businesses in Ibadan. Search for caterers, decorators, photographers, and contact them directly.</p>
-    </div>
-    <div class="card reveal" style="padding:2rem;transition-delay:0.1s;">
-      <span class="iconify" data-icon="solar:users-group-two-rounded-bold" style="font-size:2.5rem;color:var(--gold);margin-bottom:1rem;"></span>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Event Assistance & Handling</h3>
-      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;">Planning an event in Ibadan? Our expert team provides end-to-end event planning, logistics, and management services.</p>
-    </div>
-    <div class="card reveal" style="padding:2rem;transition-delay:0.2s;">
-      <span class="iconify" data-icon="solar:heart-bold" style="font-size:2.5rem;color:var(--gold);margin-bottom:1rem;"></span>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">Bridal Assistance</h3>
-      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;">We support brides with comprehensive wedding planning, day-of coordination, and seamless connections to top wedding vendors.</p>
+    <div class="card" style="padding:1.5rem;">
+      <span class="type-badge hotel">Easy Booking</span>
+      <h3 style="font-size:1.15rem;font-weight:600;margin:1rem 0 0.75rem;color:var(--charcoal);">Reserve with confidence</h3>
+      <p style="color:var(--mid);font-size:0.9rem;line-height:1.7;margin:0;">Every listing includes direct WhatsApp contact so you can confirm availability and menus instantly.</p>
     </div>
   </div>
-  
+
+  <!-- ── FILTER BAR ── -->
+  <div class="reveal" style="background:#fff;padding:1.5rem;border:1px solid rgba(184,135,11,0.15);margin-bottom:3rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+    <div style="position:relative;flex:1;min-width:250px;">
+      <span class="iconify" data-icon="solar:minimalistic-magnifer-linear" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1.1rem;"></span>
+      <input type="text" id="hr-search" placeholder="Search hotels & restaurants in Ibadan..." style="width:100%;padding:0.75rem 1rem 0.75rem 2.5rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);outline:none;background:var(--ivory);">
+    </div>
+    <div class="filter-tabs-wrap" style="display:flex;flex-shrink:0;">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="Hotel">Hotels</button>
+      <button class="filter-tab" data-filter="Restaurant">Restaurants</button>
+    </div>
+  </div>
+
+  <!-- ── LISTINGS GRID ── -->
+  <div id="hr-page-container" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:2rem;">
+    <!-- Dynamic Hotels & Restaurants will load here -->
+  </div>
+
 </main>
 
 <!-- ═══════ FOOTER ═══════ -->
@@ -575,9 +480,6 @@ img { max-width: 100%; height: auto; }
           <a href="https://www.instagram.com/explore.ibadan?igsh=MXZja2U3c2N2dDk1YQ==" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
             <span class="iconify" data-icon="ri:instagram-fill" style="font-size:0.9rem;"></span>
           </a>
-          <a href="https://x.com/exploreibadan06?s=11" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'>
-            <span style="font-size:1rem;font-weight:700;">X</span>
-          </a>
           <a href="https://www.linkedin.com/in/alankara-shukurat-opeyemi-41a582198?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
             <span class="iconify" data-icon="ri:linkedin-fill" style="font-size:0.9rem;"></span>
           </a>
@@ -591,14 +493,14 @@ img { max-width: 100%; height: auto; }
       </div>
       <div>
         <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Platform</h4>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.8rem;"><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="events.html" class="footer-link">Events</a></li><li><a href="jobs.html" class="footer-link">Jobs</a></li><li><a href="vendors.html" class="footer-link">Vendors</a></li><li><a href="services.html" class="footer-link">Services</a></li></ul>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.8rem;"><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="events.html" class="footer-link">Events</a></li><li><a href="jobs.html" class="footer-link">Jobs</a></li><li><a href="vendors.html" class="footer-link">Vendors</a></li><li><a href="hotels-restaurants.html" class="footer-link">Hotels & Dining</a></li><li><a href="services.html" class="footer-link">Services</a></li></ul>
       </div>
       
       <div>
         <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Newsletter</h4>
         <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:1rem;line-height:1.6;">Get the latest jobs and events delivered every week.</p>
         <div style="display:flex;gap:0.5rem;">
-          <input type="email" placeholder="Your email address" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(184,135,11,0.2);padding:0.65rem 1rem;font-size:0.8rem;font-family:'Outfit',sans-serif;color:#fff;outline:none;border-radius:1px;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(184,135,11,0.2)'" placeholder-style="color:rgba(255,255,255,0.3)">
+          <input type="email" placeholder="Your email address" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(184,135,11,0.2);padding:0.65rem 1rem;font-size:0.8rem;font-family:'Outfit',sans-serif;color:#fff;outline:none;border-radius:1px;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(184,135,11,0.2)'">
           <button class="btn-gold" style="padding:0.65rem 1.25rem;font-size:0.7rem;white-space:nowrap;">Join</button>
         </div>
       </div>
@@ -612,9 +514,6 @@ img { max-width: 100%; height: auto; }
   </div>
 </footer>
 
-<!-- ═══════ MOBILE BOTTOM NAV ═══════ -->
-
-
 <style>
 @media (min-width: 768px) {
   .desktop-search { display: flex !important; }
@@ -624,15 +523,11 @@ img { max-width: 100%; height: auto; }
   main { padding-bottom: 0 !important; }
 }
 @media (max-width: 767px) {
-  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-  .stat-pill { padding: 1rem !important; }
-  .stat-number { font-size: 2rem !important; }
   footer > div > div:first-child > div:first-child { grid-column: 1 / -1; }
 }
 @media (max-width: 900px) {
   footer > div > div:first-child { grid-template-columns: 1fr 1fr !important; }
 }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 </style>
 
 <script>
@@ -658,11 +553,47 @@ document.getElementById('menu-close').addEventListener('click', () => {
   document.body.style.overflow = '';
 });
 </script>
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script src="analytics.js"></script>
+
+<script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script defer src="analytics.js"></script>
+<script defer src="frontend.js?v=10"></script>
+<script>
+// Filter logic
+window.applyHRFilters = function() {
+  const searchInput = document.getElementById('hr-search');
+  const activeFilter = document.querySelector('.filter-tab.active');
+  if (!searchInput) return;
+
+  const searchTerm = searchInput.value.toLowerCase();
+  const filterType = activeFilter ? activeFilter.dataset.filter : 'all';
+
+  const cards = document.querySelectorAll('.hr-card');
+  cards.forEach(card => {
+    const cardText = card.innerText.toLowerCase();
+    const cardType = card.dataset.type || '';
+    const matchesSearch = searchTerm === '' || cardText.includes(searchTerm);
+    const matchesFilter = filterType === 'all' || cardType === filterType;
+
+    card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Search input
+  const searchInput = document.getElementById('hr-search');
+  if (searchInput) searchInput.addEventListener('input', window.applyHRFilters);
+
+  // Tab filters
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      window.applyHRFilters();
+    });
+  });
+
+  fetchHotelsRestaurants('hr-page-container');
+});
+</script>
 </body>
 </html>
-
-
-
-

@@ -54,6 +54,22 @@ CREATE TABLE services (
   created_at timestamp with time zone DEFAULT now()
 );
 
+-- Hotels & Restaurants Table
+CREATE TABLE hotels_restaurants (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  type text NOT NULL,
+  location text NOT NULL,
+  rating numeric,
+  price_range text,
+  phone text NOT NULL,
+  description text,
+  image_url text,
+  instagram text,
+  website text,
+  created_at timestamp with time zone DEFAULT now()
+);
+
 -- 2. Create Storage Bucket for Images
 insert into storage.buckets (id, name, public) values ('images', 'images', true);
 
@@ -64,12 +80,14 @@ ALTER TABLE events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE jobs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE vendors ENABLE ROW LEVEL SECURITY;
 ALTER TABLE services ENABLE ROW LEVEL SECURITY;
+ALTER TABLE hotels_restaurants ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access to all tables
 CREATE POLICY "Public profiles are viewable by everyone." ON events FOR SELECT USING (true);
 CREATE POLICY "Public profiles are viewable by everyone." ON jobs FOR SELECT USING (true);
 CREATE POLICY "Public profiles are viewable by everyone." ON vendors FOR SELECT USING (true);
 CREATE POLICY "Public profiles are viewable by everyone." ON services FOR SELECT USING (true);
+CREATE POLICY "Public profiles are viewable by everyone." ON hotels_restaurants FOR SELECT USING (true);
 
 -- Allow authenticated users to insert/update/delete (Admin only)
 CREATE POLICY "Admins can insert events" ON events FOR INSERT TO authenticated WITH CHECK (true);
@@ -87,6 +105,10 @@ CREATE POLICY "Admins can delete vendors" ON vendors FOR DELETE TO authenticated
 CREATE POLICY "Admins can insert services" ON services FOR INSERT TO authenticated WITH CHECK (true);
 CREATE POLICY "Admins can update services" ON services FOR UPDATE TO authenticated USING (true);
 CREATE POLICY "Admins can delete services" ON services FOR DELETE TO authenticated USING (true);
+
+CREATE POLICY "Admins can insert hotels_restaurants" ON hotels_restaurants FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Admins can update hotels_restaurants" ON hotels_restaurants FOR UPDATE TO authenticated USING (true);
+CREATE POLICY "Admins can delete hotels_restaurants" ON hotels_restaurants FOR DELETE TO authenticated USING (true);
 
 -- 4. Storage Bucket Policies (Allow public read, allow authenticated users to upload/delete)
 CREATE POLICY "Public Access" ON storage.objects FOR SELECT USING (bucket_id = 'images');

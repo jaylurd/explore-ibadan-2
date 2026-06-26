@@ -80,6 +80,22 @@ const entityConfigs = {
             { name: 'linkedin', label: 'LinkedIn URL', type: 'text', required: false }
         ]
     },
+    hotels_restaurants: {
+        title: 'Manage Hotels & Restaurants',
+        imageField: 'image_url',
+        columns: ['Image', 'Name', 'Type', 'Location', 'Rating', 'Price Range', 'Phone', 'Actions'],
+        fields: [
+            { name: 'name', label: 'Name', type: 'text', required: true },
+            { name: 'type', label: 'Type (Hotel or Restaurant)', type: 'text', required: true },
+            { name: 'location', label: 'Location', type: 'text', required: true },
+            { name: 'rating', label: 'Rating', type: 'text', required: false },
+            { name: 'price_range', label: 'Price Range', type: 'text', required: false },
+            { name: 'phone', label: 'Phone Number', type: 'text', required: true },
+            { name: 'description', label: 'Description', type: 'textarea', required: false },
+            { name: 'instagram', label: 'Instagram URL', type: 'text', required: false },
+            { name: 'website', label: 'Website URL', type: 'text', required: false }
+        ]
+    },
     services: {
         title: 'Manage Services',
         imageField: 'image_url',
@@ -164,9 +180,10 @@ logoutBtn.addEventListener('click', async () => {
 // Tabs Handler
 tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
+        const button = e.currentTarget;
         tabs.forEach(t => t.classList.remove('active'));
-        e.target.classList.add('active');
-        currentTab = e.target.dataset.target;
+        button.classList.add('active');
+        currentTab = button.dataset.target;
         loadData();
     });
 });
@@ -177,28 +194,37 @@ async function loadData() {
     tableBody.innerHTML = '';
     tableHead.innerHTML = '';
 
-    const config = entityConfigs[currentTab];
-    sectionTitle.textContent = config.title;
+    try {
+        const config = entityConfigs[currentTab];
+        if (!config) {
+            throw new Error(`Unknown admin tab: ${currentTab}`);
+        }
 
-    // Render Headers
-    config.columns.forEach(col => {
-        const th = document.createElement('th');
-        th.textContent = col;
-        tableHead.appendChild(th);
-    });
+        sectionTitle.textContent = config.title;
 
-    const { data, error } = await supabase.from(currentTab).select('*').order('created_at', { ascending: false });
+        // Render Headers
+        config.columns.forEach(col => {
+            const th = document.createElement('th');
+            th.textContent = col;
+            tableHead.appendChild(th);
+        });
 
-    loading.style.display = 'none';
+        const { data, error } = await supabase.from(currentTab).select('*').order('created_at', { ascending: false });
 
-    if (error) {
-        console.error(error);
-        alert('Error loading data');
-        return;
+        if (error) {
+            console.error('Supabase error loading data for', currentTab, error);
+            alert('Error loading data: ' + (error.message || error));
+            return;
+        }
+
+        currentData = data || [];
+        renderTable(currentData);
+    } catch (err) {
+        console.error('Error in loadData:', err);
+        alert('Error loading admin data: ' + err.message);
+    } finally {
+        loading.style.display = 'none';
     }
-
-    currentData = data;
-    renderTable(data);
 }
 
 function renderTable(data) {
@@ -238,6 +264,15 @@ function renderTable(data) {
                 <td>${item.category}</td>
                 <td>${item.location}</td>
                 <td>${item.phone}</td>
+            `;
+        } else if (currentTab === 'hotels_restaurants') {
+            tr.innerHTML += `
+                <td>${item.name}</td>
+                <td>${item.type}</td>
+                <td>${item.location}</td>
+                <td>${item.rating || ''}</td>
+                <td>${item.price_range || ''}</td>
+                <td>${item.phone || ''}</td>
             `;
         } else if (currentTab === 'services') {
             tr.innerHTML += `
@@ -324,10 +359,13 @@ window.editItem = function (id) {
 window.deleteItem = async function (id) {
     if (!confirm('Are you sure you want to delete this item?')) return;
 
-    const { error } = await supabase.from(currentTab).delete().eq('id', id);
+    console.log('Deleting item from', currentTab, 'id=', id);
+    const { data, error } = await supabase.from(currentTab).delete().match({ id }).select();
     if (error) {
-        alert('Error deleting item: ' + error.message);
+        alert('Error deleting item: ' + error.message + '\n' + (error.details || '') + '\n' + (error.hint || ''));
+        console.error('Delete error', currentTab, id, error);
     } else {
+        console.log('Delete success', currentTab, id, data);
         loadData();
     }
 }
