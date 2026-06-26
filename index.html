@@ -474,6 +474,8 @@ img { max-width: 100%; height: auto; }
   div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
   /* Fix CTA buttons */
   .btn-gold, .btn-primary { font-size: 0.7rem !important; padding: 0.6rem 1.2rem !important; }
+  /* Fix Hotels grid */
+  #home-hr-container { grid-template-columns: 1fr !important; }
 }
 @media (max-width: 480px) {
   .hero-title { font-size: 1.9rem !important; line-height: 1.15 !important; }
@@ -486,18 +488,21 @@ img { max-width: 100%; height: auto; }
 
 <!-- ═══════ MOBILE FULL-SCREEN MENU ═══════ -->
 <div id="mobile-menu">
-  <div style="margin-bottom:3rem;">
-    <span style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;">Explore <span style="color:var(--gold-bright)">Ibadan</span></span>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2.5rem;width:100%;">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1;">Explore <span style="color:var(--gold-bright)">Ibadan</span></span>
+    <button id="menu-close" style="background:rgba(255,255,255,0.92);border:none;color:var(--forest);font-size:1.6rem;cursor:pointer;padding:0.15rem 0.5rem;border-radius:6px;line-height:1;display:flex;align-items:center;justify-content:center;">✕</button>
   </div>
-  <a href="index.html" class="mobile-menu-link active">Home</a>
+
+
+<a href="index.html" class="mobile-menu-link active">Home</a>
   <a href="about.html" class="mobile-menu-link">About Us</a>
   <a href="events.html" class="mobile-menu-link">Events</a>
   <a href="jobs.html" class="mobile-menu-link">Jobs</a>
   <a href="vendors.html" class="mobile-menu-link">Vendors</a>
-  <a href="hotels-restaurants.html" class="mobile-menu-link">Hotel & dining</a>
+  <a href="hotels-restaurants.html" class="mobile-menu-link">Hotels & Dining</a>
   <a href="services.html" class="mobile-menu-link">Services</a>
   <a href="contact.html" class="btn-gold" style="margin-top:2.5rem;align-self:flex-start;">Contact Us</a>
-  <button id="menu-close" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,0.6);font-size:1.8rem;cursor:pointer;">✕</button>
+
 </div>
 
 <!-- ═══════ HEADER ═══════ -->
@@ -754,7 +759,7 @@ img { max-width: 100%; height: auto; }
       </a>
     </div>
 
-    <div id="home-hr-container" class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;align-items:stretch;">
+    <div id="home-hr-container" class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;align-items:stretch;">
       <!-- Dynamic Hotels & Restaurants will load here -->
     </div>
   </div>

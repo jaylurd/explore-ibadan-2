@@ -504,21 +504,22 @@
 <body>
 
   <div id="mobile-menu">
-    <div style="margin-bottom:3rem;"><span
-        style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;">Explore <span
-          style="color:var(--gold-bright)">Ibadan</span></span></div>
-    <a href="index.html" class="mobile-menu-link">Home</a>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2.5rem;width:100%;">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1;">Explore <span style="color:var(--gold-bright)">Ibadan</span></span>
+    <button id="menu-close" style="background:rgba(255,255,255,0.92);border:none;color:var(--forest);font-size:1.6rem;cursor:pointer;padding:0.15rem 0.5rem;border-radius:6px;line-height:1;display:flex;align-items:center;justify-content:center;">✕</button>
+  </div>
+
+
+<a href="index.html" class="mobile-menu-link">Home</a>
     <a href="about.html" class="mobile-menu-link">About Us</a>
     <a href="events.html" class="mobile-menu-link active">Events</a>
     <a href="jobs.html" class="mobile-menu-link">Jobs</a>
     <a href="vendors.html" class="mobile-menu-link">Vendors</a>
-    <a href="hotels-restaurants.html" class="mobile-menu-link">Hotel & dining</a>
+    <a href="hotels-restaurants.html" class="mobile-menu-link">Hotels & Dining</a>
     <a href="services.html" class="mobile-menu-link">Services</a>
     <a href="contact.html" class="btn-gold" style="margin-top:2.5rem;align-self:flex-start;">Contact Us</a>
-    <p style="margin:1rem 0 0;color:rgba(255,255,255,0.75);font-size:0.85rem;line-height:1.4;">Made with ♥ in Ìbàdàn by BadBoyJay</p>
-    <button id="menu-close"
-      style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,0.92);border:none;color:var(--forest);font-size:1.8rem;cursor:pointer;padding:0.12rem 0.45rem;border-radius:6px;">✕</button>
-  </div>
+
+</div>
 
   <header id="site-header">
     <div
@@ -540,17 +541,7 @@
     </div>
   </header>
 
-  <!-- New Header Style specific to this page to match screenshot -->
-  <style>
-    #site-header {
-      background: var(--forest) !important;
-      border-bottom: none !important;
-    }
-    .logo-text { color: #fff !important; }
-    .logo-accent { color: var(--gold-bright) !important; }
-    .nav-a { color: rgba(255, 255, 255, 0.7) !important; }
-    .nav-a:hover, .nav-a.active { color: var(--gold-bright) !important; }
-  </style>
+
 
   <main style="max-width:1280px;margin:0 auto;padding:4rem 1.5rem 5rem;">
 

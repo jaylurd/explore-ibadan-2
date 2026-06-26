@@ -141,7 +141,7 @@ async function fetchJobs(containerId, limit) {
                 `;
             }
             container.appendChild(card);
-            
+
             // Store job data for modal
             window.jobsData = window.jobsData || {};
             window.jobsData[job.id] = job;
@@ -549,7 +549,7 @@ async function fetchGallery(containerId, limit) {
         const wrapper = document.createElement('div');
         wrapper.className = 'gallery-track-wrapper';
         wrapper.style.padding = '1rem 0';
-        
+
         const track = document.createElement('div');
         track.className = 'gallery-track gallery-scroll-left';
 
@@ -588,7 +588,7 @@ async function fetchGallery(containerId, limit) {
 }
 
 // Job Modal Logic
-window.openJobModal = function(jobId) {
+window.openJobModal = function (jobId) {
     const job = window.jobsData && window.jobsData[jobId];
     if (!job) return;
 
@@ -597,7 +597,7 @@ window.openJobModal = function(jobId) {
         modal = document.createElement('div');
         modal.id = 'job-detail-modal';
         modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity 0.3s;padding:1rem;';
-        
+
         modal.innerHTML = `
             <div style="background:#fff;border-radius:8px;width:100%;max-width:600px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,0.2);transform:translateY(20px);transition:transform 0.3s;">
                 <div style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem;border-bottom:1px solid #eee;">
@@ -638,7 +638,7 @@ window.openJobModal = function(jobId) {
         `;
         document.body.appendChild(modal);
     }
-    
+
     document.getElementById('job-modal-title').textContent = job.title || 'Job Description';
     document.getElementById('job-modal-company').textContent = job.company || '-';
     document.getElementById('job-modal-location').textContent = job.location || '-';
@@ -646,9 +646,9 @@ window.openJobModal = function(jobId) {
     document.getElementById('job-modal-salary').textContent = job.salary || 'Negotiable';
     document.getElementById('job-modal-description').textContent = job.description || 'No description provided.';
     document.getElementById('job-modal-requirements').textContent = job.requirements || 'No specific requirements listed.';
-    
+
     const applyBtn = document.getElementById('job-modal-apply');
-    
+
     let applyLink = job.link || '#';
     let isEmail = false;
     let isWhatsApp = false;
@@ -691,13 +691,13 @@ window.openJobModal = function(jobId) {
         applyBtn.style.borderColor = 'var(--terra)';
         applyBtn.style.color = '#fff';
     }
-    
+
     modal.style.pointerEvents = 'auto';
     modal.style.opacity = '1';
     modal.querySelector('div').style.transform = 'translateY(0)';
 };
 
-window.closeJobModal = function() {
+window.closeJobModal = function () {
     const modal = document.getElementById('job-detail-modal');
     if (modal) {
         modal.style.opacity = '0';
@@ -805,6 +805,10 @@ async function fetchHotelsRestaurants(containerId, limit) {
 
         if (!items || items.length === 0) {
             items = fallbackItems;
+        }
+
+        if (limit && items.length > limit) {
+            items = items.slice(0, limit);
         }
 
         container.innerHTML = '';
