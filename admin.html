@@ -839,6 +839,50 @@
                 font-size: 1.3rem;
             }
 
+            /* Extra small screens: improve wrapping and prevent heading overlap */
+            @media (max-width: 480px) {
+                .mobile-tabs .tab-btn {
+                    white-space: normal !important;
+                    font-size: 0.72rem;
+                    padding: 0.45rem 0.6rem;
+                    min-width: 48px;
+                }
+
+                .mobile-tabs .tab-btn .tab-icon {
+                    font-size: 1rem;
+                    margin-bottom: 0.15rem;
+                }
+
+                .dashboard-header {
+                    gap: 0.5rem;
+                }
+
+                .dashboard-header h2 {
+                    font-size: 1.15rem;
+                    line-height: 1.2;
+                    word-break: break-word;
+                    overflow-wrap: anywhere;
+                }
+
+                #current-section-title {
+                    display: inline-block;
+                    max-width: calc(100% - 80px);
+                    vertical-align: middle;
+                }
+
+                .header-accent { height: 20px; width: 3px; }
+
+                /* Make action button smaller to avoid overlap */
+                .dashboard-header .btn {
+                    padding: 0.55rem 0.85rem;
+                    font-size: 0.78rem;
+                }
+
+                /* Ensure modal and table look good on very small screens */
+                .modal-content { border-radius: 12px 12px 0 0; }
+                td { padding-left: 1.25rem !important; padding-right: 1rem !important; }
+            }
+
             .modal-body {
                 padding: 1.5rem;
             }
