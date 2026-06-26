@@ -243,22 +243,29 @@ body::before {
 
 /* Ensure mobile menu close button is visible on all pages */
 #mobile-menu #menu-close,
-#mobile-menu button#menu-close {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  background: rgba(255,255,255,0.92);
-  border: none;
-  color: var(--forest);
-  font-size: 1.6rem;
-  cursor: pointer;
-  padding: 0.12rem 0.5rem;
-  border-radius: 6px;
-  z-index: 1100;
+#mobile-menu button#menu-close,
+button#menu-close {
+  position: absolute !important;
+  top: 1.25rem !important;
+  right: 1.25rem !important;
+  background: rgba(255,255,255,0.95) !important;
+  border: none !important;
+  color: var(--forest) !important;
+  font-size: 1.6rem !important;
+  cursor: pointer !important;
+  padding: 0.12rem 0.5rem !important;
+  border-radius: 6px !important;
+  z-index: 99999 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 @media (max-width: 480px) {
-  #mobile-menu #menu-close { font-size: 1.5rem; top: 1rem; right: 1rem; }
+  #mobile-menu #menu-close, button#menu-close { font-size: 1.5rem !important; top: 1rem !important; right: 1rem !important; }
 }
 
 /* ── EYEBROW ── */
