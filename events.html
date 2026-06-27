@@ -273,17 +273,20 @@
     }
 
     #mobile-menu {
-      position: fixed;
-      inset: 0;
-      background: var(--forest);
-      z-index: 300;
-      transform: translateX(-100%);
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 3rem 2.5rem;
-    }
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100vh !important;
+  background: var(--forest) !important;
+  z-index: 300 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 3rem 2.5rem !important;
+  box-sizing: border-box !important;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1) !important;
+}
 
     #mobile-menu.open {
       transform: translateX(0);
