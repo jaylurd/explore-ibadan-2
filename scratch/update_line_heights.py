@@ -15,14 +15,13 @@ files = [
 
 base_dir = r"c:\Users\USER\Documents\Akinjuwon\workspace\explore ibadan 2"
 
-# 1. Scrollable, flex-start layout for mobile menu to prevent cutoffs
-scrollable_mobile_menu_style = """#mobile-menu {
+# Compact mobile menu that fits all items within viewport
+compact_mobile_menu_style = """#mobile-menu {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
   background: var(--forest);
   z-index: 300;
   transform: translateX(-100%);
@@ -30,10 +29,23 @@ scrollable_mobile_menu_style = """#mobile-menu {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 3rem 2.5rem 6rem 2.5rem;
+  padding: 2.5rem 2.5rem calc(2rem + env(safe-area-inset-bottom)) 2.5rem;
   box-sizing: border-box;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}"""
+
+# Smaller link style
+compact_link_style = """.mobile-menu-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  display: block;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(184,135,11,0.1);
+  transition: color 0.2s, padding-left 0.3s;
+  line-height: 1.4;
 }"""
 
 for filename in files:
@@ -47,20 +59,21 @@ for filename in files:
         
     # Replace #mobile-menu block
     pattern = r'#mobile-menu\s*\{[^}]*\}'
-    content = re.sub(pattern, scrollable_mobile_menu_style, content)
+    content = re.sub(pattern, compact_mobile_menu_style, content)
     
-    # Replace HTML margins inside mobile menu
-    # Reduce header margin-bottom
-    content = content.replace('margin-bottom:2.5rem;width:100%;', 'margin-bottom:1.5rem;width:100%;')
-    content = content.replace('margin-bottom: 2.5rem; width: 100%;', 'margin-bottom: 1.5rem; width: 100%;')
-    content = content.replace('margin-bottom:2.5rem; width:100%;', 'margin-bottom:1.5rem; width:100%;')
+    # Replace .mobile-menu-link block
+    pattern_link = r'\.mobile-menu-link\s*\{[^}]*\}'
+    content = re.sub(pattern_link, compact_link_style, content, count=1)
     
-    # Reduce Contact Us button margin-top
-    content = content.replace('margin-top:2.5rem;align-self:flex-start;', 'margin-top:1.5rem;align-self:flex-start;')
-    content = content.replace('margin-top:2.5rem; align-self:flex-start;', 'margin-top:1.5rem; align-self:flex-start;')
-    content = content.replace('margin-top: 2.5rem; align-self: flex-start;', 'margin-top: 1.5rem; align-self: flex-start;')
+    # Reduce header margin
+    content = content.replace('margin-bottom:1.5rem;width:100%;', 'margin-bottom:1rem;width:100%;')
+    content = content.replace('margin-bottom:2.5rem;width:100%;', 'margin-bottom:1rem;width:100%;')
+    
+    # Reduce Contact Us button margin
+    content = content.replace('margin-top:1.5rem;align-self:flex-start;', 'margin-top:1rem;align-self:flex-start;')
+    content = content.replace('margin-top:2.5rem;align-self:flex-start;', 'margin-top:1rem;align-self:flex-start;')
     
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
         
-    print(f"Successfully fixed spacing and cutoff issues in {filename}")
+    print(f"Fixed {filename}")
