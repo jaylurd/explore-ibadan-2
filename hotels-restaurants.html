@@ -206,9 +206,11 @@ h1,h2,h3,h4,h5 {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 3rem 2.5rem;
+  justify-content: flex-start;
+  padding: 3rem 2.5rem 6rem 2.5rem;
   box-sizing: border-box;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 #mobile-menu.open { transform: translateX(0); }
 .mobile-menu-link {
@@ -360,7 +362,7 @@ img { max-width: 100%; height: auto; }
 
 <!-- ═══════ MOBILE FULL-SCREEN MENU ═══════ -->
 <div id="mobile-menu">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2.5rem;width:100%;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;width:100%;">
     <span style="font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1;">Explore <span style="color:var(--gold-bright)">Ibadan</span></span>
     <button id="menu-close" style="background:rgba(255,255,255,0.92);border:none;color:var(--forest);font-size:1.6rem;cursor:pointer;padding:0.15rem 0.5rem;border-radius:6px;line-height:1;display:flex;align-items:center;justify-content:center;">✕</button>
   </div>
@@ -373,7 +375,7 @@ img { max-width: 100%; height: auto; }
   <a href="vendors.html" class="mobile-menu-link">Vendors</a>
   <a href="hotels-restaurants.html" class="mobile-menu-link active">Hotels & Dining</a>
   <a href="services.html" class="mobile-menu-link">Services</a>
-  <a href="contact.html" class="btn-gold" style="margin-top:2.5rem;align-self:flex-start;">Contact Us</a>
+  <a href="contact.html" class="btn-gold" style="margin-top:1.5rem;align-self:flex-start;">Contact Us</a>
 
 </div>
 

@@ -15,8 +15,8 @@ files = [
 
 base_dir = r"c:\Users\USER\Documents\Akinjuwon\workspace\explore ibadan 2"
 
-# Robust mobile menu style without inset, using top/left/width/height/min-height for full compatibility
-robust_mobile_menu_style = """#mobile-menu {
+# 1. Scrollable, flex-start layout for mobile menu to prevent cutoffs
+scrollable_mobile_menu_style = """#mobile-menu {
   position: fixed;
   top: 0;
   left: 0;
@@ -29,9 +29,11 @@ robust_mobile_menu_style = """#mobile-menu {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 3rem 2.5rem;
+  justify-content: flex-start;
+  padding: 3rem 2.5rem 6rem 2.5rem;
   box-sizing: border-box;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }"""
 
 for filename in files:
@@ -45,9 +47,20 @@ for filename in files:
         
     # Replace #mobile-menu block
     pattern = r'#mobile-menu\s*\{[^}]*\}'
-    content = re.sub(pattern, robust_mobile_menu_style, content)
+    content = re.sub(pattern, scrollable_mobile_menu_style, content)
+    
+    # Replace HTML margins inside mobile menu
+    # Reduce header margin-bottom
+    content = content.replace('margin-bottom:2.5rem;width:100%;', 'margin-bottom:1.5rem;width:100%;')
+    content = content.replace('margin-bottom: 2.5rem; width: 100%;', 'margin-bottom: 1.5rem; width: 100%;')
+    content = content.replace('margin-bottom:2.5rem; width:100%;', 'margin-bottom:1.5rem; width:100%;')
+    
+    # Reduce Contact Us button margin-top
+    content = content.replace('margin-top:2.5rem;align-self:flex-start;', 'margin-top:1.5rem;align-self:flex-start;')
+    content = content.replace('margin-top:2.5rem; align-self:flex-start;', 'margin-top:1.5rem; align-self:flex-start;')
+    content = content.replace('margin-top: 2.5rem; align-self: flex-start;', 'margin-top: 1.5rem; align-self: flex-start;')
     
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
         
-    print(f"Successfully applied robust full-screen styling to {filename}")
+    print(f"Successfully fixed spacing and cutoff issues in {filename}")
