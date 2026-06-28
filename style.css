@@ -149,9 +149,6 @@ body::before {
   align-items: center;
   gap: 0.5rem;
   background: var(--forest);
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
   color: var(--gold-bright);
   font-family: 'Outfit', sans-serif;
   font-size: 0.75rem;
@@ -190,9 +187,6 @@ body::before {
 
 .btn-ghost:hover {
   background: var(--forest);
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
   color: var(--gold-bright);
 }
 
@@ -476,9 +470,6 @@ body::before {
 
 .feature-card:hover .feature-icon-wrap {
   background: var(--forest);
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
   color: var(--gold-bright);
   border-color: var(--forest);
 }
@@ -517,9 +508,6 @@ body::before {
 /* ── FOOTER ── */
 .footer-bg {
   background: var(--forest);
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
 }
 
 .footer-link {
@@ -539,9 +527,6 @@ body::before {
   top: 0.75rem;
   left: 0.75rem;
   background: var(--forest);
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
   color: #fff;
   padding: 0.4rem 0.75rem;
   text-align: center;
@@ -583,9 +568,6 @@ body::before {
   position: fixed;
   inset: 0;
   background: var(--forest);
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
   z-index: 300;
   opacity: 0;
   visibility: hidden;
