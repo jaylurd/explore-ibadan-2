@@ -709,7 +709,7 @@ document.querySelectorAll('.mobile-menu-link').forEach(link => {
   });
 });
 
-// Contact Form Handler - Local fallback for file:// protocol
+// Contact Form Handler - Handle both local and web server submissions
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
@@ -728,8 +728,15 @@ if (contactForm) {
       setTimeout(() => {
         window.location.href = 'thank-you.html';
       }, 800);
+    } else {
+      // If on a web server (http/https), set the absolute redirect URL for formsubmit.co
+      const nextUrlField = contactForm.querySelector('input[name="_next"]');
+      if (nextUrlField) {
+        // Build absolute URL for thank-you page
+        const absoluteUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, '') + 'thank-you.html';
+        nextUrlField.value = absoluteUrl;
+      }
     }
-    // If on a web server (http/https), allow formsubmit.co to handle it naturally
   });
 }
 
