@@ -801,3 +801,44 @@ img {
     justify-content: center;
   }
 }
+
+/* ── HOTELS & DINING: TYPE BADGE ── */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 1px;
+}
+.type-badge.hotel {
+  background: #EBF4EB;
+  color: var(--forest);
+  border: 1px solid rgba(11,46,11,0.2);
+}
+.type-badge.restaurant {
+  background: #FFF5E6;
+  color: var(--terra);
+  border: 1px solid rgba(139,58,26,0.2);
+}
+
+/* ── HOTELS & DINING: PRICE RANGE ── */
+.price-range {
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.price-range-dim {
+  color: rgba(184,135,11,0.25);
+}
+
+/* ── HOTELS & DINING: RATING STARS ── */
+.star-rating {
+  color: var(--gold);
+  font-size: 0.8rem;
+  display: inline-flex;
+  gap: 1px;
+}

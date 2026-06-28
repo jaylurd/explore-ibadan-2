@@ -1277,6 +1277,10 @@
             Object.keys(sessionStorage).forEach(k => {
                 if (!k.startsWith('admin_')) sessionStorage.removeItem(k);
             });
+            // Also clear localStorage so frontend sees changes immediately
+            Object.keys(localStorage).forEach(k => {
+                localStorage.removeItem(k);
+            });
         }
 
 

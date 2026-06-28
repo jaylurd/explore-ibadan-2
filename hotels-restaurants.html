@@ -597,7 +597,9 @@ window.applyHRFilters = function() {
     const cardText = card.innerText.toLowerCase();
     const cardType = card.dataset.type || '';
     const matchesSearch = searchTerm === '' || cardText.includes(searchTerm);
-    const matchesFilter = filterType === 'all' || cardType === filterType;
+    const cardTypeLower = (card.dataset.type || '').trim().toLowerCase();
+    const filterTypeLower = filterType.trim().toLowerCase();
+    const matchesFilter = filterType === 'all' || cardTypeLower === filterTypeLower;
 
     card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
   });

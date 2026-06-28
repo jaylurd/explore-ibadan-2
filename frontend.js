@@ -252,7 +252,7 @@ async function fetchEvents(containerId, limit) {
                     <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
                         <div class="event-tag">${event.category || 'Event'}</div>
                         <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">${event.title}</h3>
-                        <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;margin-bottom:1.5rem;flex:1;">${event.description ? event.description.substring(0, 100) + '...' : ''}</p>
+                        <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;margin-bottom:1.5rem;flex:1;">${event.description ? event.description : ''}</p>
                         <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
                         <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:clock-circle-linear" style="color:var(--gold);"></span> ${event.time || 'TBD'}</span>
                         <span style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);"></span> ${event.location}</span>
@@ -277,7 +277,7 @@ async function fetchEvents(containerId, limit) {
                         <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;">${event.title}</h3>
                         <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.25rem;">
                             <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:map-point-linear" style="color:var(--forest);"></span> ${event.location}</span>
-                            ${event.description ? `<span style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:info-circle-linear" style="color:var(--forest);"></span> ${event.description.substring(0, 60)}...</span>` : ''}
+                            ${event.description ? `<span style="display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8rem;color:var(--mid);"><span class="iconify" data-icon="solar:info-circle-linear" style="color:var(--forest);flex-shrink:0;margin-top:0.2rem;"></span> <span>${event.description}</span></span>` : ''}
                         </div>
                         <a href="${waLink}" target="_blank" class="btn-primary" style="width:100%;justify-content:center;background:#25D366;border-color:#25D366;color:#fff;">
                             <span class="iconify" data-icon="logos:whatsapp-icon" style="font-size:1.1rem;margin-right:0.4rem;"></span> WhatsApp
@@ -904,7 +904,7 @@ async function fetchHotelsRestaurants(containerId, limit) {
                     ${item.location ? `<div style="display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">
                         <span class="iconify" data-icon="solar:map-point-linear" style="color:var(--gold);flex-shrink:0;"></span> ${item.location}
                     </div>` : ''}
-                    ${item.description ? `<p style="color:var(--mid);font-size:0.82rem;line-height:1.6;margin-bottom:1.25rem;">${item.description.length > 120 ? item.description.substring(0, 120) + '...' : item.description}</p>` : '<div style="margin-bottom:1.25rem;"></div>'}
+                    ${item.description ? `<p style="color:var(--mid);font-size:0.82rem;line-height:1.6;margin-bottom:1.25rem;">${item.description}</p>` : '<div style="margin-bottom:1.25rem;"></div>'}
                     <div style="display:flex;gap:0.75rem;align-items:center;margin-bottom:0.75rem;">
                         ${item.instagram ? `<a href="${item.instagram}" target="_blank" style="color:#E1306C;font-size:1.2rem;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"><span class="iconify" data-icon="ri:instagram-fill"></span></a>` : ''}
                         ${item.website ? `<a href="${item.website}" target="_blank" style="color:var(--forest);font-size:1.2rem;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"><span class="iconify" data-icon="solar:global-bold"></span></a>` : ''}

@@ -594,44 +594,44 @@
 
     /* ── MOBILE MENU ── */
     #mobile-menu {
-  position: fixed;
-  inset: 0;
-  background: var(--forest);
-  z-index: 300;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.15s ease-out, visibility 0.15s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
+      position: fixed;
+      inset: 0;
+      background: var(--forest);
+      z-index: 300;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.15s ease-out, visibility 0.15s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
 
-#mobile-menu.open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
+    #mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
 
-.mobile-menu-link {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.5rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  display: block;
-  margin: 0.6rem 0;
-  transition: color 0.3s ease, transform 0.3s ease;
-  text-align: center;
-}
+    .mobile-menu-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      display: block;
+      margin: 0.6rem 0;
+      transition: color 0.3s ease, transform 0.3s ease;
+      text-align: center;
+    }
 
-.mobile-menu-link:hover,
-.mobile-menu-link.active {
-  color: var(--gold-bright);
-  transform: scale(1.05);
-}
+    .mobile-menu-link:hover,
+    .mobile-menu-link.active {
+      color: var(--gold-bright);
+      transform: scale(1.05);
+    }
 
     /* ── SEARCH ── */
     .search-input {
@@ -793,17 +793,18 @@
 
   <!-- ═══════ MOBILE FULL-SCREEN MENU ═══════ -->
   <div id="mobile-menu">
-  <button id="menu-close" style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(184,135,11,0.2);color:var(--gold-bright);font-size:1.4rem;cursor:pointer;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;">✕</button>
+    <button id="menu-close"
+      style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(184,135,11,0.2);color:var(--gold-bright);font-size:1.4rem;cursor:pointer;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;">✕</button>
 
-  <a href="index.html" class="mobile-menu-link active">Home</a>
-  <a href="about.html" class="mobile-menu-link">About Us</a>
-  <a href="events.html" class="mobile-menu-link">Events</a>
-  <a href="jobs.html" class="mobile-menu-link">Jobs</a>
-  <a href="vendors.html" class="mobile-menu-link">Vendors</a>
-  <a href="hotels-restaurants.html" class="mobile-menu-link">Hotels & Dining</a>
-  <a href="services.html" class="mobile-menu-link">Services</a>
-  <a href="contact.html" class="btn-gold" style="margin-top:2rem;">Contact Us</a>
-</div>
+    <a href="index.html" class="mobile-menu-link active">Home</a>
+    <a href="about.html" class="mobile-menu-link">About Us</a>
+    <a href="events.html" class="mobile-menu-link">Events</a>
+    <a href="jobs.html" class="mobile-menu-link">Jobs</a>
+    <a href="vendors.html" class="mobile-menu-link">Vendors</a>
+    <a href="hotels-restaurants.html" class="mobile-menu-link">Hotels & Dining</a>
+    <a href="services.html" class="mobile-menu-link">Services</a>
+    <a href="contact.html" class="btn-gold" style="margin-top:2rem;">Contact Us</a>
+  </div>
 
   <!-- ═══════ HEADER ═══════ -->
   <header id="site-header">
@@ -838,7 +839,10 @@
       <button id="menu-open"
         style="background: var(--forest);border:none;color:#fff;cursor:pointer;padding:0.5rem;border-radius:4px;"
         class="hamburger-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
       </button>
     </div>
   </header>
