@@ -117,7 +117,7 @@ async function fetchJobs(containerId, limit) {
         jobs.forEach((job, index) => {
             let logoHtml = '';
             if (job.logo_url && job.logo_url.startsWith('http')) {
-                logoHtml = `<img src="${job.logo_url}" alt="${job.company}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:2px;">`;
+                logoHtml = `<img src="${job.logo_url}" alt="${job.company}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:2px;" decoding="async">`;
             } else {
                 const initials = (job.company || 'J').substring(0, 2).toUpperCase();
                 logoHtml = `<span style="font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--forest);font-size:1.1rem;">${initials}</span>`;
@@ -243,7 +243,7 @@ async function fetchEvents(containerId, limit) {
                 card.className = 'event-card reveal';
                 card.innerHTML = `
                     <div style="position:relative;">
-                        <img src="${imgUrl}" class="event-img" alt="${event.title}" loading="lazy">
+                        <img src="${imgUrl}" class="event-img" alt="${event.title}" loading="lazy" decoding="async">
                         <div class="date-badge">
                         <div class="day">${dateObj.day}</div>
                         <div class="month">${dateObj.month}</div>
@@ -266,7 +266,7 @@ async function fetchEvents(containerId, limit) {
                 card.className = 'card reveal';
                 card.innerHTML = `
                     <div class="card-img" style="position:relative;height:220px;">
-                        <img src="${imgUrl}" alt="${event.title}" style="width:100%;height:100%;object-fit:cover;">
+                        <img src="${imgUrl}" alt="${event.title}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
                         <div class="img-overlay"></div>
                         <div style="position:absolute;top:1rem;left:1rem;background:var(--forest);color:#fff;text-align:center;padding:0.5rem 0.75rem;border-radius:2px;min-width:50px;">
                             <div style="font-size:1.4rem;font-weight:700;line-height:1;">${dateObj.day}</div>
@@ -347,7 +347,7 @@ async function fetchVendors(containerId) {
 
             card.innerHTML = `
                 <div style="height:260px;background:#f9f9f9;position:relative;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #eee;">
-                    <img src="${imgUrl}" loading="lazy" decode="async" style="width:100%;height:100%;object-fit:contain;" alt="${vendor.category || 'Vendor'}">
+                    <img src="${imgUrl}" loading="lazy" decode="async" style="width:100%;height:100%;object-fit:contain;" alt="${vendor.category || 'Vendor'}" decoding="async">
                 </div>
                 <div style="padding:1.5rem;">
                     <div style="display:inline-block;font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.7rem;background:var(--gold-pale);color:var(--gold);border-radius:1px;margin-bottom:0.75rem;">${vendor.category || 'Vendor'}</div>
@@ -531,7 +531,7 @@ async function fetchServices(containerId) {
             card.style.cssText = 'display:flex;flex-direction:column;';
             card.innerHTML = `
                 <div style="height:200px;position:relative;">
-                    <img src="${imgUrl}" alt="${service.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img src="${imgUrl}" alt="${service.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;" decoding="async">
                     <div style="position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,0.6);color:#fff;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.6rem;border-radius:2px;backdrop-filter:blur(4px);">
                         ${service.category}
                     </div>
@@ -606,7 +606,7 @@ async function fetchGallery(containerId, limit) {
             item.style.width = '240px';
 
             item.innerHTML = `
-                <img src="${imgUrl}" alt="${photo.title || 'Gallery photo'}" loading="lazy" loading="lazy">
+                <img src="${imgUrl}" alt="${photo.title || 'Gallery photo'}" loading="lazy" loading="lazy" decoding="async">
                 ${photo.title ? `
                 <div class="gallery-overlay">
                     <p class="gallery-name">${photo.title}</p>
@@ -882,7 +882,7 @@ async function fetchHotelsRestaurants(containerId, limit) {
 
             card.innerHTML = `
                 <div style="height:220px;position:relative;overflow:hidden;">
-                    <img src="${imgUrl}" alt="${item.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s cubic-bezier(0.22,1,0.36,1);" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="${imgUrl}" alt="${item.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s cubic-bezier(0.22,1,0.36,1);" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'" decoding="async">
                     <div style="position:absolute;top:1rem;left:1rem;">
                         <span class="type-badge ${typeBadgeClass}">
                             <span class="iconify" data-icon="${typeIcon}" style="font-size:0.85rem;"></span>
