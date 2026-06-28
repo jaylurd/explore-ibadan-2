@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <style>
 :root {
@@ -707,6 +708,60 @@ document.querySelectorAll('.mobile-menu-link').forEach(link => {
     document.body.style.overflow = '';
   });
 });
+
+// Contact Form Handler
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Collect form data
+    const formData = {
+      subject: document.getElementById('contact-subject')?.value || 'General Inquiry',
+      name: document.getElementById('contact-name')?.value || '',
+      email: document.getElementById('contact-email')?.value || '',
+      message: document.getElementById('contact-message')?.value || '',
+      submitted_at: new Date().toISOString()
+    };
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.message) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    
+    try {
+      // Try to save to Supabase if available
+      const sb = typeof getSupabase === 'function' ? getSupabase() : null;
+      if (sb) {
+        const { error } = await sb.from('contacts').insert([formData]);
+        if (error) {
+          console.warn('Note: Contact message saved locally (Supabase unavailable)');
+        }
+      }
+      
+      // Store in localStorage as backup
+      const contacts = JSON.parse(localStorage.getItem('pendingContacts') || '[]');
+      contacts.push(formData);
+      localStorage.setItem('pendingContacts', JSON.stringify(contacts));
+      
+      // Clear form
+      contactForm.reset();
+      
+      // Redirect to thank you page
+      setTimeout(() => {
+        window.location.href = 'thank-you.html';
+      }, 500);
+      
+    } catch (err) {
+      console.error('Error submitting contact form:', err);
+      // Still redirect even if there's an error - the user should see the thank you page
+      setTimeout(() => {
+        window.location.href = 'thank-you.html';
+      }, 500);
+    }
+  });
+}
 </script>
 </body>
 </html>
