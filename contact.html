@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <style>
 :root {
@@ -568,12 +567,13 @@ img { max-width: 100%; height: auto; }
     <div class="reveal" style="background:#fff;border:1px solid rgba(184,135,11,0.15);padding:3rem;box-shadow:0 8px 30px rgba(0,0,0,0.04);">
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--charcoal);margin-bottom:1.5rem;">Submit a Request</h3>
       
-      <form id="contact-form" style="display:flex;flex-direction:column;gap:1.5rem;">
+      <form id="contact-form" action="https://formsubmit.co/exploreibadan06@gmail.com" method="POST" style="display:flex;flex-direction:column;gap:1.5rem;">
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="thank-you.html">
 
         <div style="display:flex;flex-direction:column;gap:0.5rem;">
           <label style="font-size:0.8rem;font-weight:600;color:var(--charcoal);">What are you reaching out about?</label>
-          <select name="Subject" name="Subject" id="contact-subject" style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
+          <select name="Subject" id="contact-subject" style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
             <option>General Inquiry</option>
             <option>Post a Job</option>
             <option>Register as a Vendor</option>
@@ -585,17 +585,17 @@ img { max-width: 100%; height: auto; }
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
           <div style="display:flex;flex-direction:column;gap:0.5rem;">
             <label style="font-size:0.8rem;font-weight:600;color:var(--charcoal);">Name</label>
-            <input type="text" name="Name" name="Name" id="contact-name" placeholder="Your name" required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
+            <input type="text" name="Name" id="contact-name" placeholder="Your name" required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
           </div>
           <div style="display:flex;flex-direction:column;gap:0.5rem;">
             <label style="font-size:0.8rem;font-weight:600;color:var(--charcoal);">Email</label>
-            <input type="email" name="Email" name="Email" id="contact-email" placeholder="Your email address" required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
+            <input type="email" name="Email" id="contact-email" placeholder="Your email address" required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;">
           </div>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:0.5rem;">
           <label style="font-size:0.8rem;font-weight:600;color:var(--charcoal);">Message</label>
-          <textarea name="Message" name="Message" id="contact-message" rows="5" placeholder="Tell us more details..." required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;resize:vertical;"></textarea>
+          <textarea name="Message" id="contact-message" rows="5" placeholder="Tell us more details..." required style="padding:0.8rem 1rem;font-family:'Outfit',sans-serif;font-size:0.9rem;border:1px solid rgba(184,135,11,0.2);background:var(--ivory);outline:none;resize:vertical;"></textarea>
         </div>
 
         <button type="submit" id="contact-submit-btn" class="btn-primary" style="align-self:flex-start;padding:0.8rem 2.5rem;font-size:0.85rem;border:none;cursor:pointer;">Submit Message</button>
@@ -709,59 +709,30 @@ document.querySelectorAll('.mobile-menu-link').forEach(link => {
   });
 });
 
-// Contact Form Handler
+// Contact Form Handler - Local fallback for file:// protocol
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Collect form data
-    const formData = {
-      subject: document.getElementById('contact-subject')?.value || 'General Inquiry',
-      name: document.getElementById('contact-name')?.value || '',
-      email: document.getElementById('contact-email')?.value || '',
-      message: document.getElementById('contact-message')?.value || '',
-      submitted_at: new Date().toISOString()
-    };
-    
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-    
-    try {
-      // Try to save to Supabase if available
-      const sb = typeof getSupabase === 'function' ? getSupabase() : null;
-      if (sb) {
-        const { error } = await sb.from('contacts').insert([formData]);
-        if (error) {
-          console.warn('Note: Contact message saved locally (Supabase unavailable)');
-        }
-      }
+  contactForm.addEventListener('submit', function(e) {
+    // If running locally (file://), prevent default and redirect to thank-you page
+    if (window.location.protocol === 'file:') {
+      e.preventDefault();
       
-      // Store in localStorage as backup
-      const contacts = JSON.parse(localStorage.getItem('pendingContacts') || '[]');
-      contacts.push(formData);
-      localStorage.setItem('pendingContacts', JSON.stringify(contacts));
+      // Get form data for console logging
+      const formData = new FormData(contactForm);
+      console.log('Form data submitted:', Object.fromEntries(formData));
       
-      // Clear form
-      contactForm.reset();
+      // Show success message and redirect
+      alert('✓ Thank you for your message! We will contact you shortly.');
       
-      // Redirect to thank you page
+      // Redirect to thank you page after a short delay
       setTimeout(() => {
         window.location.href = 'thank-you.html';
-      }, 500);
-      
-    } catch (err) {
-      console.error('Error submitting contact form:', err);
-      // Still redirect even if there's an error - the user should see the thank you page
-      setTimeout(() => {
-        window.location.href = 'thank-you.html';
-      }, 500);
+      }, 800);
     }
+    // If on a web server (http/https), allow formsubmit.co to handle it naturally
   });
 }
+
 </script>
 </body>
 </html>
