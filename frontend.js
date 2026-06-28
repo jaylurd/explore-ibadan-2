@@ -22,6 +22,44 @@ function getSupabase() {
     return _supabaseClient;
 }
 
+
+// --- CACHING LAYER ---
+const CACHE_TTL = 15 * 60 * 1000; // 15 mins
+
+async function fetchWithCache(cacheKey, queryPromise) {
+    const cached = sessionStorage.getItem(cacheKey);
+    let cachedData = null;
+    
+    if (cached) {
+        try {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < CACHE_TTL) {
+                cachedData = parsed.data;
+            }
+        } catch (e) {
+            console.warn('Cache parse error', e);
+        }
+    }
+
+    if (cachedData) {
+        // Fetch in background to keep data fresh (stale-while-revalidate)
+        queryPromise.then(({ data, error }) => {
+            if (!error && data) {
+                sessionStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+            }
+        }).catch(() => {});
+        return { data: cachedData, error: null };
+    }
+
+    // Await query if no cache
+    const { data, error } = await queryPromise;
+    if (!error && data) {
+        sessionStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+    }
+    return { data, error };
+}
+
+
 function getFallbackImage(type) {
     if (type === 'event') return 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=75&auto=format&fit=crop';
     if (type === 'vendor') return 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=600&q=75&auto=format&fit=crop';
@@ -67,7 +105,7 @@ async function fetchJobs(containerId, limit) {
         let query = sb.from('jobs').select('*').order('created_at', { ascending: false });
         if (limit) query = query.limit(limit);
 
-        const { data: jobs, error } = await query;
+        const { data: jobs, error } = await fetchWithCache('jobs_' + (limit || 'all'), query);
         if (error) throw error;
 
         container.innerHTML = '';
@@ -171,7 +209,7 @@ async function fetchEvents(containerId, limit) {
         let query = sb.from('events').select('*').order('date', { ascending: true });
         if (limit) query = query.limit(limit);
 
-        const { data: events, error } = await query;
+        const { data: events, error } = await fetchWithCache('events_' + (limit || 'all'), query);
         if (error) throw error;
 
         container.innerHTML = '';
@@ -250,9 +288,9 @@ async function fetchEvents(containerId, limit) {
             container.appendChild(card);
         });
 
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             container.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-        }, 50);
+        });
 
     } catch (err) {
         console.error('Error fetching events:', err);
@@ -267,7 +305,7 @@ async function fetchVendors(containerId) {
     if (!container) return;
 
     try {
-        const { data: vendors, error } = await sb.from('vendors').select('*').order('created_at', { ascending: false });
+        const { data: vendors, error } = await fetchWithCache('vendors_all', sb.from('vendors').select('*').order('created_at', { ascending: false }));
         if (error) throw error;
 
         container.innerHTML = '';
@@ -331,12 +369,12 @@ async function fetchVendors(containerId) {
             container.appendChild(card);
         });
 
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             container.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
             if (typeof window.applyVendorFilters === 'function') {
                 window.applyVendorFilters();
             }
-        }, 50);
+        });
 
         const countEl = document.getElementById('vendor-count');
         if (countEl) countEl.innerText = vendors.length;
@@ -476,7 +514,7 @@ async function fetchServices(containerId) {
     if (!container) return;
 
     try {
-        const { data: services, error } = await sb.from('services').select('*').order('created_at', { ascending: false });
+        const { data: services, error } = await fetchWithCache('services_all', sb.from('services').select('*').order('created_at', { ascending: false }));
         if (error) throw error;
 
         container.innerHTML = '';
@@ -511,9 +549,9 @@ async function fetchServices(containerId) {
             container.appendChild(card);
         });
 
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             container.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-        }, 50);
+        });
 
         const countEl = document.getElementById('service-count');
         if (countEl) countEl.innerText = services.length;
@@ -534,7 +572,7 @@ async function fetchGallery(containerId, limit) {
         let query = sb.from('gallery').select('*').order('created_at', { ascending: false });
         if (limit) query = query.limit(limit);
 
-        const { data: photos, error } = await query;
+        const { data: photos, error } = await fetchWithCache('gallery_' + (limit || 'all'), query);
         if (error) throw error;
 
         container.innerHTML = '';
@@ -795,7 +833,7 @@ async function fetchHotelsRestaurants(containerId, limit) {
             let query = sb.from('hotels_restaurants').select('*').order('created_at', { ascending: false });
             if (limit) query = query.limit(limit);
 
-            const { data, error } = await query;
+            const { data, error } = await fetchWithCache('hr_' + (limit || 'all'), query);
             if (error) {
                 console.error('Hotels/restaurants fetch error:', error);
             } else if (data && data.length) {
@@ -879,12 +917,12 @@ async function fetchHotelsRestaurants(containerId, limit) {
             container.appendChild(card);
         });
 
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             container.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
             if (typeof window.applyHRFilters === 'function') {
                 window.applyHRFilters();
             }
-        }, 50);
+        });
 
     } catch (err) {
         console.error('Error fetching hotels/restaurants:', err);

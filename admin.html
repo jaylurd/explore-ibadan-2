@@ -1242,6 +1242,40 @@
         let currentData = [];
         let supabaseClient = null;
 
+
+        const ADMIN_CACHE_TTL = 15 * 60 * 1000;
+        async function fetchWithCache(cacheKey, queryPromise) {
+            const cached = sessionStorage.getItem('admin_' + cacheKey);
+            let cachedData = null;
+            if (cached) {
+                try {
+                    const parsed = JSON.parse(cached);
+                    if (Date.now() - parsed.timestamp < ADMIN_CACHE_TTL) {
+                        cachedData = parsed.data;
+                    }
+                } catch (e) { console.warn('Cache parse error', e); }
+            }
+            if (cachedData) {
+                queryPromise.then(({ data, error }) => {
+                    if (!error && data) sessionStorage.setItem('admin_' + cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+                }).catch(() => {});
+                return { data: cachedData, error: null };
+            }
+            const { data, error } = await queryPromise;
+            if (!error && data) {
+                sessionStorage.setItem('admin_' + cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+            }
+            return { data, error };
+        }
+        function invalidateAdminCache(tab) {
+            sessionStorage.removeItem('admin_' + tab);
+            sessionStorage.removeItem('admin_analytics');
+            Object.keys(sessionStorage).forEach(k => {
+                if (!k.startsWith('admin_')) sessionStorage.removeItem(k);
+            });
+        }
+
+
         // Configurations for different entities
         const entityConfigs = {
             events: {
@@ -1459,7 +1493,7 @@
                 document.getElementById('add-new-btn').style.display = 'none';
                 sectionTitle.textContent = "Website Analytics";
 
-                const { data, error } = await supabaseClient.from('analytics').select('*').order('created_at', { ascending: false });
+                const { data, error } = await fetchWithCache('analytics', supabaseClient.from('analytics').select('*').order('created_at', { ascending: false }));
                 loading.style.display = 'none';
 
                 if (error) {
@@ -1496,7 +1530,7 @@
                 tableHead.appendChild(th);
             });
 
-            const { data, error } = await supabaseClient.from(currentTab).select('*').order('created_at', { ascending: false });
+            const { data, error } = await fetchWithCache(currentTab, supabaseClient.from(currentTab).select('*').order('created_at', { ascending: false }));
 
             loading.style.display = 'none';
 
@@ -1679,8 +1713,7 @@
                 alert('Error deleting item: ' + error.message + '\n' + (error.details || '') + '\n' + (error.hint || ''));
                 console.error('Delete error', currentTab, id, error);
             } else {
-                console.log('Delete success', currentTab, id, data);
-                loadData();
+                console.log('Delete success', currentTab, id, data); invalidateAdminCache(currentTab); loadData();
             }
         }
 
@@ -1749,8 +1782,7 @@
                 if (result.error) throw result.error;
 
                 console.log('Save result', result.data);
-                modal.style.display = 'none';
-                loadData();
+                modal.style.display = 'none'; invalidateAdminCache(currentTab); loadData();
             } catch (error) {
                 console.error('Save failed', error);
                 alert('Error saving data: ' + (error.message || error));
