@@ -27,7 +27,7 @@ function getSupabase() {
 const CACHE_TTL = 15 * 60 * 1000; // 15 mins
 
 async function fetchWithCache(cacheKey, queryPromise) {
-    const cached = sessionStorage.getItem(cacheKey);
+    const cached = localStorage.getItem(cacheKey);
     let cachedData = null;
     
     if (cached) {
@@ -45,7 +45,7 @@ async function fetchWithCache(cacheKey, queryPromise) {
         // Fetch in background to keep data fresh (stale-while-revalidate)
         queryPromise.then(({ data, error }) => {
             if (!error && data) {
-                sessionStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+                localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
             }
         }).catch(() => {});
         return { data: cachedData, error: null };
@@ -54,7 +54,7 @@ async function fetchWithCache(cacheKey, queryPromise) {
     // Await query if no cache
     const { data, error } = await queryPromise;
     if (!error && data) {
-        sessionStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
+        localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
     }
     return { data, error };
 }
@@ -147,7 +147,7 @@ async function fetchJobs(containerId, limit) {
                           </div>
                         </div>
                       </div>
-                      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
+                      <div class="job-card-actions">
                         <span class="job-tag" style="border-color:rgba(11,46,11,0.2);color:var(--forest);background:#EBF4EB;">${job.type || 'Job'}</span>
                         <button onclick="openJobModal('${job.id}')" class="btn-primary" style="font-size:0.7rem;padding:0.55rem 1.2rem;border:none;cursor:pointer;">
                             View Job Description
@@ -347,7 +347,7 @@ async function fetchVendors(containerId) {
 
             card.innerHTML = `
                 <div style="height:260px;background:#f9f9f9;position:relative;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #eee;">
-                    <img src="${imgUrl}" style="width:100%;height:100%;object-fit:contain;" alt="${vendor.category || 'Vendor'}">
+                    <img src="${imgUrl}" loading="lazy" decode="async" style="width:100%;height:100%;object-fit:contain;" alt="${vendor.category || 'Vendor'}">
                 </div>
                 <div style="padding:1.5rem;">
                     <div style="display:inline-block;font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.7rem;background:var(--gold-pale);color:var(--gold);border-radius:1px;margin-bottom:0.75rem;">${vendor.category || 'Vendor'}</div>
