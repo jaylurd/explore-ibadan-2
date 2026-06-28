@@ -1,1157 +1,1656 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Explore Ibadan | Discover. Connect. Grow.</title>
-<meta name="description" content="The premier community platform for everyone living, working, and exploring the ancient city of Ibadan.">
-<meta name="theme-color" content="#0B2E0B">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Explore Ibadan | Discover. Connect. Grow.</title>
+  <meta name="description"
+    content="The premier community platform for everyone living, working, and exploring the ancient city of Ibadan.">
+  <meta name="theme-color" content="#0B2E0B">
 
-<!-- Performance: DNS Prefetch & Preconnect -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="dns-prefetch" href="https://images.unsplash.com">
-<link rel="dns-prefetch" href="https://code.iconify.design">
-<link rel="preconnect" href="https://uaokmfmvzxolvvigjjol.supabase.co">
+  <!-- Performance: DNS Prefetch & Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://code.iconify.design">
+  <link rel="preconnect" href="https://uaokmfmvzxolvvigjjol.supabase.co">
 
-<!-- Fonts: Optimized loading with font-display=swap -->
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts: Optimized loading with font-display=swap -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
 
-<!-- Iconify: Async loading for better performance -->
-<script async src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-<!-- Supabase + frontend scripts moved to end of body for proper loading -->
+  <!-- Iconify: Async loading for better performance -->
+  <script async src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <!-- Supabase + frontend scripts moved to end of body for proper loading -->
 
-<style>
-:root {
-  --forest:        #0B2E0B;
-  --forest-mid:    #1A5C1A;
-  --forest-light:  #2D8A2D;
-  --gold:          #B8870B;
-  --gold-bright:   #D4A520;
-  --gold-pale:     #F7F0DC;
-  --ivory:         #FAF8F2;
-  --parchment:     #F2EAD8;
-  --charcoal:      #1C1812;
-  --mid:           #4A4238;
-  --muted:         #8A8070;
-  --terra:         #8B3A1A;
-  --terra-light:   #B44E24;
-}
+  <style>
+    :root {
+      --forest: #0B2E0B;
+      --forest-mid: #1A5C1A;
+      --forest-light: #2D8A2D;
+      --gold: #B8870B;
+      --gold-bright: #D4A520;
+      --gold-pale: #F7F0DC;
+      --ivory: #FAF8F2;
+      --parchment: #F2EAD8;
+      --charcoal: #1C1812;
+      --mid: #4A4238;
+      --muted: #8A8070;
+      --terra: #8B3A1A;
+      --terra-light: #B44E24;
+    }
 
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--ivory);
-  color: var(--charcoal);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-h1,h2,h3,h4,h5 {
-  font-family: 'Cormorant Garamond', serif;
-  letter-spacing: -0.01em;
-}
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* ── OPTIMIZED STYLES FOR PERFORMANCE ── */
-body {
-  -webkit-backface-visibility: hidden;
-  will-change: auto;
-}
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: -0.01em;
+    }
 
-/* ── NAV ── */
-#site-header {
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  transition: background 0.3s ease-out, box-shadow 0.3s ease-out;
-  background: rgba(250,248,242,0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(184,135,11,0.12);
-}
-#site-header.scrolled {
-  background: rgba(11,46,11,0.97);
-  box-shadow: 0 2px 40px rgba(0,0,0,0.25);
-}
-#site-header.scrolled .logo-text { color: #fff; }
-#site-header.scrolled .logo-accent { color: var(--gold-bright); }
-#site-header.scrolled .nav-a { color: rgba(255,255,255,0.75); }
-#site-header.scrolled .nav-a:hover,
-#site-header.scrolled .nav-a.active { color: var(--gold-bright); }
-#site-header.scrolled .nav-a::after { background: var(--gold-bright); }
-#site-header.scrolled .search-input { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #fff; }
-#site-header.scrolled .search-input::placeholder { color: rgba(255,255,255,0.4); }
+    /* ── OPTIMIZED STYLES FOR PERFORMANCE ── */
+    body {
+      -webkit-backface-visibility: hidden;
+      will-change: auto;
+    }
 
-.nav-a {
-  position: relative;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--mid);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.nav-a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px; left: 50%;
-  width: 0; height: 1.5px;
-  background: var(--gold);
-  transition: width 0.3s, left 0.3s;
-}
-.nav-a:hover::after, .nav-a.active::after { width: 100%; left: 0; }
-.nav-a:hover, .nav-a.active { color: var(--forest); }
-.logo-text { font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--forest); font-size: 1.4rem; text-decoration: none; }
-.logo-accent { color: var(--gold); }
+    /* ── NAV ── */
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      transition: background 0.3s ease-out, box-shadow 0.3s ease-out;
+      background: rgba(250, 248, 242, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(184, 135, 11, 0.12);
+    }
 
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--forest);
-  color: var(--gold-bright);
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.65rem 1.6rem;
-  border-radius: 2px;
-  border: 1px solid transparent;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.btn-primary:hover { background: var(--gold); color: var(--forest); }
+    #site-header.scrolled {
+      background: rgba(11, 46, 11, 0.97);
+      box-shadow: 0 2px 40px rgba(0, 0, 0, 0.25);
+    }
 
-.btn-ghost {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: transparent;
-  color: var(--forest);
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.65rem 1.6rem;
-  border-radius: 2px;
-  border: 1px solid var(--forest);
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.btn-ghost:hover { background: var(--forest); color: var(--gold-bright); }
+    #site-header.scrolled .logo-text {
+      color: #fff;
+    }
 
-.btn-gold {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--gold);
-  color: var(--forest);
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.7rem 1.8rem;
-  border-radius: 2px;
-  border: none;
-  text-decoration: none;
-  transition: all 0.3s; line-height: 1.5;}
-.btn-gold:hover { background: var(--gold-bright); transform: translateY(-1px); }
+    #site-header.scrolled .logo-accent {
+      color: var(--gold-bright);
+    }
 
-/* ── REVEAL - OPTIMIZED FOR GPU ACCELERATION ── */
-.reveal {
-  opacity: 0;
-  transform: translate(0, 24px);
-  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
-  will-change: opacity, transform;
-}
-.reveal.active { 
-  opacity: 1; 
-  transform: translate(0, 0); 
-  will-change: auto;
-}
-.reveal-delay-1 { transition-delay: 0.05s; }
-.reveal-delay-2 { transition-delay: 0.1s; }
-.reveal-delay-3 { transition-delay: 0.15s; }
-.reveal-delay-4 { transition-delay: 0.2s; }
+    #site-header.scrolled .nav-a {
+      color: rgba(255, 255, 255, 0.75);
+    }
 
-/* ── EYEBROW ── */
-.eyebrow {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: flex; align-items: center; gap: 0.75rem;
-}
-.eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 2rem; height: 1px;
-  background: var(--gold);
-}
+    #site-header.scrolled .nav-a:hover,
+    #site-header.scrolled .nav-a.active {
+      color: var(--gold-bright);
+    }
 
-/* ── GOLD RULE ── */
-.gold-rule {
-  display: flex; align-items: center; gap: 1rem;
-  margin: 1.5rem 0;
-}
-.gold-rule::before, .gold-rule::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-}
+    #site-header.scrolled .nav-a::after {
+      background: var(--gold-bright);
+    }
 
-/* ── SECTION DIVIDER ── */
-.section-divider {
-  width: 60px; height: 2px;
-  background: linear-gradient(to right, var(--gold), var(--gold-bright));
-  margin: 1.25rem 0;
-}
+    #site-header.scrolled .search-input {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
 
-/* ── CARDS - OPTIMIZED ── */
-.card {
-  background: #fff;
-  border: 1px solid rgba(184,135,11,0.1);
-  border-radius: 2px;
-  overflow: hidden;
-  transition: box-shadow 0.3s ease-out, border-color 0.3s ease-out;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  will-change: box-shadow, border-color;
-}
-.card:hover {
-  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-  border-color: var(--gold);
-}
-.card:hover .card-img img { transform: scale(1.04); }
+    #site-header.scrolled .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
 
-.card-img { overflow: hidden; }
-.card-img img { 
-  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
-  will-change: transform;
-}
+    .nav-a {
+      position: relative;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
 
-/* ── STAT PILL ── */
-.stat-pill {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 1.5rem 2rem;
-  border-right: 1px solid rgba(184,135,11,0.15);
-}
-.stat-pill:last-child { border-right: none; }
-.stat-number {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.75rem; font-weight: 700;
-  color: var(--forest);
-  line-height: 1;
-}
-.stat-label {
-  font-size: 0.7rem; font-weight: 500;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 0.35rem;
-}
+    .nav-a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background: var(--gold);
+      transition: width 0.3s, left 0.3s;
+    }
 
-/* ── HERO ── */
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 0.45rem 1rem;
-  border-radius: 1px;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #fff;
-}
+    .nav-a:hover::after,
+    .nav-a.active::after {
+      width: 100%;
+      left: 0;
+    }
 
-/* ── HERO TITLE - OPTIMIZED ── */
-@keyframes heroIn {
-  from { opacity: 0; transform: translate(0, 16px); }
-  to { opacity: 1; transform: translate(0, 0); }
-}
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.2rem, 6vw, 6.5rem);
-  font-weight: 600;
-  color: #fff;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  animation: heroIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both;
-  will-change: opacity, transform;
-}
-.hero-sub {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-  color: rgba(255,255,255,0.82);
-  line-height: 1.7;
-  font-weight: 300;
-  max-width: 520px;
-  animation: heroIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both;
-  will-change: opacity, transform;
-}
+    .nav-a:hover,
+    .nav-a.active {
+      color: var(--forest);
+    }
 
-/* ── NAV SCROLL INDICATOR ── */
-@keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(6px); opacity: 0.5; }
-}
-.scroll-cue { animation: scrollBounce 2s ease-in-out infinite; }
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--forest);
+      font-size: 1.4rem;
+      text-decoration: none;
+    }
 
-/* ── MOBILE NAV ── */
-.mobile-nav-bar {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: rgba(11,46,11,0.97);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(184,135,11,0.2);
-  z-index: 200;
-  display: flex;
-  justify-content: space-around;
-  padding: 0.6rem 0.5rem;
-  padding-bottom: calc(0.6rem + env(safe-area-inset-bottom));
-}
-.mobile-nav-item {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  color: rgba(255,255,255,0.5);
-  font-size: 0.6rem; font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 0.2s;
-  min-width: 48px;
-}
-.mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold-bright); }
-.mobile-nav-item .iconify { font-size: 1.3rem; }
+    .logo-accent {
+      color: var(--gold);
+    }
 
-/* ── FEATURE GRID ── */
-.feature-icon-wrap {
-  width: 52px; height: 52px;
-  background: var(--gold-pale);
-  border: 1px solid rgba(184,135,11,0.2);
-  border-radius: 2px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gold);
-  font-size: 1.4rem;
-  transition: all 0.3s;
-}
-.feature-card:hover .feature-icon-wrap {
-  background: var(--forest);
-  color: var(--gold-bright);
-  border-color: var(--forest);
-}
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--forest);
+      color: var(--gold-bright);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.6rem;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
 
-/* ── TESTIMONIAL ── */
-.testimonial-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 4.5rem; line-height: 0.5;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  display: block;
-}
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--forest);
+    }
 
-/* ── JOB TAG ── */
-.job-tag {
-  font-size: 0.65rem; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.25rem 0.7rem;
-  border: 1px solid rgba(184,135,11,0.3);
-  border-radius: 1px;
-  color: var(--gold);
-  background: var(--gold-pale);
-}
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--forest);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.6rem;
+      border-radius: 2px;
+      border: 1px solid var(--forest);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
 
-/* ── CTA SECTION ── */
-.cta-pattern {
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(212,165,32,0.15) 1px, transparent 0);
-  background-size: 32px 32px;
-}
+    .btn-ghost:hover {
+      background: var(--forest);
+      color: var(--gold-bright);
+    }
 
-/* ── FOOTER ── */
-.footer-bg { background: var(--forest); }
-.footer-link { color: rgba(255,255,255,0.55); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
-.footer-link:hover { color: var(--gold-bright); }
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gold);
+      color: var(--forest);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.8rem;
+      border-radius: 2px;
+      border: none;
+      text-decoration: none;
+      transition: all 0.3s;
+      line-height: 1.5;
+    }
 
-/* ── EVENT DATE BOX ── */
-.event-date-box {
-  position: absolute; top: 0.75rem; left: 0.75rem;
-  background: var(--forest);
-  color: #fff;
-  padding: 0.4rem 0.75rem;
-  text-align: center;
-  border-radius: 1px;
-  min-width: 50px;
-}
-.event-date-box .day {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem; font-weight: 700;
-  line-height: 1;
-  color: var(--gold-bright);
-}
-.event-date-box .month {
-  font-size: 0.6rem; font-weight: 600;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-}
+    .btn-gold:hover {
+      background: var(--gold-bright);
+      transform: translateY(-1px);
+    }
 
-/* ── HOVER OVERLAY ── */
-.img-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(11,46,11,0.7) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.card:hover .img-overlay { opacity: 1; }
+    /* ── REVEAL - OPTIMIZED FOR GPU ACCELERATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translate(0, 24px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
 
-/* ── MOBILE MENU ── */
-/* ── MOBILE MENU - OPTIMIZED ── */
-#mobile-menu {
+    .reveal.active {
+      opacity: 1;
+      transform: translate(0, 0);
+      will-change: auto;
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.05s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.15s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.2s;
+    }
+
+    /* ── EYEBROW ── */
+    .eyebrow {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ── GOLD RULE ── */
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .gold-rule::before,
+    .gold-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, var(--gold), var(--gold-bright));
+      margin: 1.25rem 0;
+    }
+
+    /* ── CARDS - OPTIMIZED ── */
+    .card {
+      background: #fff;
+      border: 1px solid rgba(184, 135, 11, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      will-change: box-shadow, border-color;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      border-color: var(--gold);
+    }
+
+    .card:hover .card-img img {
+      transform: scale(1.04);
+    }
+
+    .card-img {
+      overflow: hidden;
+    }
+
+    .card-img img {
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    /* ── STAT PILL ── */
+    .stat-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      border-right: 1px solid rgba(184, 135, 11, 0.15);
+    }
+
+    .stat-pill:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    /* ── HERO ── */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.45rem 1rem;
+      border-radius: 1px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    /* ── HERO TITLE - OPTIMIZED ── */
+    @keyframes heroIn {
+      from {
+        opacity: 0;
+        transform: translate(0, 16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 6vw, 6.5rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      animation: heroIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+      will-change: opacity, transform;
+    }
+
+    .hero-sub {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 520px;
+      animation: heroIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+      will-change: opacity, transform;
+    }
+
+    /* ── NAV SCROLL INDICATOR ── */
+    @keyframes scrollBounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(6px);
+        opacity: 0.5;
+      }
+    }
+
+    .scroll-cue {
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    /* ── MOBILE NAV ── */
+    .mobile-nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 46, 11, 0.97);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(184, 135, 11, 0.2);
+      z-index: 200;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.6rem 0.5rem;
+      padding-bottom: calc(0.6rem + env(safe-area-inset-bottom));
+    }
+
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+      min-width: 48px;
+    }
+
+    .mobile-nav-item.active,
+    .mobile-nav-item:hover {
+      color: var(--gold-bright);
+    }
+
+    .mobile-nav-item .iconify {
+      font-size: 1.3rem;
+    }
+
+    /* ── FEATURE GRID ── */
+    .feature-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background: var(--gold-pale);
+      border: 1px solid rgba(184, 135, 11, 0.2);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1.4rem;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover .feature-icon-wrap {
+      background: var(--forest);
+      color: var(--gold-bright);
+      border-color: var(--forest);
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.5rem;
+      line-height: 0.5;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      display: block;
+    }
+
+    /* ── JOB TAG ── */
+    .job-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid rgba(184, 135, 11, 0.3);
+      border-radius: 1px;
+      color: var(--gold);
+      background: var(--gold-pale);
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-pattern {
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(212, 165, 32, 0.15) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+
+    /* ── FOOTER ── */
+    .footer-bg {
+      background: var(--forest);
+    }
+
+    .footer-link {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--gold-bright);
+    }
+
+    /* ── EVENT DATE BOX ── */
+    .event-date-box {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: var(--forest);
+      color: #fff;
+      padding: 0.4rem 0.75rem;
+      text-align: center;
+      border-radius: 1px;
+      min-width: 50px;
+    }
+
+    .event-date-box .day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold-bright);
+    }
+
+    .event-date-box .month {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ── HOVER OVERLAY ── */
+    .img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11, 46, 11, 0.7) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .card:hover .img-overlay {
+      opacity: 1;
+    }
+
+    /* ── MOBILE MENU ── */
+    #mobile-menu {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: var(--forest);
   z-index: 300;
-  transform: translateX(-100%);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease-out, visibility 0.15s;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 2.5rem 2.5rem calc(2rem + env(safe-area-inset-bottom)) 2.5rem;
-  box-sizing: border-box;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
-#mobile-menu.open { transform: translateX(0); }
+
+#mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 .mobile-menu-link {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; font-weight: 500;
-  color: rgba(255,255,255,0.75);
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   display: block;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid rgba(184,135,11,0.1);
-  transition: color 0.2s, padding-left 0.3s;
-  line-height: 1.4;
+  margin: 0.6rem 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+  text-align: center;
 }
-.mobile-menu-link:hover, .mobile-menu-link.active { color: var(--gold-bright); padding-left: 0.75rem; }
 
-/* ── SEARCH ── */
-.search-input {
-  background: rgba(11,46,11,0.05);
-  border: 1px solid rgba(184,135,11,0.2);
-  border-radius: 1px;
-  padding: 0.5rem 1rem 0.5rem 2.5rem;
-  font-size: 0.8rem;
-  font-family: 'Outfit', sans-serif;
-  color: var(--charcoal);
-  width: 100%;
-  transition: all 0.3s;
-  outline: none;
+.mobile-menu-link:hover,
+.mobile-menu-link.active {
+  color: var(--gold-bright);
+  transform: scale(1.05);
 }
-.search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,135,11,0.08); }
-.search-input::placeholder { color: var(--muted); }
-</style>
 
-<style id="global-responsive-fixes">
-/* GLOBAL RESPONSIVE FIXES */
-img { max-width: 100%; height: auto; }
+    /* ── SEARCH ── */
+    .search-input {
+      background: rgba(11, 46, 11, 0.05);
+      border: 1px solid rgba(184, 135, 11, 0.2);
+      border-radius: 1px;
+      padding: 0.5rem 1rem 0.5rem 2.5rem;
+      font-size: 0.8rem;
+      font-family: 'Outfit', sans-serif;
+      color: var(--charcoal);
+      width: 100%;
+      transition: all 0.3s;
+      outline: none;
+    }
 
-/* Hero mobile fix */
-.hero-wrapper { position:relative; width:100%; min-height:clamp(600px,78vh,820px); overflow:hidden; border-radius:3px; }
-.hero-content { position:relative; z-index:10; height:100%; min-height:clamp(600px,78vh,820px); display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(2rem,5vw,4.5rem); padding-top:6rem; }
+    .search-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(184, 135, 11, 0.08);
+    }
 
-@media (max-width: 768px) {
-  /* Hero: let it grow with content */
-  .hero-wrapper { min-height: auto !important; height: auto !important; overflow: visible !important; }
-  .hero-content { min-height: auto !important; height: auto !important; padding: 2rem 1.5rem 4rem !important; padding-top: 5rem !important; }
-  .hero-title { font-size: clamp(2rem, 8vw, 3rem) !important; }
-  .hero-sub { font-size: 0.9rem !important; margin-bottom: 1.5rem !important; }
-  .hero-badge { font-size: 0.55rem !important; padding: 0.35rem 0.75rem !important; }
-  .scroll-cue { display: none !important; }
+    .search-input::placeholder {
+      color: var(--muted);
+    }
+  </style>
 
-  /* Fix Stats Bar */
-  .stat-pill { padding: 1rem !important; }
-  .stat-number { font-size: 2rem !important; }
-  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
-  /* Fix Mosaic */
-  .features-grid > div > div[style*="height:480px"] { height: auto !important; }
-  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-  /* Fix Footer Grid */
-  footer > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
-  footer > div > div:first-child > div { grid-column: 1 / -1 !important; }
-  /* Fix Founder Bio */
-  .reveal[style*="flex-wrap:wrap"] > div { min-width: 100% !important; }
-  /* Fix feature cards grid */
-  div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
-  /* Fix CTA buttons */
-  .btn-gold, .btn-primary { font-size: 0.7rem !important; padding: 0.6rem 1.2rem !important; }
-  /* Fix Hotels grid */
-  #home-hr-container { grid-template-columns: 1fr !important; }
-}
-@media (max-width: 480px) {
-  .hero-title { font-size: 1.9rem !important; line-height: 1.15 !important; }
-  .reveal[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
-}
-</style>
+  <style id="global-responsive-fixes">
+    /* GLOBAL RESPONSIVE FIXES */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Hero mobile fix */
+    .hero-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: clamp(600px, 78vh, 820px);
+      overflow: hidden;
+      border-radius: 3px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      min-height: clamp(600px, 78vh, 820px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(2rem, 5vw, 4.5rem);
+      padding-top: 6rem;
+    }
+
+    @media (max-width: 768px) {
+
+      /* Hero: let it grow with content */
+      .hero-wrapper {
+        min-height: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      .hero-content {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 2rem 1.5rem 4rem !important;
+        padding-top: 5rem !important;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem) !important;
+      }
+
+      .hero-sub {
+        font-size: 0.9rem !important;
+        margin-bottom: 1.5rem !important;
+      }
+
+      .hero-badge {
+        font-size: 0.55rem !important;
+        padding: 0.35rem 0.75rem !important;
+      }
+
+      .scroll-cue {
+        display: none !important;
+      }
+
+      /* Fix Stats Bar */
+      .stat-pill {
+        padding: 1rem !important;
+      }
+
+      .stat-number {
+        font-size: 2rem !important;
+      }
+
+      .reveal[style*="grid-template-columns:repeat(4,1fr)"] {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1rem !important;
+      }
+
+      /* Fix Mosaic */
+      .features-grid>div>div[style*="height:480px"] {
+        height: auto !important;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+      }
+
+      /* Fix Footer Grid */
+      footer>div>div:first-child {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+
+      footer>div>div:first-child>div {
+        grid-column: 1 / -1 !important;
+      }
+
+      /* Fix Founder Bio */
+      .reveal[style*="flex-wrap:wrap"]>div {
+        min-width: 100% !important;
+      }
+
+      /* Fix feature cards grid */
+      div[style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Fix CTA buttons */
+      .btn-gold,
+      .btn-primary {
+        font-size: 0.7rem !important;
+        padding: 0.6rem 1.2rem !important;
+      }
+
+      /* Fix Hotels grid */
+      #home-hr-container {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.9rem !important;
+        line-height: 1.15 !important;
+      }
+
+      .reveal[style*="grid-template-columns:repeat(4,1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ═══════ MOBILE FULL-SCREEN MENU ═══════ -->
-<div id="mobile-menu">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;width:100%;">
-    <span style="font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1;">Explore <span style="color:var(--gold-bright)">Ibadan</span></span>
-    <button id="menu-close" style="background:rgba(255,255,255,0.92);border:none;color:var(--forest);font-size:1.6rem;cursor:pointer;padding:0.15rem 0.5rem;border-radius:6px;line-height:1;display:flex;align-items:center;justify-content:center;">✕</button>
-  </div>
+  <!-- ═══════ MOBILE FULL-SCREEN MENU ═══════ -->
+  <div id="mobile-menu">
+  <button id="menu-close" style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(184,135,11,0.2);color:var(--gold-bright);font-size:1.4rem;cursor:pointer;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;">✕</button>
 
-
-<a href="index.html" class="mobile-menu-link active">Home</a>
+  <a href="index.html" class="mobile-menu-link active">Home</a>
   <a href="about.html" class="mobile-menu-link">About Us</a>
   <a href="events.html" class="mobile-menu-link">Events</a>
   <a href="jobs.html" class="mobile-menu-link">Jobs</a>
   <a href="vendors.html" class="mobile-menu-link">Vendors</a>
   <a href="hotels-restaurants.html" class="mobile-menu-link">Hotels & Dining</a>
   <a href="services.html" class="mobile-menu-link">Services</a>
-  <a href="contact.html" class="btn-gold" style="margin-top:1rem;align-self:flex-start;">Contact Us</a>
-
+  <a href="contact.html" class="btn-gold" style="margin-top:2rem;">Contact Us</a>
 </div>
 
-<!-- ═══════ HEADER ═══════ -->
-<header id="site-header">
-  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;">
+  <!-- ═══════ HEADER ═══════ -->
+  <header id="site-header">
+    <div
+      style="max-width:1280px;margin:0 auto;padding:0 1.5rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;">
 
-    <!-- Logo -->
-    <a href="index.html" class="logo-text" style="flex-shrink:0;">
-      Explore <span class="logo-accent">Ibadan</span>
-    </a>
+      <!-- Logo -->
+      <a href="index.html" class="logo-text" style="flex-shrink:0;">
+        Explore <span class="logo-accent">Ibadan</span>
+      </a>
 
-    <!-- Search (desktop) -->
-    <div style="flex:1;max-width:300px;display:none;position:relative;" class="desktop-search">
-      <span class="iconify" data-icon="solar:minimalistic-magnifer-linear" style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.95rem;"></span>
-      <input type="text" placeholder="Search jobs, events…" class="search-input">
-    </div>
-
-    <!-- Desktop Nav -->
-    <nav style="display:none;align-items:center;gap:2rem;" class="desktop-nav">
-      <a href="index.html" class="nav-a active">Home</a>
-      <a href="about.html" class="nav-a">About</a>
-      <a href="events.html" class="nav-a">Events</a>
-      <a href="jobs.html" class="nav-a">Jobs</a>
-      <a href="vendors.html" class="nav-a">Vendors</a>
-      <a href="hotels-restaurants.html" class="nav-a">Hotels & Dining</a>
-      <a href="services.html" class="nav-a">Services</a>
-      <a href="contact.html" class="btn-primary" style="margin-left:0.5rem;">Contact Us</a>
-    </nav>
-
-    <!-- Hamburger -->
-    <button id="menu-open" style="background:var(--forest);border:none;color:#fff;cursor:pointer;padding:0.5rem;border-radius:4px;" class="hamburger-btn">
-      <span class="iconify" data-icon="solar:hamburger-menu-linear" style="font-size:1.6rem;"></span>
-    </button>
-  </div>
-</header>
-
-<!-- ═══════ MAIN ═══════ -->
-<main style="padding-bottom:5rem;">
-
-<!-- ── HERO ── -->
-<section style="padding:1.5rem 1.5rem 0;max-width:1280px;margin:0 auto;">
-  <div class="hero-wrapper" style="position:relative;width:100%;min-height:clamp(600px,78vh,820px);height:auto;overflow:hidden;border-radius:3px;">
-    <!-- BG Image: Optimized for performance -->
-    <img src="./new%20hero.jpg"
-         alt="Ibadan cityscape aerial view from Mapo Hall"
-         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"
-         loading="eager"
-         decoding="async"
-         fetchpriority="high">
-    <!-- Cinematic overlays -->
-    <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(11,46,11,0.96) 0%,rgba(11,46,11,0.72) 50%,rgba(11,46,11,0.25) 100%);"></div>
-    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,46,11,0.9) 0%,transparent 55%);"></div>
-
-    <!-- Gold frame accent -->
-    <div style="position:absolute;inset:1rem;border:1px solid rgba(184,135,11,0.18);pointer-events:none;border-radius:2px;"></div>
-
-    <!-- Hero Content -->
-    <div class="hero-content" style="position:relative;z-index:10;height:100%;min-height:clamp(600px,78vh,820px);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(2rem,5vw,4.5rem);padding-top:6rem;">
-      <!-- Badge -->
-      <div style="margin-bottom:1.25rem;animation:heroIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s both;">
-        <span class="hero-badge">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--gold-bright);animation:pulse 2s infinite;"></span>
-          The City of Brown Roofs · Est. 1829
-        </span>
+      <!-- Search (desktop) -->
+      <div style="flex:1;max-width:300px;display:none;position:relative;" class="desktop-search">
+        <span class="iconify" data-icon="solar:minimalistic-magnifer-linear"
+          style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.95rem;"></span>
+        <input type="text" placeholder="Search jobs, events…" class="search-input">
       </div>
 
-      <h1 class="hero-title">Discover Ibadan.<br>Your city, your events, your opportunities.</h1>
+      <!-- Desktop Nav -->
+      <nav style="display:none;align-items:center;gap:2rem;" class="desktop-nav">
+        <a href="index.html" class="nav-a active">Home</a>
+        <a href="about.html" class="nav-a">About</a>
+        <a href="events.html" class="nav-a">Events</a>
+        <a href="jobs.html" class="nav-a">Jobs</a>
+        <a href="vendors.html" class="nav-a">Vendors</a>
+        <a href="hotels-restaurants.html" class="nav-a">Hotels & Dining</a>
+        <a href="services.html" class="nav-a">Services</a>
+        <a href="contact.html" class="btn-primary" style="margin-left:0.5rem;">Contact Us</a>
+      </nav>
 
-      <p class="hero-sub" style="margin:1.5rem 0 2.25rem;">
-        Explore Ibadan is your hub for everything happening in Ibadan. We connect people to events, jobs, trusted vendors, and event services.
-      </p>
+      <!-- Hamburger -->
+      <button id="menu-open"
+        style="background:var(--forest);border:none;color:#fff;cursor:pointer;padding:0.5rem;border-radius:4px;"
+        class="hamburger-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
 
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;animation:heroIn 1s cubic-bezier(0.22,1,0.36,1) 0.7s both;">
-        <a href="events.html" class="btn-gold">Upcoming Events</a>
-        <a href="jobs.html" class="btn-gold" style="background:var(--forest);color:var(--gold-bright);">Find Jobs</a>
-        <a href="vendors.html" class="btn-gold" style="background:var(--forest);color:var(--gold-bright);">Find Vendors</a>
-        <a href="contact.html" class="btn-gold" style="background:transparent;border:1px solid var(--gold);color:var(--gold-bright);">Hire Us</a>
+  <!-- ═══════ MAIN ═══════ -->
+  <main style="padding-bottom:5rem;">
+
+    <!-- ── HERO ── -->
+    <section style="padding:1.5rem 1.5rem 0;max-width:1280px;margin:0 auto;">
+      <div class="hero-wrapper"
+        style="position:relative;width:100%;min-height:clamp(600px,78vh,820px);height:auto;overflow:hidden;border-radius:3px;">
+        <!-- BG Image: Optimized for performance -->
+        <img src="./new%20hero.jpg" alt="Ibadan cityscape aerial view from Mapo Hall"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"
+          loading="eager" decoding="async" fetchpriority="high">
+        <!-- Cinematic overlays -->
+        <div
+          style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(11,46,11,0.96) 0%,rgba(11,46,11,0.72) 50%,rgba(11,46,11,0.25) 100%);">
+        </div>
+        <div
+          style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,46,11,0.9) 0%,transparent 55%);">
+        </div>
+
+        <!-- Gold frame accent -->
+        <div
+          style="position:absolute;inset:1rem;border:1px solid rgba(184,135,11,0.18);pointer-events:none;border-radius:2px;">
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content"
+          style="position:relative;z-index:10;height:100%;min-height:clamp(600px,78vh,820px);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(2rem,5vw,4.5rem);padding-top:6rem;">
+          <!-- Badge -->
+          <div style="margin-bottom:1.25rem;animation:heroIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s both;">
+            <span class="hero-badge">
+              <span
+                style="width:6px;height:6px;border-radius:50%;background:var(--gold-bright);animation:pulse 2s infinite;"></span>
+              The City of Brown Roofs · Est. 1829
+            </span>
+          </div>
+
+          <h1 class="hero-title">Discover Ibadan.<br>Your city, your events, your opportunities.</h1>
+
+          <p class="hero-sub" style="margin:1.5rem 0 2.25rem;">
+            Explore Ibadan is your hub for everything happening in Ibadan. We connect people to events, jobs, trusted
+            vendors, and event services.
+          </p>
+
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;animation:heroIn 1s cubic-bezier(0.22,1,0.36,1) 0.7s both;">
+            <a href="events.html" class="btn-gold">Upcoming Events</a>
+            <a href="jobs.html" class="btn-gold" style="background:var(--forest);color:var(--gold-bright);">Find
+              Jobs</a>
+            <a href="vendors.html" class="btn-gold" style="background:var(--forest);color:var(--gold-bright);">Find
+              Vendors</a>
+            <a href="contact.html" class="btn-gold"
+              style="background:transparent;border:1px solid var(--gold);color:var(--gold-bright);">Hire Us</a>
+          </div>
+
+          <!-- Scroll cue -->
+          <div class="scroll-cue"
+            style="position:absolute;bottom:2.5rem;right:3rem;display:flex;flex-direction:column;align-items:center;gap:0.4rem;color:rgba(255,255,255,0.4);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;">
+            <span class="iconify" data-icon="solar:arrow-down-linear" style="font-size:1rem;"></span>
+            Scroll
+          </div>
+        </div>
       </div>
+    </section>
 
-      <!-- Scroll cue -->
-      <div class="scroll-cue" style="position:absolute;bottom:2.5rem;right:3rem;display:flex;flex-direction:column;align-items:center;gap:0.4rem;color:rgba(255,255,255,0.4);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;">
-        <span class="iconify" data-icon="solar:arrow-down-linear" style="font-size:1rem;"></span>
-        Scroll
+
+    <!-- ── STATS BAR ── -->
+    <section style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+      <div class="reveal"
+        style="background:#fff;border:1px solid rgba(184,135,11,0.12);margin-top:-3rem;position:relative;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);">
+        <div class="stat-pill">
+          <span class="stat-number">12k+</span>
+          <span class="stat-label">Active Members</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-number" style="color:var(--gold);">340+</span>
+          <span class="stat-label">Jobs Posted</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-number" style="color:var(--terra);">85</span>
+          <span class="stat-label">Events Hosted</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-number">5k+</span>
+          <span class="stat-label">Posts Shared</span>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
 
-<!-- ── STATS BAR ── -->
-<section style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
-  <div class="reveal" style="background:#fff;border:1px solid rgba(184,135,11,0.12);margin-top:-3rem;position:relative;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);">
-    <div class="stat-pill">
-      <span class="stat-number">12k+</span>
-      <span class="stat-label">Active Members</span>
-    </div>
-    <div class="stat-pill">
-      <span class="stat-number" style="color:var(--gold);">340+</span>
-      <span class="stat-label">Jobs Posted</span>
-    </div>
-    <div class="stat-pill">
-      <span class="stat-number" style="color:var(--terra);">85</span>
-      <span class="stat-label">Events Hosted</span>
-    </div>
-    <div class="stat-pill">
-      <span class="stat-number">5k+</span>
-      <span class="stat-label">Posts Shared</span>
-    </div>
-  </div>
-</section>
+    <!-- ── ABOUT / FEATURES ── -->
+    <section style="padding:6rem 1.5rem;max-width:1280px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;" class="features-grid">
 
-
-<!-- ── ABOUT / FEATURES ── -->
-<section style="padding:6rem 1.5rem;max-width:1280px;margin:0 auto;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;" class="features-grid">
-
-    <!-- Left: Image mosaic -->
-    <div class="reveal" style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;height:480px;">
-      <div style="grid-row:span 2;overflow:hidden;border-radius:2px;">
-        <img loading="lazy" 
-             src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&q=80&auto=format&fit=crop"
-             srcset="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=300&q=80&auto=format&fit=crop 300w,
+        <!-- Left: Image mosaic -->
+        <div class="reveal"
+          style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;height:480px;">
+          <div style="grid-row:span 2;overflow:hidden;border-radius:2px;">
+            <img loading="lazy"
+              src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&q=80&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=300&q=80&auto=format&fit=crop 300w,
                      https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&q=80&auto=format&fit=crop 500w,
                      https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80&auto=format&fit=crop 800w"
-             sizes="(max-width: 768px) 100vw, 400px"
-             alt="Ibadan city streets" 
-             style="width:100%;height:100%;object-fit:cover;"
-             decoding="async">
-      </div>
-      <div style="overflow:hidden;border-radius:2px;">
-        <img loading="lazy" 
-             src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80&auto=format&fit=crop"
-             srcset="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=250&q=80&auto=format&fit=crop 250w,
+              sizes="(max-width: 768px) 100vw, 400px" alt="Ibadan city streets"
+              style="width:100%;height:100%;object-fit:cover;" decoding="async">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;">
+            <img loading="lazy"
+              src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=250&q=80&auto=format&fit=crop 250w,
                      https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80&auto=format&fit=crop 400w,
                      https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&q=80&auto=format&fit=crop 600w"
-             sizes="(max-width: 768px) 100vw, 200px"
-             alt="Vibrant market life" 
-             style="width:100%;height:100%;object-fit:cover;"
-             decoding="async">
-      </div>
-      <div style="overflow:hidden;border-radius:2px;">
-        <img loading="lazy" 
-             src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=400&q=80&auto=format&fit=crop"
-             srcset="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=250&q=80&auto=format&fit=crop 250w,
+              sizes="(max-width: 768px) 100vw, 200px" alt="Vibrant market life"
+              style="width:100%;height:100%;object-fit:cover;" decoding="async">
+          </div>
+          <div style="overflow:hidden;border-radius:2px;">
+            <img loading="lazy"
+              src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=400&q=80&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=250&q=80&auto=format&fit=crop 250w,
                      https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=400&q=80&auto=format&fit=crop 400w,
                      https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=600&q=80&auto=format&fit=crop 600w"
-             sizes="(max-width: 768px) 100vw, 200px"
-             alt="Professional community" 
-             style="width:100%;height:100%;object-fit:cover;"
-             decoding="async">
-      </div>
-      <!-- Decorative gold box -->
-      <div style="position:absolute;bottom:-1.5rem;left:-1.5rem;width:6rem;height:6rem;border:2px solid var(--gold);border-radius:2px;z-index:-1;"></div>
-    </div>
-
-    <!-- Right: Text -->
-    <div class="reveal reveal-delay-2">
-      <span class="eyebrow" style="margin-bottom:1.25rem;">About the Platform</span>
-      <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:600;color:var(--charcoal);line-height:1.2;margin-bottom:0;">
-        Ibadan's Premier<br><em>Community Hub</em>
-      </h2>
-      <div class="section-divider"></div>
-      <p style="color:var(--mid);line-height:1.8;font-size:0.95rem;margin-bottom:1.5rem;">
-        From the ancient walls of Oja'ba to the buzzing corridors of UI, Ibadan is alive with potential. We created this platform to connect every professional, entrepreneur, and creative across the seven hills.
-      </p>
-      <p style="color:var(--mid);line-height:1.8;font-size:0.95rem;margin-bottom:2.5rem;">
-        Whether you're hunting for opportunity, sharing your expertise, or simply staying connected with the heartbeat of the city — Explore Ibadan is your home.
-      </p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
-        <div class="feature-card" style="display:flex;flex-direction:column;gap:0.75rem;padding:1.25rem;border:1px solid rgba(184,135,11,0.12);transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.12)'">
-          <div class="feature-icon-wrap">
-            <span class="iconify" data-icon="solar:users-group-rounded-bold"></span>
+              sizes="(max-width: 768px) 100vw, 200px" alt="Professional community"
+              style="width:100%;height:100%;object-fit:cover;" decoding="async">
           </div>
-          <h5 style="font-size:0.95rem;font-weight:600;color:var(--charcoal);margin:0;">Community Feed</h5>
-          <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin:0;">Connect, share, and collaborate with thousands of Ibadanites.</p>
-        </div>
-        <div class="feature-card" style="display:flex;flex-direction:column;gap:0.75rem;padding:1.25rem;border:1px solid rgba(184,135,11,0.12);transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.12)'">
-          <div class="feature-icon-wrap">
-            <span class="iconify" data-icon="solar:case-minimalistic-bold"></span>
+          <!-- Decorative gold box -->
+          <div
+            style="position:absolute;bottom:-1.5rem;left:-1.5rem;width:6rem;height:6rem;border:2px solid var(--gold);border-radius:2px;z-index:-1;">
           </div>
-          <h5 style="font-size:0.95rem;font-weight:600;color:var(--charcoal);margin:0;">Jobs Board</h5>
-          <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin:0;">Discover roles across tech, finance, agriculture and more.</p>
         </div>
-        <div class="feature-card" style="display:flex;flex-direction:column;gap:0.75rem;padding:1.25rem;border:1px solid rgba(184,135,11,0.12);transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.12)'">
-          <div class="feature-icon-wrap">
-            <span class="iconify" data-icon="solar:calendar-date-bold"></span>
+
+        <!-- Right: Text -->
+        <div class="reveal reveal-delay-2">
+          <span class="eyebrow" style="margin-bottom:1.25rem;">About the Platform</span>
+          <h2
+            style="font-size:clamp(2rem,3.5vw,3rem);font-weight:600;color:var(--charcoal);line-height:1.2;margin-bottom:0;">
+            Ibadan's Premier<br><em>Community Hub</em>
+          </h2>
+          <div class="section-divider"></div>
+          <p style="color:var(--mid);line-height:1.8;font-size:0.95rem;margin-bottom:1.5rem;">
+            From the ancient walls of Oja'ba to the buzzing corridors of UI, Ibadan is alive with potential. We created
+            this platform to connect every professional, entrepreneur, and creative across the seven hills.
+          </p>
+          <p style="color:var(--mid);line-height:1.8;font-size:0.95rem;margin-bottom:2.5rem;">
+            Whether you're hunting for opportunity, sharing your expertise, or simply staying connected with the
+            heartbeat of the city — Explore Ibadan is your home.
+          </p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+            <div class="feature-card"
+              style="display:flex;flex-direction:column;gap:0.75rem;padding:1.25rem;border:1px solid rgba(184,135,11,0.12);transition:border-color 0.3s;"
+              onmouseover="this.style.borderColor='var(--gold)'"
+              onmouseout="this.style.borderColor='rgba(184,135,11,0.12)'">
+              <div class="feature-icon-wrap">
+                <span class="iconify" data-icon="solar:users-group-rounded-bold"></span>
+              </div>
+              <h5 style="font-size:0.95rem;font-weight:600;color:var(--charcoal);margin:0;">Community Feed</h5>
+              <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin:0;">Connect, share, and collaborate
+                with thousands of Ibadanites.</p>
+            </div>
+            <div class="feature-card"
+              style="display:flex;flex-direction:column;gap:0.75rem;padding:1.25rem;border:1px solid rgba(184,135,11,0.12);transition:border-color 0.3s;"
+              onmouseover="this.style.borderColor='var(--gold)'"
+              onmouseout="this.style.borderColor='rgba(184,135,11,0.12)'">
+              <div class="feature-icon-wrap">
+                <span class="iconify" data-icon="solar:case-minimalistic-bold"></span>
+              </div>
+              <h5 style="font-size:0.95rem;font-weight:600;color:var(--charcoal);margin:0;">Jobs Board</h5>
+              <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin:0;">Discover roles across tech,
+                finance, agriculture and more.</p>
+            </div>
+            <div class="feature-card"
+              style="display:flex;flex-direction:column;gap:0.75rem;padding:1.25rem;border:1px solid rgba(184,135,11,0.12);transition:border-color 0.3s;"
+              onmouseover="this.style.borderColor='var(--gold)'"
+              onmouseout="this.style.borderColor='rgba(184,135,11,0.12)'">
+              <div class="feature-icon-wrap">
+                <span class="iconify" data-icon="solar:calendar-date-bold"></span>
+              </div>
+              <h5 style="font-size:0.95rem;font-weight:600;color:var(--charcoal);margin:0;">Events</h5>
+              <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin:0;">From Cocoa House summits to Mapo
+                Hill festivals.</p>
+            </div>
+            <div class="feature-card"
+              style="display:flex;flex-direction:column;gap:0.75rem;padding:1.25rem;border:1px solid rgba(184,135,11,0.12);transition:border-color 0.3s;"
+              onmouseover="this.style.borderColor='var(--gold)'"
+              onmouseout="this.style.borderColor='rgba(184,135,11,0.12)'">
+              <div class="feature-icon-wrap">
+                <span class="iconify" data-icon="solar:user-id-bold"></span>
+              </div>
+              <h5 style="font-size:0.95rem;font-weight:600;color:var(--charcoal);margin:0;">Directory</h5>
+              <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin:0;">Find professionals by industry,
+                skill, or neighbourhood.</p>
+            </div>
           </div>
-          <h5 style="font-size:0.95rem;font-weight:600;color:var(--charcoal);margin:0;">Events</h5>
-          <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin:0;">From Cocoa House summits to Mapo Hill festivals.</p>
-        </div>
-        <div class="feature-card" style="display:flex;flex-direction:column;gap:0.75rem;padding:1.25rem;border:1px solid rgba(184,135,11,0.12);transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.12)'">
-          <div class="feature-icon-wrap">
-            <span class="iconify" data-icon="solar:user-id-bold"></span>
-          </div>
-          <h5 style="font-size:0.95rem;font-weight:600;color:var(--charcoal);margin:0;">Directory</h5>
-          <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin:0;">Find professionals by industry, skill, or neighbourhood.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
 
-<!-- ── FEATURED JOBS ── -->
-<section style="padding:5rem 1.5rem;background:var(--parchment);">
-  <div style="max-width:1280px;margin:0 auto;">
+    <!-- ── FEATURED JOBS ── -->
+    <section style="padding:5rem 1.5rem;background:var(--parchment);">
+      <div style="max-width:1280px;margin:0 auto;">
 
-    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;">
-      <div>
-        <span class="eyebrow" style="margin-bottom:1rem;">Opportunities</span>
-        <h2 style="font-size:clamp(1.8rem,3vw,2.75rem);font-weight:600;color:var(--charcoal);margin:0;line-height:1.2;">Featured Jobs in Ibadan</h2>
-      </div>
-      <a href="jobs.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--forest);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:all 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--forest)'">
-        View All Jobs <span class="iconify" data-icon="solar:arrow-right-linear"></span>
-      </a>
-    </div>
-
-    <div id="home-jobs-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
-      <!-- Dynamic Jobs will load here -->
-    </div>
-  </div>
-</section>
-
-
-<!-- ── UPCOMING EVENTS ── -->
-<section style="padding:6rem 1.5rem;max-width:1280px;margin:0 auto;">
-  <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;">
-    <div>
-      <span class="eyebrow" style="margin-bottom:1rem;">What's On</span>
-      <h2 style="font-size:clamp(1.8rem,3vw,2.75rem);font-weight:600;color:var(--charcoal);margin:0;line-height:1.2;">Upcoming in Ibadan</h2>
-    </div>
-    <a href="events.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--forest);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--forest)'">
-      See All Events <span class="iconify" data-icon="solar:arrow-right-linear"></span>
-    </a>
-  </div>
-
-  <div id="home-events-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
-    <!-- Dynamic Events will load here -->
-  </div>
-</section>
-
-
-<!-- ── STAY & DINE HIGHLIGHTS ── -->
-<section style="padding:6rem 1.5rem;background:var(--parchment);">
-  <div style="max-width:1280px;margin:0 auto;">
-    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;">
-      <div>
-        <span class="eyebrow" style="margin-bottom:1rem;">Stay & Dine</span>
-        <h2 style="font-size:clamp(1.8rem,3vw,2.75rem);font-weight:600;color:var(--charcoal);margin:0;line-height:1.2;">Hotels & restaurants to bookmark</h2>
-      </div>
-      <a href="hotels-restaurants.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--forest);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--forest)'">
-        Explore Hotels & Dining <span class="iconify" data-icon="solar:arrow-right-linear"></span>
-      </a>
-    </div>
-
-    <div id="home-hr-container" class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;align-items:stretch;">
-      <!-- Dynamic Hotels & Restaurants will load here -->
-    </div>
-  </div>
-</section>
-
-
-<!-- ── TESTIMONIALS ── -->
-<section style="padding:6rem 1.5rem;background:var(--forest);">
-  <div style="max-width:1280px;margin:0 auto;">
-    <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
-      <span class="eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1rem;">
-        <span style="background:var(--gold);"></span>
-        Community Love
-        <span style="background:var(--gold);"></span>
-      </span>
-      <h2 style="font-size:clamp(1.8rem,3vw,2.75rem);font-weight:500;color:#fff;margin:0 0 0.75rem;font-style:italic;">What Ibadan People Say</h2>
-      <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;max-width:500px;margin:0 auto;line-height:1.7;">Real stories from residents, professionals, and newcomers who found their community here.</p>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
-
-      <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(184,135,11,0.2);padding:2rem;transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.2)'">
-        <span class="testimonial-quote">"</span>
-        <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">Found my dream job in Bodija through Explore Ibadan within just 3 weeks! The community is incredibly supportive and responsive.</p>
-        <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
+        <div class="reveal"
+          style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;">
           <div>
-            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Adebayo Oluwaseun</div>
-            <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">Software Engineer, Bodija</div>
+            <span class="eyebrow" style="margin-bottom:1rem;">Opportunities</span>
+            <h2
+              style="font-size:clamp(1.8rem,3vw,2.75rem);font-weight:600;color:var(--charcoal);margin:0;line-height:1.2;">
+              Featured Jobs in Ibadan</h2>
           </div>
+          <a href="jobs.html"
+            style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--forest);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:all 0.2s;"
+            onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--forest)'">
+            View All Jobs <span class="iconify" data-icon="solar:arrow-right-linear"></span>
+          </a>
+        </div>
+
+        <div id="home-jobs-container"
+          style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
+          <!-- Dynamic Jobs will load here -->
         </div>
       </div>
+    </section>
 
-      <div class="reveal reveal-delay-1" style="background:rgba(255,255,255,0.04);border:1px solid rgba(184,135,11,0.2);padding:2rem;transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.2)'">
-        <span class="testimonial-quote">"</span>
-        <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">As a Lagos returnee, this platform helped me reconnect with Ibadan's growing tech scene. The events section is absolute gold.</p>
-        <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
-          <div>
-            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Omobolanle Temitope</div>
-            <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">UX Designer, New Bodija</div>
-          </div>
+
+    <!-- ── UPCOMING EVENTS ── -->
+    <section style="padding:6rem 1.5rem;max-width:1280px;margin:0 auto;">
+      <div class="reveal"
+        style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <span class="eyebrow" style="margin-bottom:1rem;">What's On</span>
+          <h2
+            style="font-size:clamp(1.8rem,3vw,2.75rem);font-weight:600;color:var(--charcoal);margin:0;line-height:1.2;">
+            Upcoming in Ibadan</h2>
         </div>
-      </div>
-
-      <div class="reveal reveal-delay-2" style="background:rgba(255,255,255,0.04);border:1px solid rgba(184,135,11,0.2);padding:2rem;transition:border-color 0.3s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(184,135,11,0.2)'">
-        <span class="testimonial-quote">"</span>
-        <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">My business went from local to citywide after posting in the community feed. The members here are serious professionals who get things done.</p>
-        <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
-          <div>
-            <div style="font-weight:600;color:#fff;font-size:0.85rem;">Emmanuel Felix</div>
-            <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">Entrepreneur, Ring Road</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ── FOUNDER BIOGRAPHY ── -->
-<section style="padding:5rem 0;background:var(--ivory);overflow:hidden;">
-  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
-    <div class="reveal" style="display:flex;align-items:center;gap:3rem;flex-wrap:wrap;">
-      <div style="flex:1;min-width:300px;">
-        <img loading="lazy" 
-             src="founder.jpg" 
-             alt="Founder of Explore Ibadan" 
-             style="width:100%;max-width:500px;border-radius:3px;border:1px solid rgba(184,135,11,0.2);box-shadow:0 12px 40px rgba(0,0,0,0.08);"
-             decoding="async">
-      </div>
-      <div style="flex:1;min-width:300px;">
-        <span class="eyebrow" style="margin-bottom:1.25rem;">
-          <span style="background:var(--gold);"></span>
-          The Visionary
-        </span>
-        <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:0.5rem;">
-          Meet the <em>Founder</em>
-        </h2>
-        <h3 style="font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:500;color:var(--gold-bright);margin-bottom:1.25rem;">
-          Alankara Shukurat Opeyemi
-        </h3>
-        <div class="gold-rule"></div>
-        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
-          Long before Explore Ibadan had a name, it started with a simple passion: bringing people together to experience the city in a different way.
-        </p>
-        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
-          Since 2022, I have organized outings, experiences, and events that helped people discover new places, build connections, and create lasting memories. Through those experiences, I noticed something important—many people lived in or visited Ibadan without truly knowing all the city had to offer.
-        </p>
-        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
-          That realization inspired Explore Ibadan.
-        </p>
-        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
-          Today, Explore Ibadan is more than a tourism platform. It is a growing community designed to connect people with the best of the city—from events and experiences to businesses, opportunities, and local communities.
-        </p>
-        <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
-          Our mission is simple: to help more people discover, experience, and connect with Ibadan.
-        </p>
-        <p style="color:var(--mid);font-size:1rem;line-height:1.8;">
-          Because Ibadan is more than a city. It is a culture, a community, and a story worth exploring.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-/* Members Gallery Slideshow */
-.gallery-track-wrapper { overflow:hidden; position:relative; }
-
-.gallery-track { display:flex; gap:1.25rem; width:max-content; }
-
-.gallery-scroll-left { animation: scrollLeft 40s linear infinite; }
-.gallery-scroll-right { animation: scrollRight 40s linear infinite; }
-
-.gallery-track:hover { animation-play-state:paused; }
-
-@keyframes scrollLeft {
-  0% { transform:translateX(0); }
-  100% { transform:translateX(-50%); }
-}
-@keyframes scrollRight {
-  0% { transform:translateX(-50%); }
-  100% { transform:translateX(0); }
-}
-
-.gallery-member {
-  position:relative;
-  width:220px;
-  height:280px;
-  flex-shrink:0;
-  overflow:hidden;
-  border-radius:3px;
-  border:1px solid rgba(184,135,11,0.12);
-  cursor:pointer;
-  transition:border-color 0.3s;
-}
-.gallery-member:hover { border-color:var(--gold); }
-
-.gallery-member img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform 0.6s cubic-bezier(0.22,1,0.36,1);
-}
-.gallery-member:hover img { transform:scale(1.08); }
-
-.gallery-overlay {
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  padding:1.25rem 1rem;
-  background:linear-gradient(to top, rgba(11,46,11,0.92) 0%, rgba(11,46,11,0.5) 60%, transparent 100%);
-  transform:translateY(10px);
-  opacity:0;
-  transition:all 0.35s cubic-bezier(0.22,1,0.36,1);
-}
-.gallery-member:hover .gallery-overlay { transform:translateY(0); opacity:1; }
-
-.gallery-name {
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.15rem;
-  font-weight:700;
-  color:#fff;
-  line-height:1.1;
-  margin-bottom:0.2rem;
-}
-.gallery-role {
-  font-size:0.7rem;
-  font-weight:500;
-  text-transform:uppercase;
-  letter-spacing:0.1em;
-  color:var(--gold-bright);
-}
-</style>
-
-
-
-<!-- ── PHOTO GALLERY ── -->
-<section style="padding:5rem 0;background:#fafafa;overflow:hidden;">
-  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
-    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
-      <span class="eyebrow" style="justify-content:center;margin-bottom:1rem;color:var(--gold);">
-        <span style="background:var(--gold);"></span>
-        Our Community
-        <span style="background:var(--gold);"></span>
-      </span>
-      <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:1rem;">Photo <em>Gallery</em></h2>
-      <div class="gold-rule" style="margin:0 auto;"></div>
-      <p style="color:var(--mid);font-size:0.95rem;line-height:1.8;margin-top:1rem;max-width:520px;margin-left:auto;margin-right:auto;">A glimpse into the vibrant life and culture of Ibadan through our community's eyes.</p>
-    </div>
-
-    <div id="home-gallery-container">
-      <!-- Dynamic gallery photos will load here -->
-    </div>
-  </div>
-</section>
-
-<!-- ── CTA BANNER ── -->
-<section style="padding:6rem 1.5rem;position:relative;overflow:hidden;background:var(--parchment);">
-  <div class="cta-pattern" style="position:absolute;inset:0;opacity:0.6;"></div>
-  <div style="max-width:700px;margin:0 auto;text-align:center;position:relative;">
-    <div class="reveal">
-      <span class="eyebrow" style="justify-content:center;margin-bottom:1.25rem;">
-        <span style="background:var(--gold);"></span>
-        Get Started
-        <span style="background:var(--gold);"></span>
-      </span>
-      <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:1.25rem;">
-        Ready to Connect with<br><em>Fellow Ibadan Indigenes?</em>
-      </h2>
-      <div class="gold-rule"></div>
-      <p style="color:var(--mid);font-size:0.95rem;line-height:1.8;margin-bottom:2.5rem;max-width:520px;margin-left:auto;margin-right:auto;">
-        Join thousands of residents, professionals, and visitors who call Ibadan home. Your city, your community — ancient pride, modern ambition.
-      </p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a href="contact.html" class="btn-gold" style="font-size:0.82rem;padding:0.85rem 2.2rem;">
-          <span class="iconify" data-icon="solar:handshake-bold"></span>
-          Join the Community
-        </a>
-        <a href="https://wa.me/2348135471582" target="_blank" class="btn-ghost" style="font-size:0.82rem;padding:0.85rem 2.2rem;">
-          <span class="iconify" data-icon="logos:whatsapp-icon"></span>
-          Join WhatsApp
+        <a href="events.html"
+          style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--forest);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;"
+          onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--forest)'">
+          See All Events <span class="iconify" data-icon="solar:arrow-right-linear"></span>
         </a>
       </div>
-    </div>
-  </div>
-</section>
 
-</main>
+      <div id="home-events-container"
+        style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
+        <!-- Dynamic Events will load here -->
+      </div>
+    </section>
 
-<!-- ═══════ FOOTER ═══════ -->
-<footer class="footer-bg" style="background:var(--forest);padding:5rem 1.5rem 2.5rem;">
-  <div style="max-width:1280px;margin:0 auto;">
-    <!-- Top grid -->
-    <div style="display:grid;grid-template-columns:2fr 1fr 2fr;gap:3rem;margin-bottom:4rem;">
-      <div>
-        <a href="index.html" style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:1rem;">
-          Explore <span style="color:var(--gold-bright);">Ibadan</span>
-        </a>
-        <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:1.5rem;max-width:260px;">The premier community platform for everyone living, working, and exploring the ancient city of seven hills.</p>
-                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-          <a href="https://www.instagram.com/explore.ibadan?igsh=MXZja2U3c2N2dDk1YQ==" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
-            <span class="iconify" data-icon="ri:instagram-fill" style="font-size:0.9rem;"></span>
-          </a>
-          <a href="https://x.com/exploreibadan06?s=11" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'>
-            <span style="font-size:1rem;font-weight:700;">X</span>
-          </a>
-          <a href="https://www.linkedin.com/in/alankara-shukurat-opeyemi-41a582198?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
-            <span class="iconify" data-icon="ri:linkedin-fill" style="font-size:0.9rem;"></span>
-          </a>
-          <a href="https://www.facebook.com/share/1bWVrsSmgv/" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
-            <span class="iconify" data-icon="ri:facebook-fill" style="font-size:0.9rem;"></span>
-          </a>
-          <a href="https://www.tiktok.com/@exploreib?_r=1&_t=ZS-97BbDlEzW6x" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
-            <span class="iconify" data-icon="ic:baseline-tiktok" style="font-size:0.9rem;"></span>
+
+    <!-- ── STAY & DINE HIGHLIGHTS ── -->
+    <section style="padding:6rem 1.5rem;background:var(--parchment);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div class="reveal"
+          style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;">
+          <div>
+            <span class="eyebrow" style="margin-bottom:1rem;">Stay & Dine</span>
+            <h2
+              style="font-size:clamp(1.8rem,3vw,2.75rem);font-weight:600;color:var(--charcoal);margin:0;line-height:1.2;">
+              Hotels & restaurants to bookmark</h2>
+          </div>
+          <a href="hotels-restaurants.html"
+            style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--forest);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;"
+            onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--forest)'">
+            Explore Hotels & Dining <span class="iconify" data-icon="solar:arrow-right-linear"></span>
           </a>
         </div>
-      </div>
-      <div>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Platform</h4>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.8rem;"><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="events.html" class="footer-link">Events</a></li><li><a href="jobs.html" class="footer-link">Jobs</a></li><li><a href="vendors.html" class="footer-link">Vendors</a></li><li><a href="services.html" class="footer-link">Services</a></li></ul>
-      </div>
-      
-      <div>
-        <h4 style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">Newsletter</h4>
-        <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:1rem;line-height:1.6;">Get the latest jobs and events delivered every week.</p>
-        <div style="display:flex;gap:0.5rem;">
-          <input type="email" placeholder="Your email address" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(184,135,11,0.2);padding:0.65rem 1rem;font-size:0.8rem;font-family:'Outfit',sans-serif;color:#fff;outline:none;border-radius:1px;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(184,135,11,0.2)'" placeholder-style="color:rgba(255,255,255,0.3)">
-          <button class="btn-gold" style="padding:0.65rem 1.25rem;font-size:0.7rem;white-space:nowrap;">Join</button>
+
+        <div id="home-hr-container" class="reveal"
+          style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;align-items:stretch;">
+          <!-- Dynamic Hotels & Restaurants will load here -->
         </div>
       </div>
+    </section>
+
+
+    <!-- ── TESTIMONIALS ── -->
+    <section style="padding:6rem 1.5rem;background:var(--forest);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+          <span class="eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1rem;">
+            <span style="background:var(--gold);"></span>
+            Community Love
+            <span style="background:var(--gold);"></span>
+          </span>
+          <h2
+            style="font-size:clamp(1.8rem,3vw,2.75rem);font-weight:500;color:#fff;margin:0 0 0.75rem;font-style:italic;">
+            What Ibadan People Say</h2>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;max-width:500px;margin:0 auto;line-height:1.7;">Real
+            stories from residents, professionals, and newcomers who found their community here.</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
+
+          <div class="reveal"
+            style="background:rgba(255,255,255,0.04);border:1px solid rgba(184,135,11,0.2);padding:2rem;transition:border-color 0.3s;"
+            onmouseover="this.style.borderColor='var(--gold)'"
+            onmouseout="this.style.borderColor='rgba(184,135,11,0.2)'">
+            <span class="testimonial-quote">"</span>
+            <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
+            <p
+              style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">
+              Found my dream job in Bodija through Explore Ibadan within just 3 weeks! The community is incredibly
+              supportive and responsive.</p>
+            <div
+              style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
+              <div>
+                <div style="font-weight:600;color:#fff;font-size:0.85rem;">Adebayo Oluwaseun</div>
+                <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">Software Engineer, Bodija</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal reveal-delay-1"
+            style="background:rgba(255,255,255,0.04);border:1px solid rgba(184,135,11,0.2);padding:2rem;transition:border-color 0.3s;"
+            onmouseover="this.style.borderColor='var(--gold)'"
+            onmouseout="this.style.borderColor='rgba(184,135,11,0.2)'">
+            <span class="testimonial-quote">"</span>
+            <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
+            <p
+              style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">
+              As a Lagos returnee, this platform helped me reconnect with Ibadan's growing tech scene. The events
+              section is absolute gold.</p>
+            <div
+              style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
+              <div>
+                <div style="font-weight:600;color:#fff;font-size:0.85rem;">Omobolanle Temitope</div>
+                <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">UX Designer, New Bodija</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal reveal-delay-2"
+            style="background:rgba(255,255,255,0.04);border:1px solid rgba(184,135,11,0.2);padding:2rem;transition:border-color 0.3s;"
+            onmouseover="this.style.borderColor='var(--gold)'"
+            onmouseout="this.style.borderColor='rgba(184,135,11,0.2)'">
+            <span class="testimonial-quote">"</span>
+            <div style="color:var(--gold);font-size:0.8rem;margin-bottom:1rem;">★★★★★</div>
+            <p
+              style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.5rem;">
+              My business went from local to citywide after posting in the community feed. The members here are serious
+              professionals who get things done.</p>
+            <div
+              style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid rgba(184,135,11,0.1);">
+              <div>
+                <div style="font-weight:600;color:#fff;font-size:0.85rem;">Emmanuel Felix</div>
+                <div style="font-size:0.72rem;color:rgba(255,255,255,0.45);">Entrepreneur, Ring Road</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── FOUNDER BIOGRAPHY ── -->
+    <section style="padding:5rem 0;background:var(--ivory);overflow:hidden;">
+      <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+        <div class="reveal" style="display:flex;align-items:center;gap:3rem;flex-wrap:wrap;">
+          <div style="flex:1;min-width:300px;">
+            <img loading="lazy" src="founder.jpg" alt="Founder of Explore Ibadan"
+              style="width:100%;max-width:500px;border-radius:3px;border:1px solid rgba(184,135,11,0.2);box-shadow:0 12px 40px rgba(0,0,0,0.08);"
+              decoding="async">
+          </div>
+          <div style="flex:1;min-width:300px;">
+            <span class="eyebrow" style="margin-bottom:1.25rem;">
+              <span style="background:var(--gold);"></span>
+              The Visionary
+            </span>
+            <h2
+              style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:0.5rem;">
+              Meet the <em>Founder</em>
+            </h2>
+            <h3
+              style="font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:500;color:var(--gold-bright);margin-bottom:1.25rem;">
+              Alankara Shukurat Opeyemi
+            </h3>
+            <div class="gold-rule"></div>
+            <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+              Long before Explore Ibadan had a name, it started with a simple passion: bringing people together to
+              experience the city in a different way.
+            </p>
+            <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+              Since 2022, I have organized outings, experiences, and events that helped people discover new places,
+              build connections, and create lasting memories. Through those experiences, I noticed something
+              important—many people lived in or visited Ibadan without truly knowing all the city had to offer.
+            </p>
+            <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+              That realization inspired Explore Ibadan.
+            </p>
+            <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+              Today, Explore Ibadan is more than a tourism platform. It is a growing community designed to connect
+              people with the best of the city—from events and experiences to businesses, opportunities, and local
+              communities.
+            </p>
+            <p style="color:var(--mid);font-size:1rem;line-height:1.8;margin-bottom:1.25rem;">
+              Our mission is simple: to help more people discover, experience, and connect with Ibadan.
+            </p>
+            <p style="color:var(--mid);font-size:1rem;line-height:1.8;">
+              Because Ibadan is more than a city. It is a culture, a community, and a story worth exploring.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      /* Members Gallery Slideshow */
+      .gallery-track-wrapper {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .gallery-track {
+        display: flex;
+        gap: 1.25rem;
+        width: max-content;
+      }
+
+      .gallery-scroll-left {
+        animation: scrollLeft 40s linear infinite;
+      }
+
+      .gallery-scroll-right {
+        animation: scrollRight 40s linear infinite;
+      }
+
+      .gallery-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes scrollLeft {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      @keyframes scrollRight {
+        0% {
+          transform: translateX(-50%);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .gallery-member {
+        position: relative;
+        width: 220px;
+        height: 280px;
+        flex-shrink: 0;
+        overflow: hidden;
+        border-radius: 3px;
+        border: 1px solid rgba(184, 135, 11, 0.12);
+        cursor: pointer;
+        transition: border-color 0.3s;
+      }
+
+      .gallery-member:hover {
+        border-color: var(--gold);
+      }
+
+      .gallery-member img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .gallery-member:hover img {
+        transform: scale(1.08);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.25rem 1rem;
+        background: linear-gradient(to top, rgba(11, 46, 11, 0.92) 0%, rgba(11, 46, 11, 0.5) 60%, transparent 100%);
+        transform: translateY(10px);
+        opacity: 0;
+        transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .gallery-member:hover .gallery-overlay {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .gallery-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.1;
+        margin-bottom: 0.2rem;
+      }
+
+      .gallery-role {
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--gold-bright);
+      }
+    </style>
+
+
+
+    <!-- ── PHOTO GALLERY ── -->
+    <section style="padding:5rem 0;background:#fafafa;overflow:hidden;">
+      <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+        <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+          <span class="eyebrow" style="justify-content:center;margin-bottom:1rem;color:var(--gold);">
+            <span style="background:var(--gold);"></span>
+            Our Community
+            <span style="background:var(--gold);"></span>
+          </span>
+          <h2
+            style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:1rem;">
+            Photo <em>Gallery</em></h2>
+          <div class="gold-rule" style="margin:0 auto;"></div>
+          <p
+            style="color:var(--mid);font-size:0.95rem;line-height:1.8;margin-top:1rem;max-width:520px;margin-left:auto;margin-right:auto;">
+            A glimpse into the vibrant life and culture of Ibadan through our community's eyes.</p>
+        </div>
+
+        <div id="home-gallery-container">
+          <!-- Dynamic gallery photos will load here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA BANNER ── -->
+    <section style="padding:6rem 1.5rem;position:relative;overflow:hidden;background:var(--parchment);">
+      <div class="cta-pattern" style="position:absolute;inset:0;opacity:0.6;"></div>
+      <div style="max-width:700px;margin:0 auto;text-align:center;position:relative;">
+        <div class="reveal">
+          <span class="eyebrow" style="justify-content:center;margin-bottom:1.25rem;">
+            <span style="background:var(--gold);"></span>
+            Get Started
+            <span style="background:var(--gold);"></span>
+          </span>
+          <h2
+            style="font-size:clamp(2rem,4vw,3.25rem);font-weight:600;color:var(--charcoal);line-height:1.15;margin-bottom:1.25rem;">
+            Ready to Connect with<br><em>Fellow Ibadan Indigenes?</em>
+          </h2>
+          <div class="gold-rule"></div>
+          <p
+            style="color:var(--mid);font-size:0.95rem;line-height:1.8;margin-bottom:2.5rem;max-width:520px;margin-left:auto;margin-right:auto;">
+            Join thousands of residents, professionals, and visitors who call Ibadan home. Your city, your community —
+            ancient pride, modern ambition.
+          </p>
+          <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+            <a href="contact.html" class="btn-gold" style="font-size:0.82rem;padding:0.85rem 2.2rem;">
+              <span class="iconify" data-icon="solar:handshake-bold"></span>
+              Join the Community
+            </a>
+            <a href="https://wa.me/2348135471582" target="_blank" class="btn-ghost"
+              style="font-size:0.82rem;padding:0.85rem 2.2rem;">
+              <span class="iconify" data-icon="logos:whatsapp-icon"></span>
+              Join WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer class="footer-bg" style="background:var(--forest);padding:5rem 1.5rem 2.5rem;">
+    <div style="max-width:1280px;margin:0 auto;">
+      <!-- Top grid -->
+      <div style="display:grid;grid-template-columns:2fr 1fr 2fr;gap:3rem;margin-bottom:4rem;">
+        <div>
+          <a href="index.html"
+            style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:1rem;">
+            Explore <span style="color:var(--gold-bright);">Ibadan</span>
+          </a>
+          <p
+            style="font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:1.5rem;max-width:260px;">
+            The premier community platform for everyone living, working, and exploring the ancient city of seven hills.
+          </p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <a href="https://www.instagram.com/explore.ibadan?igsh=MXZja2U3c2N2dDk1YQ==" target="_blank"
+              style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;"
+              onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+              <span class="iconify" data-icon="ri:instagram-fill" style="font-size:0.9rem;"></span>
+            </a>
+            <a href="https://x.com/exploreibadan06?s=11" target="_blank"
+              style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;"
+              onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'>
+            <span style=" font-size:1rem;font-weight:700;">X</span>
+            </a>
+            <a href="https://www.linkedin.com/in/alankara-shukurat-opeyemi-41a582198?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"
+              style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;"
+              onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+              <span class="iconify" data-icon="ri:linkedin-fill" style="font-size:0.9rem;"></span>
+            </a>
+            <a href="https://www.facebook.com/share/1bWVrsSmgv/" target="_blank"
+              style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;"
+              onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+              <span class="iconify" data-icon="ri:facebook-fill" style="font-size:0.9rem;"></span>
+            </a>
+            <a href="https://www.tiktok.com/@exploreib?_r=1&_t=ZS-97BbDlEzW6x" target="_blank"
+              style="width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid rgba(184,135,11,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.2s;"
+              onmouseover="this.style.background='var(--gold)';this.style.color='var(--forest)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.6)'">
+              <span class="iconify" data-icon="ic:baseline-tiktok" style="font-size:0.9rem;"></span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4
+            style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">
+            Platform</h4>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.8rem;">
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="events.html" class="footer-link">Events</a></li>
+            <li><a href="jobs.html" class="footer-link">Jobs</a></li>
+            <li><a href="vendors.html" class="footer-link">Vendors</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4
+            style="font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.25rem;">
+            Newsletter</h4>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:1rem;line-height:1.6;">Get the latest
+            jobs and events delivered every week.</p>
+          <div style="display:flex;gap:0.5rem;">
+            <input type="email" placeholder="Your email address"
+              style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(184,135,11,0.2);padding:0.65rem 1rem;font-size:0.8rem;font-family:'Outfit',sans-serif;color:#fff;outline:none;border-radius:1px;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(184,135,11,0.2)'"
+              placeholder-style="color:rgba(255,255,255,0.3)">
+            <button class="btn-gold" style="padding:0.65rem 1.25rem;font-size:0.7rem;white-space:nowrap;">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div
+        style="border-top:1px solid rgba(184,135,11,0.15);padding-top:1.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin:0;">© 2026 Explore Ibadan. All rights reserved.
+        </p>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin:0;">Made with <span
+            style="color:var(--gold);">♥</span> in Ìbàdàn by BadBoyJay</p>
+      </div>
     </div>
+  </footer>
 
-    <!-- Bottom bar -->
-    <div style="border-top:1px solid rgba(184,135,11,0.15);padding-top:1.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
-      <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin:0;">© 2026 Explore Ibadan. All rights reserved.</p>
-      <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin:0;">Made with <span style="color:var(--gold);">♥</span> in Ìbàdàn by BadBoyJay</p>
-    </div>
-  </div>
-</footer>
-
-<!-- ═══════ MOBILE BOTTOM NAV ═══════ -->
+  <!-- ═══════ MOBILE BOTTOM NAV ═══════ -->
 
 
-<style>
-/* Accessibility: Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+  <style>
+    /* Accessibility: Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
 
-/* Performance: Hide scroll cue on mobile */
-@media (max-width: 768px) {
-  .scroll-cue { display: none !important; }
-}
+    /* Performance: Hide scroll cue on mobile */
+    @media (max-width: 768px) {
+      .scroll-cue {
+        display: none !important;
+      }
+    }
 
-@media (min-width: 768px) {
-  .desktop-search { display: flex !important; }
-  .desktop-nav { display: flex !important; }
-  .hamburger-btn { display: none !important; }
-  .mobile-nav-bar { display: none !important; }
-  main { padding-bottom: 0 !important; }
-}
-@media (max-width: 767px) {
-  .features-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-  .stat-pill { padding: 1rem !important; }
-  .stat-number { font-size: 2rem !important; }
-  footer > div > div:first-child > div:first-child { grid-column: 1 / -1; }
-  
-  /* Optimize animations on mobile */
-  .reveal { transition-duration: 0.4s !important; }
-  .hero-title { animation-duration: 0.5s !important; }
-  .hero-sub { animation-duration: 0.5s !important; }
-  .card { transition-duration: 0.2s !important; }
-}
-@media (max-width: 900px) {
-  footer > div > div:first-child { grid-template-columns: 1fr 1fr !important; }
-}
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-</style>
+    @media (min-width: 768px) {
+      .desktop-search {
+        display: flex !important;
+      }
 
-<script>
-// Scroll reveal
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revealObs.unobserve(e.target); } });
-}, { threshold: 0.06 });
-document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+      .desktop-nav {
+        display: flex !important;
+      }
 
-// Header scroll effect
-const header = document.getElementById('site-header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 60);
-});
+      .hamburger-btn {
+        display: none !important;
+      }
 
-// Mobile menu
-document.getElementById('menu-open').addEventListener('click', () => {
-  document.getElementById('mobile-menu').classList.add('open');
-  document.body.style.overflow = 'hidden';
-});
-document.getElementById('menu-close').addEventListener('click', () => {
-  document.getElementById('mobile-menu').classList.remove('open');
-  document.body.style.overflow = '';
-});
-</script>
+      .mobile-nav-bar {
+        display: none !important;
+      }
 
-<!-- Performance: Defer scripts for better page load -->
-<script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script defer src="analytics.js"></script>
-<script defer src="frontend.js?v=7"></script>
+      main {
+        padding-bottom: 0 !important;
+      }
+    }
 
-<!-- Performance: Initialize data fetch when DOM is ready -->
-<script>
-  // Reduce motion for users who prefer it
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
-    document.documentElement.style.setProperty('--animation-duration', '0.01s');
-  }
-  
-  // Defer data fetching to after page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+    @media (max-width: 767px) {
+      .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+      }
+
+      .stat-pill {
+        padding: 1rem !important;
+      }
+
+      .stat-number {
+        font-size: 2rem !important;
+      }
+
+      footer>div>div:first-child>div:first-child {
+        grid-column: 1 / -1;
+      }
+
+      /* Optimize animations on mobile */
+      .reveal {
+        transition-duration: 0.4s !important;
+      }
+
+      .hero-title {
+        animation-duration: 0.5s !important;
+      }
+
+      .hero-sub {
+        animation-duration: 0.5s !important;
+      }
+
+      .card {
+        transition-duration: 0.2s !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      footer>div>div:first-child {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+  </style>
+
+  <script>
+    // Scroll reveal
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // Header scroll effect
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile menu
+    document.getElementById('menu-open').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    document.getElementById('menu-close').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  </script>
+
+  <!-- Performance: Defer scripts for better page load -->
+  <script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script defer src="analytics.js"></script>
+  <script defer src="frontend.js?v=7"></script>
+
+  <!-- Performance: Initialize data fetch when DOM is ready -->
+  <script>
+    // Reduce motion for users who prefer it
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.documentElement.style.setProperty('--animation-duration', '0.01s');
+    }
+
+    // Defer data fetching to after page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        fetchJobs('home-jobs-container', 3);
+        fetchEvents('home-events-container', 3);
+        fetchGallery('home-gallery-container', 8);
+        fetchHotelsRestaurants('home-hr-container', 3);
+      });
+    } else {
       fetchJobs('home-jobs-container', 3);
       fetchEvents('home-events-container', 3);
       fetchGallery('home-gallery-container', 8);
       fetchHotelsRestaurants('home-hr-container', 3);
-    });
-  } else {
-    fetchJobs('home-jobs-container', 3);
-    fetchEvents('home-events-container', 3);
-    fetchGallery('home-gallery-container', 8);
-    fetchHotelsRestaurants('home-hr-container', 3);
-  }
-</script>
+    }
+  </script>
 </body>
+
 </html>
-
-
-
-
