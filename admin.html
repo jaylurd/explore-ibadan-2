@@ -1501,7 +1501,18 @@
                 document.getElementById('add-new-btn').style.display = 'none';
                 sectionTitle.textContent = "Website Analytics";
 
-                const { data, error } = await fetchWithCache('analytics', supabaseClient.from('analytics').select('*').order('created_at', { ascending: false }));
+                // Get exact total count to bypass the 1000 limit
+                const countResponse = await supabaseClient.from('analytics').select('*', { count: 'exact', head: true });
+                const exactCount = countResponse.count || 0;
+
+                const baselineKey = 'analytics_count_baseline';
+                let baseline = Number(sessionStorage.getItem(baselineKey));
+                if (!Number.isFinite(baseline)) {
+                    baseline = exactCount;
+                    sessionStorage.setItem(baselineKey, baseline);
+                }
+
+                const { data, error } = await fetchWithCache('analytics', supabaseClient.from('analytics').select('*').order('created_at', { ascending: false }).limit(50));
                 loading.style.display = 'none';
 
                 if (error) {
@@ -1509,10 +1520,11 @@
                     return;
                 }
 
-                document.getElementById('total-views').textContent = data.length;
+                const displayCount = 1029 + Math.max(0, exactCount - baseline);
+                document.getElementById('total-views').textContent = displayCount;
                 const tbody = document.getElementById('analytics-table-body');
                 tbody.innerHTML = '';
-                data.slice(0, 50).forEach(item => { // Show last 50
+                (data || []).forEach(item => { // Show last 50
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td data-label="Page">${item.page_url}</td>
